@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Lab | AI Training Programs & Cohorts 2026</title>
+<meta name="description" content="Core Lab AI Education. Practical hands-on AI programs for beginners & students. AI Content Creator Weekend (12-13 Sep) & 7-Day Cohort 5 (5-11 Oct). Guided by FAST University graduates.">
+<style>
+:root {
+  /* Official Core Lab Brand Palette */
+  --core-navy: #0e1b2e;
+  --core-navy-dark: #070e18;
+  --core-navy-light: #1a2b44;
+  --core-gold: #c59b27;
+  --core-gold-hover: #b0891f;
+  --core-gold-light: #fef9eb;
+  
+  --navy: var(--core-navy);
+  --navy-dark: var(--core-navy-dark);
+  --blue: #165ec9;
+  --blue-light: #ebf2fc;
+  --teal: #0d8a8a;
+  --teal-light: #e6f5f5;
+  --gold: var(--core-gold);
+  --purple: #6b3ba7;
+  --purple-light: #f4ecfc;
+  
+  --ink: #0e1b2e;
+  --muted: #475569;
+  --bg: #f5f7fa;
+  --white: #ffffff;
+  --line: #e2e7ec;
+  --shadow: 0 16px 40px rgba(14, 27, 46, 0.07);
+  --shadow-hover: 0 24px 50px rgba(14, 27, 46, 0.14);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.55;
+}
+a { text-decoration: none; color: inherit; }
+
+.container { width: min(1140px, 92%); margin: auto; }
+
+/* Header */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Official Core Lab Brand Logo Component */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.logo-svg {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+.brand-text-group {
+  display: flex;
+  flex-direction: column;
+}
+.brand-name {
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--core-navy);
+  letter-spacing: -0.02em;
+}
+.brand-name b { font-weight: 900; color: var(--core-navy); }
+.brand-name span { font-weight: 400; color: var(--core-navy); margin-left: 2px; }
+.brand-sub {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--core-gold);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.nav-links a {
+  font-weight: 700;
+  color: var(--core-navy);
+  font-size: 0.93rem;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--core-gold); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 24px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  font-size: 0.95rem;
+  text-align: center;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--core-navy), var(--core-navy-light));
+  color: white;
+  box-shadow: 0 10px 25px rgba(14, 27, 46, 0.25);
+}
+.btn-gold {
+  background: linear-gradient(135deg, var(--core-gold), var(--core-gold-hover));
+  color: white;
+  box-shadow: 0 10px 25px rgba(197, 155, 39, 0.3);
+}
+.btn-purple {
+  background: linear-gradient(135deg, #6b3ba7, #592d91);
+  color: white;
+  box-shadow: 0 10px 25px rgba(107, 59, 167, 0.28);
+}
+.btn-outline {
+  background: white;
+  border: 2px solid var(--line);
+  color: var(--core-navy);
+}
+
+/* Hero Section */
+.hero {
+  padding: 55px 0 50px;
+  background: radial-gradient(circle at 50% 0%, #fef9eb 0%, transparent 60%), linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  text-align: center;
+}
+.hero-tag-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.hero-tag {
+  background: var(--core-gold-light);
+  color: #8c6a0e;
+  border: 1px solid rgba(197, 155, 39, 0.3);
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+.hero-tag-navy {
+  background: var(--blue-light);
+  color: var(--core-navy);
+  border-color: rgba(22, 94, 201, 0.2);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 4.8vw, 4rem);
+  line-height: 1.1;
+  color: var(--core-navy);
+  margin: 0 0 14px;
+  letter-spacing: -0.035em;
+}
+.hero h1 span { color: var(--core-gold); }
+.hero p {
+  font-size: 1.12rem;
+  color: var(--muted);
+  max-width: 720px;
+  margin: 0 auto 36px;
+}
+
+/* Trust Banner */
+.trust-banner {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 22px;
+  max-width: 920px;
+  margin: 0 auto 36px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--core-navy);
+}
+
+/* FRONT PAGE DUAL CARDS */
+.dual-programs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+.program-card {
+  background: white;
+  border-radius: 28px;
+  border: 2px solid var(--line);
+  padding: 34px 30px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.program-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.program-card.purple-theme {
+  border-color: #a855f7;
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+}
+.program-card.blue-theme {
+  border-color: var(--core-navy);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+}
+
+.card-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.category-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.purple-badge { background: var(--purple-light); color: var(--purple); }
+.blue-badge { background: var(--blue-light); color: var(--core-navy); }
+
+.date-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  font-size: 0.85rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.date-pill-purple { background: var(--purple); color: white; }
+.date-pill-gold { background: var(--core-gold); color: white; }
+
+.program-card h2 {
+  font-size: 1.85rem;
+  color: var(--core-navy);
+  margin: 10px 0 12px;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.best-for-box {
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin: 12px 0 22px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.purple-theme .best-for-box {
+  background: #f3e8ff;
+  border-left: 5px solid var(--purple);
+  color: #4c1d95;
+}
+.blue-theme .best-for-box {
+  background: var(--core-gold-light);
+  border-left: 5px solid var(--core-gold);
+  color: #785a07;
+}
+.best-for-box strong {
+  display: block;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 4px;
+  font-weight: 900;
+}
+
+.syllabus-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: grid;
+  gap: 13px;
+}
+.syllabus-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.96rem;
+  color: #1e293b;
+  line-height: 1.45;
+}
+.syllabus-highlights .bullet {
+  font-weight: 900;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.purple-bullet { color: var(--purple); }
+.gold-bullet { color: var(--core-gold); }
+
+.card-footer {
+  border-top: 1.5px solid var(--line);
+  padding-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+.price-display { display: flex; flex-direction: column; }
+.price-val { font-size: 2rem; font-weight: 950; color: var(--core-navy); line-height: 1; letter-spacing: -0.02em; }
+.price-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; font-weight: 700; }
+
+/* Interactive Tabs Section */
+section { padding: 60px 0; }
+.section-title { text-align: center; margin-bottom: 32px; }
+.section-title h2 { font-size: 2.2rem; color: var(--core-navy); margin: 0 0 8px; letter-spacing: -0.02em; }
+.section-title p { color: var(--muted); font-size: 1.05rem; }
+
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  border: 2px solid var(--line);
+  color: var(--core-navy);
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+.tab-btn:hover { border-color: var(--core-gold); }
+.tab-btn.active-purple {
+  background: var(--purple);
+  color: white;
+  border-color: var(--purple);
+  box-shadow: 0 8px 25px rgba(107, 59, 167, 0.32);
+}
+.tab-btn.active-gold {
+  background: var(--core-navy);
+  color: white;
+  border-color: var(--core-navy);
+  box-shadow: 0 8px 25px rgba(14, 27, 46, 0.32);
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.35s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Detail Card Views */
+.detail-card {
+  background: white;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  padding: 38px;
+  box-shadow: var(--shadow);
+}
+.detail-header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 22px;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.detail-header h3 { font-size: 1.85rem; margin: 0 0 6px; color: var(--core-navy); }
+.detail-header p { margin: 0; color: var(--muted); font-size: 1.02rem; }
+
+.days-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.days-grid-7 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
+.day-detail-box {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 24px;
+}
+.day-detail-box h4 { font-size: 1.2rem; margin: 0 0 14px; color: var(--core-navy); display: flex; align-items: center; justify-content: space-between; }
+.day-badge { font-size: 0.78rem; background: var(--core-navy); color: white; padding: 5px 12px; border-radius: 999px; font-weight: 800; }
+.day-badge-purple { background: var(--purple); }
+
+.day-detail-box ul {
+  margin: 0;
+  padding-left: 18px;
+  color: #334155;
+  display: grid;
+  gap: 9px;
+  font-size: 0.96rem;
+}
+
+/* Single Professional Registration Block */
+.registration-outcome-card {
+  margin-top: 32px;
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  border: 1.5px solid transparent;
+}
+.purple-outcome {
+  background: linear-gradient(135deg, #091b36, #2d124d);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: white;
+}
+.navy-outcome {
+  background: linear-gradient(135deg, var(--core-navy-dark), var(--core-navy));
+  border-color: rgba(197, 155, 39, 0.4);
+  color: white;
+}
+.roc-badge {
+  font-weight: 900;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--core-gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.roc-info h4 { font-size: 1.4rem; margin: 0 0 6px; color: white; }
+.roc-info p { margin: 0; color: #cbd5e1; font-size: 0.98rem; max-width: 600px; }
+
+/* Mentors & Info */
+.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.info-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(14, 27, 46, 0.03);
+}
+.info-card strong { display: block; color: var(--core-navy); font-size: 1.12rem; margin-top: 8px; }
+.info-card span { color: var(--muted); font-size: 0.93rem; }
+
+/* FAQ */
+.faq { display: grid; gap: 14px; max-width: 850px; margin: auto; }
+.faq details {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+.faq summary { font-weight: 800; color: var(--core-navy); cursor: pointer; font-size: 1.05rem; }
+.faq p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; }
+
+footer {
+  background: var(--core-navy-dark);
+  color: #cbd5e1;
+  padding: 34px 0;
+  text-align: center;
+  font-size: 0.92rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 900px) {
+  .dual-programs-grid, .days-grid-2, .days-grid-7, .info-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .card-footer, .registration-outcome-card { flex-direction: column; align-items: stretch; text-align: center; }
+  .price-display { align-items: center; margin-bottom: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <!-- Official Core Lab Brand Logo -->
+    <a href="#" class="brand">
+      <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connecting network lines -->
+        <line x1="25" y1="50" x2="50" y2="25" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="80" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+        <line x1="80" y1="50" x2="50" y2="80" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="25" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="60" y2="52" stroke="#0e1b2e" stroke-width="5" stroke-linecap="round"/>
+        
+        <!-- Outer midnight navy nodes -->
+        <circle cx="50" cy="25" r="11" fill="#0e1b2e"/>
+        <circle cx="80" cy="50" r="11" fill="#0e1b2e"/>
+        <circle cx="50" cy="80" r="11" fill="#0e1b2e"/>
+        <circle cx="25" cy="50" r="11" fill="#0e1b2e"/>
+        
+        <!-- Inner Core Gold Node -->
+        <circle cx="60" cy="50" r="9" fill="#c59b27"/>
+      </svg>
+      <div class="brand-text-group">
+        <div class="brand-name"><b>Core</b><span>Lab</span></div>
+        <div class="brand-sub">AI Education & Bootcamps</div>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#programs">Programs & Dates</a>
+      <a href="#details">Syllabus Details</a>
+      <a href="#instructors">Instructors</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a class="btn btn-primary" href="#programs">Choose Program & Register</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO & FRONT PAGE DUAL PROGRAM SECTION -->
+<section class="hero" id="programs">
+  <div class="container">
+    <div class="hero-tag-group">
+      <span class="hero-tag">⚡ DATES ANNOUNCED: SEP & OCT 2026</span>
+      <span class="hero-tag hero-tag-navy">🎓 BEGINNER & STUDENT FRIENDLY</span>
+    </div>
+    
+    <h1>Core Lab <span>AI Learning Paths</span></h1>
+    <p>Select the practical AI program that fits your goals — whether you need a fast 2-day visual creation workshop or a complete 7-day AI builder cohort.</p>
+
+    <!-- TRUST BADGE BAR FOR PARENTS & STUDENTS -->
+    <div class="trust-banner">
+      <div class="trust-item"><span>🎓</span> Guided by FAST University Graduates</div>
+      <div class="trust-item"><span>💻</span> 100% Online Live Interactive Sessions</div>
+      <div class="trust-item"><span>📜</span> Official Core Lab Certificate of Completion</div>
+      <div class="trust-item"><span>🚀</span> Build Real-World Projects Hands-On</div>
+    </div>
+
+    <!-- FRONT PAGE DUAL CARDS (SIDE-BY-SIDE) -->
+    <div class="dual-programs-grid">
+      
+      <!-- LEFT CARD: WEEKEND PLAN -->
+      <div class="program-card purple-theme">
+        <div>
+          <div class="card-header-top">
+            <span class="category-badge purple-badge">🎨 2-DAY WEEKEND WORKSHOP</span>
+            <span class="date-pill date-pill-purple">📅 12 & 13 SEP 2026</span>
+          </div>
+
+          <h2>AI Content Creator Weekend</h2>
+          
+          <div class="best-for-box">
+            <strong>🎯 BEST FOR WHOM:</strong>
+            Students, creators, social media users, small businesses & anyone wanting to generate viral visual content fast.
+          </div>
+
+          <ul class="syllabus-highlights">
+            <li>
+              <span class="bullet purple-bullet">✦</span>
+              <span><strong>Day 1 (12 Sep):</strong> AI Images, Posters, Social Posts, Captions & Ideas</span>
+            </li>
+            <li>
+              <span class="bullet purple-bullet">✦</span>
+              <span><strong>Day 2 (13 Sep):</strong> Short Videos, AI Voices, Auto-Captions, Reels & Shorts</span>
+            </li>
+            <li>
+              <span class="bullet purple-bullet">✦</span>
+              <span><strong>Outcome:</strong> Complete Multi-Platform AI Content Pack</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-footer">
+          <div class="price-display">
+            <span class="price-val">PKR 2,999</span>
+            <span class="price-sub">Student Launch Pass</span>
+          </div>
+          <a class="btn btn-purple" href="#details" onclick="switchTab('tab-weekend', 'purple')">View Details & Register →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT CARD: 7-DAY PLAN -->
+      <div class="program-card blue-theme">
+        <div>
+          <div class="card-header-top">
+            <span class="category-badge blue-badge">🚀 7-DAY FLAGSHIP COHORT 5</span>
+            <span class="date-pill date-pill-gold">📅 5–11 OCT 2026</span>
+          </div>
+
+          <h2>AI From Zero to AI Builder</h2>
+          
+          <div class="best-for-box">
+            <strong>🎯 BEST FOR WHOM:</strong>
+            Beginners, professionals, and students who want a deep end-to-end AI foundation (Productivity, Research, Websites, Automation & Projects).
+          </div>
+
+          <ul class="syllabus-highlights">
+            <li>
+              <span class="bullet gold-bullet">✦</span>
+              <span><strong>Days 1–3 (5–7 Oct):</strong> AI Productivity, Research Assistant & Design Assets</span>
+            </li>
+            <li>
+              <span class="bullet gold-bullet">✦</span>
+              <span><strong>Days 4–6 (8–10 Oct):</strong> AI Video, Web/App Building & Workflow Automation</span>
+            </li>
+            <li>
+              <span class="bullet gold-bullet">✦</span>
+              <span><strong>Day 7 (11 Oct):</strong> Build & Showcase Your Capstone AI Project</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-footer">
+          <div class="price-display">
+            <span class="price-val">PKR 4,999</span>
+            <span class="price-sub">Regular (Premium PKR 5,999)</span>
+          </div>
+          <a class="btn btn-gold" href="#details" onclick="switchTab('tab-cohort5', 'gold')">View Details & Register →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE DETAILS & REGISTRATION SECTION -->
+<section id="details">
+  <div class="container">
+    <div class="section-title">
+      <h2>Full Program Details & Registration</h2>
+      <p>Click below to inspect the day-by-day syllabus details and access the official Google Form registration links.</p>
+    </div>
+
+    <!-- INTERACTIVE TAB BUTTONS -->
+    <div class="tabs-container">
+      <button id="btn-tab-weekend" class="tab-btn active-purple" onclick="switchTab('tab-weekend', 'purple')">
+        🎨 AI Content Creator Weekend (12 & 13 Sep)
+      </button>
+      <button id="btn-tab-cohort5" class="tab-btn" onclick="switchTab('tab-cohort5', 'gold')">
+        🚀 AI From Zero to AI Builder (5–11 Oct)
+      </button>
+    </div>
+
+    <!-- TAB 1: WEEKEND INTENSIVE -->
+    <div id="tab-weekend" class="tab-content active">
+      <div class="detail-card">
+        <div class="detail-header">
+          <div>
+            <h3>🎨 AI Content Creator Weekend Syllabus</h3>
+            <p><strong>Dates:</strong> 12 & 13 September 2026 (Saturday & Sunday) • <strong>Price:</strong> PKR 2,999</p>
+          </div>
+          <span class="date-pill date-pill-purple">📅 12 & 13 SEP 2026</span>
+        </div>
+
+        <div class="days-grid-2">
+          <div class="day-detail-box">
+            <h4>Day 1 — Create With AI <span class="day-badge day-badge-purple">12 SEP (SAT)</span></h4>
+            <ul>
+              <li><strong>AI Image Generation:</strong> Create stunning graphics, artwork & post visuals</li>
+              <li><strong>Posters & Banners:</strong> Design branded poster templates for social media</li>
+              <li><strong>Social Media Captions:</strong> Generate viral hooks & copywriting effortlessly</li>
+              <li><strong>Content Ideas Engine:</strong> Turn 1 concept into a week's worth of ideas</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 2 — Create Videos With AI <span class="day-badge day-badge-purple">13 SEP (SUN)</span></h4>
+            <ul>
+              <li><strong>Short Video Creation:</strong> Generate clip sequences using simple AI tools</li>
+              <li><strong>AI Voiceovers:</strong> Create natural, professional voice narration</li>
+              <li><strong>Auto-Captions & Subtitles:</strong> Add animated subtitles for Reels/Shorts</li>
+              <li><strong>Multi-Post Distribution:</strong> Repurpose 1 video into 10+ social assets</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SINGLE CLEAN REGISTRATION BLOCK -->
+        <div class="registration-outcome-card purple-outcome">
+          <div class="roc-info">
+            <span class="roc-badge">🎁 KEY DELIVERABLE & OUTCOME</span>
+            <h4>Complete Multi-Platform AI Content Pack</h4>
+            <p>You leave with ready-to-publish graphics, short videos/reels, AI voiceovers, and reusable prompt templates.</p>
+          </div>
+          <a class="btn btn-purple" href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Weekend Intensive (PKR 2,999) →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: COHORT 5 7-DAY -->
+    <div id="tab-cohort5" class="tab-content">
+      <div class="detail-card">
+        <div class="detail-header">
+          <div>
+            <h3>🚀 7-Day Cohort 5 Syllabus</h3>
+            <p><strong>Dates:</strong> 5–11 October 2026 (Monday to Sunday) • <strong>Price:</strong> PKR 4,999 (Regular) / PKR 5,999 (Premium)</p>
+          </div>
+          <span class="date-pill date-pill-gold">📅 5–11 OCT 2026</span>
+        </div>
+
+        <div class="days-grid-7">
+          <div class="day-detail-box">
+            <h4>Day 1: AI Basics & Productivity <span class="day-badge">5 OCT</span></h4>
+            <ul>
+              <li>Understand how AI models work from zero</li>
+              <li>Master prompt engineering for daily tasks</li>
+              <li>Build your Personal AI Productivity Kit</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 2: Research & Documents <span class="day-badge">6 OCT</span></h4>
+            <ul>
+              <li>Summarize long PDFs, books & reports</li>
+              <li>Extract answers and key takeaways 10x faster</li>
+              <li>Build your AI Research Assistant</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 3: Images & Visual Content <span class="day-badge">7 OCT</span></h4>
+            <ul>
+              <li>Create photorealistic graphics & images</li>
+              <li>Design social media visual content</li>
+              <li>Build your AI Visual Content Pack</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 4: Video, Voice & Social <span class="day-badge">8 OCT</span></h4>
+            <ul>
+              <li>Create short-form video clips with AI</li>
+              <li>Generate realistic human AI voices</li>
+              <li>Build your First Complete AI Video</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 5: Web & App Building <span class="day-badge">9 OCT</span></h4>
+            <ul>
+              <li>Turn an idea into a functional website</li>
+              <li>Build web tools without writing code</li>
+              <li>Publish your Live Web Application</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box">
+            <h4>Day 6: AI Automation <span class="day-badge">10 OCT</span></h4>
+            <ul>
+              <li>Automate repetitive tasks, forms & emails</li>
+              <li>Connect web tools into automatic workflows</li>
+              <li>Build your First AI Automation</li>
+            </ul>
+          </div>
+
+          <div class="day-detail-box" style="grid-column: 1 / -1;">
+            <h4>Day 7: Capstone AI Project & Graduation <span class="day-badge">11 OCT</span></h4>
+            <ul>
+              <li>Build your own custom AI project from scratch with mentor support</li>
+              <li>Showcase your project and receive your official Core Lab Certificate</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SINGLE CLEAN REGISTRATION BLOCK -->
+        <div class="registration-outcome-card navy-outcome">
+          <div class="roc-info">
+            <span class="roc-badge">🏆 GRADUATION OUTCOME</span>
+            <h4>7 Completed Projects & Official Core Lab Certificate</h4>
+            <p>Gain real confidence with 7 completed projects and a capstone project for your resume and portfolio.</p>
+          </div>
+          <a class="btn btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7RiMN-fY79iWMNIXExgRhtg4VoXTQ3uESU20le4qn-sgg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Cohort 5 (PKR 4,999) →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INSTRUCTORS SECTION -->
+<section id="instructors" style="background:white;border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="section-title">
+      <h2>Meet Your Core Lab Instructors</h2>
+      <p>Guided by FAST University graduates dedicated to practical, hands-on learning.</p>
+    </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div style="font-size:2.5rem;">👨‍💻</div>
+        <strong>Abdullah</strong>
+        <span>FAST University Graduate<br>AI & Practical Technology</span>
+      </div>
+      <div class="info-card">
+        <div style="font-size:2.5rem;">👩‍💻</div>
+        <strong>Munazzah</strong>
+        <span>FAST University Graduate<br>AI & Practical Technology</span>
+      </div>
+      <div class="info-card">
+        <div style="font-size:2.5rem;">🎓</div>
+        <strong>Student-Centered Mentorship</strong>
+        <span>Live interactive sessions & direct project guidance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section id="faq">
+  <div class="container">
+    <div class="section-title">
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>What is Core Lab?</summary>
+        <p><strong>Core Lab</strong> is a practical AI education initiative founded by FAST University graduates to teach hands-on AI tools, visual creation, productivity, and web building to Pakistani students and creators.</p>
+      </details>
+      <details>
+        <summary>What are the dates for each program?</summary>
+        <p>The <strong>AI Content Creator Weekend</strong> takes place on <strong>12 & 13 September 2026</strong> (Saturday & Sunday). The <strong>7-Day Cohort 5</strong> runs from <strong>5–11 October 2026</strong> (Monday to Sunday).</p>
+      </details>
+      <details>
+        <summary>Do students or parents need technical experience to join?</summary>
+        <p>No prior coding or technical experience is required! Both programs are designed step-by-step for beginners, students, creators, and parents.</p>
+      </details>
+      <details>
+        <summary>How do I register?</summary>
+        <p>Click any "Register" or "View Details & Register" button. It will open the official Google Form for your selected program in a new tab.</p>
+      </details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    Core Lab • AI Education — AI Creator Weekend (12–13 Sep) | Cohort 5 (5–11 Oct) | Vercel Ready
+  </div>
+</footer>
+
+<script>
+function switchTab(tabId, theme) {
+  const contents = document.querySelectorAll('.tab-content');
+  contents.forEach(c => c.classList.remove('active'));
+
+  const btnWeekend = document.getElementById('btn-tab-weekend');
+  const btnCohort5 = document.getElementById('btn-tab-cohort5');
+  btnWeekend.className = 'tab-btn';
+  btnCohort5.className = 'tab-btn';
+
+  const targetContent = document.getElementById(tabId);
+  if (targetContent) {
+    targetContent.classList.add('active');
+  }
+
+  if (tabId === 'tab-weekend') {
+    btnWeekend.classList.add('active-purple');
+  } else {
+    btnCohort5.classList.add('active-gold');
+  }
+}
+</script>
+
+</body>
+</html>
