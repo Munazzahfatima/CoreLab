@@ -136,6 +136,12 @@ header {
 .btn-primary:hover {
   background: #1a2b44;
 }
+.btn-header {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-header .mobile-text { display: none; }
+.btn-header .desktop-text { display: inline; }
 .btn-creator {
   background: linear-gradient(135deg, var(--creator-blue-dark), var(--creator-blue));
   color: white;
@@ -847,6 +853,53 @@ footer {
   .card-footer, .registration-outcome-card, .footer-inner { flex-direction: column; align-items: stretch; text-align: center; }
   .footer-right, .footer-brand { justify-content: center; }
   .price-display { align-items: center; margin-bottom: 12px; }
+
+  /* Mobile Header Alignment & Proportions */
+  .nav {
+    height: 66px;
+  }
+  .btn-header {
+    padding: 9px 18px;
+    font-size: 0.86rem;
+    border-radius: 10px;
+  }
+  .btn-header .desktop-text { display: none; }
+  .btn-header .mobile-text { display: inline; }
+
+  .brand {
+    gap: 9px;
+  }
+  .logo-svg {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-name {
+    font-size: 1.25rem;
+  }
+  .brand-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    height: 62px;
+  }
+  .btn-header {
+    padding: 8px 14px;
+    font-size: 0.82rem;
+  }
+  .logo-svg {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-name {
+    font-size: 1.16rem;
+  }
+  .brand-sub {
+    font-size: 0.55rem;
+  }
 }
 </style>
 </head>
@@ -882,7 +935,10 @@ footer {
       <a href="#instructors">Instructors</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a class="btn btn-primary" href="#programs">Choose Program & Register</a>
+    <a class="btn btn-primary btn-header" href="#programs">
+      <span class="desktop-text">Choose Program & Register</span>
+      <span class="mobile-text">Register Now</span>
+    </a>
   </div>
 </header>
 
