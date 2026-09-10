@@ -41,7 +41,7 @@ What began as interactive AI workshops in university classrooms has evolved into
 
 ## 👨‍💻 Foundational Mentors
 * **Muhammad Abdullah** — FAST University Graduate | AI & Practical Technology
-* **Munazzah** — FAST University Graduate | AI & Practical Technology
+* **Syeda Munazzah Fatima** — FAST University Graduate | AI & Practical Technology
 
 ---
 *Built with passion for students, creators, and future technology leaders.*

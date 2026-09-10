@@ -662,26 +662,19 @@ section { padding: 60px 0; }
 }
 
 .mentor-credential {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--core-navy);
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-.mentor-bio {
-  font-size: 0.93rem;
-  color: var(--muted);
-  line-height: 1.55;
-  margin: 0 0 20px;
-  flex-grow: 1;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .mentor-skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
   margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid #f1f5f9;
@@ -783,18 +776,76 @@ section { padding: 60px 0; }
 footer {
   background: #090e17;
   color: #94a3b8;
-  padding: 40px 0;
-  text-align: center;
+  padding: 34px 0;
   font-size: 0.92rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
-footer a { color: #e2e8f0; transition: color 0.2s; }
-footer a:hover { color: var(--builder-gold); }
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer-brand .f-name {
+  color: white;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.footer-brand .f-sub {
+  color: var(--builder-gold);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+}
+.footer-right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+.footer-event-pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footer-event-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.footer-event-pill.pill-blue {
+  background: rgba(37, 99, 235, 0.14);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+.footer-event-pill.pill-amber {
+  background: rgba(217, 119, 6, 0.14);
+  color: #fde68a;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
 
 @media (max-width: 900px) {
   .dual-programs-grid, .days-grid-2, .days-grid-7, .info-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
-  .card-footer, .registration-outcome-card { flex-direction: column; align-items: stretch; text-align: center; }
+  .card-footer, .registration-outcome-card, .footer-inner { flex-direction: column; align-items: stretch; text-align: center; }
+  .footer-right, .footer-brand { justify-content: center; }
   .price-display { align-items: center; margin-bottom: 12px; }
 }
 </style>
@@ -1111,43 +1162,33 @@ footer a:hover { color: var(--builder-gold); }
           <div class="mentor-avatar avatar-blue">👨‍💻</div>
           <div class="mentor-title-group">
             <h3>Muhammad Abdullah</h3>
-            <span class="mentor-badge-tag">Lead AI & Systems</span>
+            <span class="mentor-badge-tag">Instructor</span>
           </div>
         </div>
         <div class="mentor-credential">
           <span>🎓</span> FAST-NUCES Graduate
         </div>
-        <p class="mentor-bio">
-          Specializes in prompt engineering architectures, AI automation pipelines, and guiding beginners to deploy functional AI tools and web apps from day one.
-        </p>
         <div class="mentor-skills">
-          <span class="skill-pill">Prompt Engineering</span>
-          <span class="skill-pill">AI Automation</span>
-          <span class="skill-pill">Web Tools</span>
-          <span class="skill-pill">LLMs</span>
+          <span class="skill-pill">AI & Practical Tech</span>
+          <span class="skill-pill">Hands-On Mentorship</span>
         </div>
       </div>
 
-      <!-- MENTOR 2: MUNAZZAH -->
+      <!-- MENTOR 2: SYEDA MUNAZZAH FATIMA -->
       <div class="mentor-card">
         <div class="mentor-header">
           <div class="mentor-avatar avatar-gold">👩‍💻</div>
           <div class="mentor-title-group">
-            <h3>Munazzah</h3>
-            <span class="mentor-badge-tag">AI Media & Design</span>
+            <h3>Syeda Munazzah Fatima</h3>
+            <span class="mentor-badge-tag">Instructor</span>
           </div>
         </div>
         <div class="mentor-credential">
           <span>🎓</span> FAST-NUCES Graduate
         </div>
-        <p class="mentor-bio">
-          Specializes in generative visual computing, photorealistic design, short-form video generation, and multi-platform social media distribution engines.
-        </p>
         <div class="mentor-skills">
-          <span class="skill-pill">Generative Art</span>
-          <span class="skill-pill">AI Video & Voice</span>
-          <span class="skill-pill">Visual Assets</span>
-          <span class="skill-pill">Reels/Shorts</span>
+          <span class="skill-pill">AI & Practical Tech</span>
+          <span class="skill-pill">Hands-On Mentorship</span>
         </div>
       </div>
 
@@ -1161,16 +1202,12 @@ footer a:hover { color: var(--builder-gold); }
           </div>
         </div>
         <div class="mentor-credential">
-          <span>⚡</span> Direct Real-Time Support
+          <span>⚡</span> Direct Real-Time Guidance
         </div>
-        <p class="mentor-bio">
-          No passive pre-recorded lectures. You get live interactive screen guidance, active problem solving, hands-on debugging, and individual capstone feedback.
-        </p>
         <div class="mentor-skills">
           <span class="skill-pill">Live Q&A</span>
-          <span class="skill-pill">Capstone Reviews</span>
+          <span class="skill-pill">Project Reviews</span>
           <span class="skill-pill">Certificate</span>
-          <span class="skill-pill">1-on-1 Help</span>
         </div>
       </div>
     </div>
@@ -1246,8 +1283,32 @@ footer a:hover { color: var(--builder-gold); }
 </main>
 
 <footer>
-  <div class="container">
-    Core Lab • AI Education — AI Creator Weekend (12–13 Sep) | Cohort 5 (5–11 Oct) | Vercel Ready
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <line x1="25" y1="50" x2="50" y2="25" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+        <line x1="50" y1="25" x2="80" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+        <line x1="80" y1="50" x2="50" y2="80" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="25" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="50" cy="25" r="11" fill="#cbd5e1"/>
+        <circle cx="80" cy="50" r="11" fill="#cbd5e1"/>
+        <circle cx="50" cy="80" r="11" fill="#cbd5e1"/>
+        <circle cx="25" cy="50" r="11" fill="#cbd5e1"/>
+        <circle cx="60" cy="50" r="9" fill="#f59e0b"/>
+      </svg>
+      <div>
+        <div class="f-name">Core Lab</div>
+        <div class="f-sub">AI Education & Bootcamps</div>
+      </div>
+    </div>
+
+    <div class="footer-right">
+      <span>Upcoming Events:</span>
+      <div class="footer-event-pills">
+        <span class="footer-event-pill pill-blue">🎨 Creator Weekend (12–13 Sep)</span>
+        <span class="footer-event-pill pill-amber">🚀 7-Day Cohort 5 (5–11 Oct)</span>
+      </div>
+    </div>
   </div>
 </footer>
 
