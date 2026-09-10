@@ -32,14 +32,15 @@ What began as interactive AI workshops in university classrooms has evolved into
 ---
 
 ## ✨ Brand Colors & Identity
-- **Primary Navy:** `#0e1b2e` (Core Midnight Navy)
-- **Accent Gold:** `#c59b27` (Core Network Gold)
-- **Background Slate:** `#f5f7fa`
+- **Brand Navy:** `#0e1b2e` (Core Midnight Navy Anchor)
+- **Creator Track (Weekend):** `#2563eb` (Electric Cobalt / Indigo)
+- **Builder Track (Cohort 5):** `#d97706` (Radiant Warm Amber Gold)
+- **Background Slate:** `#f8fafc`
 
 ---
 
 ## 👨‍💻 Foundational Mentors
-* **Abdullah** — FAST University Graduate | AI & Practical Technology
+* **Muhammad Abdullah** — FAST University Graduate | AI & Practical Technology
 * **Munazzah** — FAST University Graduate | AI & Practical Technology
 
 ---

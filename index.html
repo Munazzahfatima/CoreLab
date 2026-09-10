@@ -7,31 +7,32 @@
 <meta name="description" content="Core Lab AI Education. Practical hands-on AI programs for beginners & students. AI Content Creator Weekend (12-13 Sep) & 7-Day Cohort 5 (5-11 Oct). Guided by FAST University graduates.">
 <style>
 :root {
-  /* Official Core Lab Brand Palette */
+  /* Core Brand Anchors */
   --core-navy: #0e1b2e;
   --core-navy-dark: #070e18;
-  --core-navy-light: #1a2b44;
-  --core-gold: #c59b27;
-  --core-gold-hover: #b0891f;
-  --core-gold-light: #fef9eb;
   
-  --navy: var(--core-navy);
-  --navy-dark: var(--core-navy-dark);
-  --blue: #165ec9;
-  --blue-light: #ebf2fc;
-  --teal: #0d8a8a;
-  --teal-light: #e6f5f5;
-  --gold: var(--core-gold);
-  --purple: #6b3ba7;
-  --purple-light: #f4ecfc;
+  /* Vibrant Electric Cobalt / Indigo (Creator Weekend Track) */
+  --creator-blue: #2563eb;
+  --creator-blue-dark: #1d4ed8;
+  --creator-blue-light: #eff6ff;
+  --creator-blue-border: #bfdbfe;
+  --creator-blue-glow: rgba(37, 99, 235, 0.28);
+
+  /* Rich Radiant Warm Amber / Gold (7-Day AI Builder Cohort 5 Track) */
+  --builder-gold: #d97706;
+  --builder-gold-dark: #b45309;
+  --builder-gold-light: #fffbeb;
+  --builder-gold-border: #fde68a;
+  --builder-gold-glow: rgba(217, 119, 6, 0.28);
   
-  --ink: #0e1b2e;
+  /* Base Neutral & Canvas */
+  --ink: #0f172a;
   --muted: #475569;
-  --bg: #f5f7fa;
+  --bg: #f8fafc;
   --white: #ffffff;
-  --line: #e2e7ec;
-  --shadow: 0 16px 40px rgba(14, 27, 46, 0.07);
-  --shadow-hover: 0 24px 50px rgba(14, 27, 46, 0.14);
+  --line: #e2e8f0;
+  --shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 24px 50px rgba(15, 23, 42, 0.12);
 }
 
 * { box-sizing: border-box; }
@@ -40,7 +41,10 @@ body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--ink);
-  background: var(--bg);
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(37, 99, 235, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(217, 119, 6, 0.06) 0%, transparent 45%),
+    #f8fafc;
   line-height: 1.55;
 }
 a { text-decoration: none; color: inherit; }
@@ -125,19 +129,28 @@ header {
 }
 .btn:hover { transform: translateY(-2px); }
 .btn-primary {
-  background: linear-gradient(135deg, var(--core-navy), var(--core-navy-light));
+  background: var(--core-navy);
   color: white;
-  box-shadow: 0 10px 25px rgba(14, 27, 46, 0.25);
+  box-shadow: 0 8px 20px rgba(14, 27, 46, 0.25);
 }
-.btn-gold {
-  background: linear-gradient(135deg, var(--core-gold), var(--core-gold-hover));
-  color: white;
-  box-shadow: 0 10px 25px rgba(197, 155, 39, 0.3);
+.btn-primary:hover {
+  background: #1a2b44;
 }
-.btn-purple {
-  background: linear-gradient(135deg, #6b3ba7, #592d91);
+.btn-creator {
+  background: linear-gradient(135deg, var(--creator-blue-dark), var(--creator-blue));
   color: white;
-  box-shadow: 0 10px 25px rgba(107, 59, 167, 0.28);
+  box-shadow: 0 10px 25px var(--creator-blue-glow);
+}
+.btn-creator:hover {
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.45);
+}
+.btn-builder {
+  background: linear-gradient(135deg, var(--builder-gold-dark), var(--builder-gold));
+  color: white;
+  box-shadow: 0 10px 25px var(--builder-gold-glow);
+}
+.btn-builder:hover {
+  box-shadow: 0 14px 30px rgba(217, 119, 6, 0.45);
 }
 .btn-outline {
   background: white;
@@ -148,7 +161,7 @@ header {
 /* Hero Section */
 .hero {
   padding: 55px 0 50px;
-  background: radial-gradient(circle at 50% 0%, #fef9eb 0%, transparent 60%), linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
+  background: transparent;
   text-align: center;
 }
 .hero-tag-group {
@@ -159,19 +172,19 @@ header {
   margin-bottom: 16px;
 }
 .hero-tag {
-  background: var(--core-gold-light);
-  color: #8c6a0e;
-  border: 1px solid rgba(197, 155, 39, 0.3);
-  font-weight: 900;
+  background: var(--builder-gold-light);
+  color: var(--builder-gold-dark);
+  border: 1px solid var(--builder-gold-border);
+  font-weight: 800;
   border-radius: 999px;
   padding: 6px 16px;
   font-size: 0.82rem;
   letter-spacing: 0.04em;
 }
 .hero-tag-navy {
-  background: var(--blue-light);
+  background: #f1f5f9;
   color: var(--core-navy);
-  border-color: rgba(22, 94, 201, 0.2);
+  border-color: #e2e8f0;
 }
 
 .hero h1 {
@@ -181,7 +194,11 @@ header {
   margin: 0 0 14px;
   letter-spacing: -0.035em;
 }
-.hero h1 span { color: var(--core-gold); }
+.hero h1 span { 
+  background: linear-gradient(135deg, var(--builder-gold-dark), var(--builder-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .hero p {
   font-size: 1.12rem;
   color: var(--muted);
@@ -224,7 +241,6 @@ header {
 .program-card {
   background: white;
   border-radius: 28px;
-  border: 2px solid var(--line);
   padding: 34px 30px;
   box-shadow: var(--shadow);
   display: flex;
@@ -237,16 +253,26 @@ header {
 }
 .program-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-hover);
 }
 
-.program-card.purple-theme {
-  border-color: #a855f7;
-  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+/* LEFT CARD: VIBRANT ELECTRIC COBALT */
+.program-card.creator-card {
+  border: 2px solid var(--creator-blue-border);
+  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
 }
-.program-card.blue-theme {
-  border-color: var(--core-navy);
-  background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+.program-card.creator-card:hover {
+  border-color: var(--creator-blue);
+  box-shadow: 0 24px 50px var(--creator-blue-glow);
+}
+
+/* RIGHT CARD: RADIANT AMBER GOLD */
+.program-card.builder-card {
+  border: 2px solid var(--builder-gold-border);
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf7 100%);
+}
+.program-card.builder-card:hover {
+  border-color: var(--builder-gold);
+  box-shadow: 0 24px 50px var(--builder-gold-glow);
 }
 
 .card-header-top {
@@ -259,13 +285,21 @@ header {
 .category-badge {
   padding: 6px 14px;
   border-radius: 999px;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 0.78rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
-.purple-badge { background: var(--purple-light); color: var(--purple); }
-.blue-badge { background: var(--blue-light); color: var(--core-navy); }
+.badge-creator { 
+  background: var(--creator-blue-light); 
+  color: var(--creator-blue-dark); 
+  border: 1px solid var(--creator-blue-border);
+}
+.badge-builder { 
+  background: var(--builder-gold-light); 
+  color: var(--builder-gold-dark); 
+  border: 1px solid var(--builder-gold-border);
+}
 
 .date-pill {
   display: inline-flex;
@@ -273,12 +307,19 @@ header {
   gap: 6px;
   padding: 7px 14px;
   border-radius: 999px;
-  font-weight: 900;
+  font-weight: 800;
   font-size: 0.85rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
-.date-pill-purple { background: var(--purple); color: white; }
-.date-pill-gold { background: var(--core-gold); color: white; }
+.pill-creator { 
+  background: linear-gradient(135deg, var(--creator-blue-dark), var(--creator-blue)); 
+  color: white; 
+  box-shadow: 0 4px 14px var(--creator-blue-glow);
+}
+.pill-builder { 
+  background: linear-gradient(135deg, var(--builder-gold-dark), var(--builder-gold)); 
+  color: white; 
+  box-shadow: 0 4px 14px var(--builder-gold-glow);
+}
 
 .program-card h2 {
   font-size: 1.85rem;
@@ -289,21 +330,21 @@ header {
 }
 
 .best-for-box {
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 16px 18px;
   margin: 12px 0 22px;
   font-size: 0.95rem;
   line-height: 1.5;
 }
-.purple-theme .best-for-box {
-  background: #f3e8ff;
-  border-left: 5px solid var(--purple);
-  color: #4c1d95;
+.creator-card .best-for-box {
+  background: var(--creator-blue-light);
+  border-left: 4px solid var(--creator-blue);
+  color: #1e3a8a;
 }
-.blue-theme .best-for-box {
-  background: var(--core-gold-light);
-  border-left: 5px solid var(--core-gold);
-  color: #785a07;
+.builder-card .best-for-box {
+  background: var(--builder-gold-light);
+  border-left: 4px solid var(--builder-gold);
+  color: #78350f;
 }
 .best-for-box strong {
   display: block;
@@ -311,7 +352,7 @@ header {
   text-transform: uppercase;
   letter-spacing: 0.07em;
   margin-bottom: 4px;
-  font-weight: 900;
+  font-weight: 800;
 }
 
 .syllabus-highlights {
@@ -334,8 +375,8 @@ header {
   font-size: 1.1rem;
   line-height: 1;
 }
-.purple-bullet { color: var(--purple); }
-.gold-bullet { color: var(--core-gold); }
+.bullet-creator { color: var(--creator-blue); }
+.bullet-builder { color: var(--builder-gold); }
 
 .card-footer {
   border-top: 1.5px solid var(--line);
@@ -347,7 +388,7 @@ header {
   margin-top: auto;
 }
 .price-display { display: flex; flex-direction: column; }
-.price-val { font-size: 2rem; font-weight: 950; color: var(--core-navy); line-height: 1; letter-spacing: -0.02em; }
+.price-val { font-size: 2rem; font-weight: 900; color: var(--core-navy); line-height: 1; letter-spacing: -0.02em; }
 .price-sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; font-weight: 700; }
 
 /* Interactive Tabs Section */
@@ -377,18 +418,18 @@ section { padding: 60px 0; }
   transition: all 0.22s ease;
   box-shadow: 0 4px 15px rgba(0,0,0,0.03);
 }
-.tab-btn:hover { border-color: var(--core-gold); }
-.tab-btn.active-purple {
-  background: var(--purple);
+.tab-btn:hover { transform: translateY(-2px); }
+.tab-btn.active-creator {
+  background: linear-gradient(135deg, var(--creator-blue-dark), var(--creator-blue));
   color: white;
-  border-color: var(--purple);
-  box-shadow: 0 8px 25px rgba(107, 59, 167, 0.32);
+  border-color: var(--creator-blue-dark);
+  box-shadow: 0 8px 25px var(--creator-blue-glow);
 }
-.tab-btn.active-gold {
-  background: var(--core-navy);
+.tab-btn.active-builder {
+  background: linear-gradient(135deg, var(--builder-gold-dark), var(--builder-gold));
   color: white;
-  border-color: var(--core-navy);
-  box-shadow: 0 8px 25px rgba(14, 27, 46, 0.32);
+  border-color: var(--builder-gold-dark);
+  box-shadow: 0 8px 25px var(--builder-gold-glow);
 }
 
 .tab-content { display: none; }
@@ -431,7 +472,8 @@ section { padding: 60px 0; }
 }
 .day-detail-box h4 { font-size: 1.2rem; margin: 0 0 14px; color: var(--core-navy); display: flex; align-items: center; justify-content: space-between; }
 .day-badge { font-size: 0.78rem; background: var(--core-navy); color: white; padding: 5px 12px; border-radius: 999px; font-weight: 800; }
-.day-badge-purple { background: var(--purple); }
+.day-badge-creator { background: linear-gradient(135deg, var(--creator-blue-dark), var(--creator-blue)); color: white; }
+.day-badge-builder { background: linear-gradient(135deg, var(--builder-gold-dark), var(--builder-gold)); color: white; }
 
 .day-detail-box ul {
   margin: 0;
@@ -442,39 +484,41 @@ section { padding: 60px 0; }
   font-size: 0.96rem;
 }
 
-/* Single Professional Registration Block */
+/* Luminous Professional Registration Blocks */
 .registration-outcome-card {
   margin-top: 32px;
   border-radius: 24px;
-  padding: 32px;
+  padding: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 24px;
-  border: 1.5px solid transparent;
 }
-.purple-outcome {
-  background: linear-gradient(135deg, #091b36, #2d124d);
-  border-color: rgba(168, 85, 247, 0.4);
+.outcome-creator {
+  background: linear-gradient(135deg, #091a3e 0%, #1e3a8a 100%);
+  border: 1.5px solid rgba(59, 130, 246, 0.4);
+  box-shadow: 0 16px 40px rgba(30, 58, 138, 0.25);
   color: white;
 }
-.navy-outcome {
-  background: linear-gradient(135deg, var(--core-navy-dark), var(--core-navy));
-  border-color: rgba(197, 155, 39, 0.4);
+.outcome-builder {
+  background: linear-gradient(135deg, #1c1305 0%, #451a03 50%, #172554 100%);
+  border: 1.5px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 16px 40px rgba(180, 83, 9, 0.25);
   color: white;
 }
 .roc-badge {
-  font-weight: 900;
+  font-weight: 800;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
-  color: var(--core-gold);
   text-transform: uppercase;
   display: block;
   margin-bottom: 6px;
 }
+.outcome-creator .roc-badge { color: #93c5fd; }
+.outcome-builder .roc-badge { color: #fcd34d; }
 .roc-info h4 { font-size: 1.4rem; margin: 0 0 6px; color: white; }
-.roc-info p { margin: 0; color: #cbd5e1; font-size: 0.98rem; max-width: 600px; }
+.roc-info p { margin: 0; color: #e2e8f0; font-size: 0.98rem; max-width: 600px; }
 
 /* Mentors & Info */
 .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -485,8 +529,14 @@ section { padding: 60px 0; }
   padding: 28px;
   text-align: center;
   box-shadow: 0 6px 20px rgba(14, 27, 46, 0.03);
+  transition: all 0.25s ease;
 }
-.info-card strong { display: block; color: var(--core-navy); font-size: 1.12rem; margin-top: 8px; }
+.info-card:hover {
+  border-color: var(--core-navy);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(14, 27, 46, 0.08);
+}
+.info-card strong { display: block; color: var(--core-navy); font-size: 1.15rem; margin-top: 10px; }
 .info-card span { color: var(--muted); font-size: 0.93rem; }
 
 /* FAQ */
@@ -496,6 +546,10 @@ section { padding: 60px 0; }
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px 24px;
+  transition: border-color 0.2s ease;
+}
+.faq details[open] {
+  border-color: var(--core-gold);
 }
 .faq summary { font-weight: 800; color: var(--core-navy); cursor: pointer; font-size: 1.05rem; }
 .faq p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; }
@@ -524,20 +578,17 @@ footer {
     <!-- Official Core Lab Brand Logo -->
     <a href="#" class="brand">
       <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Connecting network lines -->
         <line x1="25" y1="50" x2="50" y2="25" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
         <line x1="50" y1="25" x2="80" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
         <line x1="80" y1="50" x2="50" y2="80" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
         <line x1="50" y1="80" x2="25" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
         <line x1="50" y1="80" x2="60" y2="52" stroke="#0e1b2e" stroke-width="5" stroke-linecap="round"/>
         
-        <!-- Outer midnight navy nodes -->
         <circle cx="50" cy="25" r="11" fill="#0e1b2e"/>
         <circle cx="80" cy="50" r="11" fill="#0e1b2e"/>
         <circle cx="50" cy="80" r="11" fill="#0e1b2e"/>
         <circle cx="25" cy="50" r="11" fill="#0e1b2e"/>
         
-        <!-- Inner Core Gold Node -->
         <circle cx="60" cy="50" r="9" fill="#c59b27"/>
       </svg>
       <div class="brand-text-group">
@@ -579,12 +630,12 @@ footer {
     <!-- FRONT PAGE DUAL CARDS (SIDE-BY-SIDE) -->
     <div class="dual-programs-grid">
       
-      <!-- LEFT CARD: WEEKEND PLAN -->
-      <div class="program-card purple-theme">
+      <!-- LEFT CARD: WEEKEND PLAN (VIBRANT ELECTRIC COBALT) -->
+      <div class="program-card creator-card">
         <div>
           <div class="card-header-top">
-            <span class="category-badge purple-badge">🎨 2-DAY WEEKEND WORKSHOP</span>
-            <span class="date-pill date-pill-purple">📅 12 & 13 SEP 2026</span>
+            <span class="category-badge badge-creator">🎨 2-DAY WEEKEND WORKSHOP</span>
+            <span class="date-pill pill-creator">📅 12 & 13 SEP 2026</span>
           </div>
 
           <h2>AI Content Creator Weekend</h2>
@@ -596,15 +647,15 @@ footer {
 
           <ul class="syllabus-highlights">
             <li>
-              <span class="bullet purple-bullet">✦</span>
+              <span class="bullet bullet-creator">✦</span>
               <span><strong>Day 1 (12 Sep):</strong> AI Images, Posters, Social Posts, Captions & Ideas</span>
             </li>
             <li>
-              <span class="bullet purple-bullet">✦</span>
+              <span class="bullet bullet-creator">✦</span>
               <span><strong>Day 2 (13 Sep):</strong> Short Videos, AI Voices, Auto-Captions, Reels & Shorts</span>
             </li>
             <li>
-              <span class="bullet purple-bullet">✦</span>
+              <span class="bullet bullet-creator">✦</span>
               <span><strong>Outcome:</strong> Complete Multi-Platform AI Content Pack</span>
             </li>
           </ul>
@@ -615,16 +666,16 @@ footer {
             <span class="price-val">PKR 2,999</span>
             <span class="price-sub">Student Launch Pass</span>
           </div>
-          <a class="btn btn-purple" href="#details" onclick="switchTab('tab-weekend', 'purple')">View Details & Register →</a>
+          <a class="btn btn-creator" href="#details" onclick="switchTab('tab-weekend')">View Details & Register →</a>
         </div>
       </div>
 
-      <!-- RIGHT CARD: 7-DAY PLAN -->
-      <div class="program-card blue-theme">
+      <!-- RIGHT CARD: 7-DAY PLAN (RADIANT AMBER GOLD) -->
+      <div class="program-card builder-card">
         <div>
           <div class="card-header-top">
-            <span class="category-badge blue-badge">🚀 7-DAY FLAGSHIP COHORT 5</span>
-            <span class="date-pill date-pill-gold">📅 5–11 OCT 2026</span>
+            <span class="category-badge badge-builder">🚀 7-DAY FLAGSHIP COHORT 5</span>
+            <span class="date-pill pill-builder">📅 5–11 OCT 2026</span>
           </div>
 
           <h2>AI From Zero to AI Builder</h2>
@@ -636,15 +687,15 @@ footer {
 
           <ul class="syllabus-highlights">
             <li>
-              <span class="bullet gold-bullet">✦</span>
+              <span class="bullet bullet-builder">✦</span>
               <span><strong>Days 1–3 (5–7 Oct):</strong> AI Productivity, Research Assistant & Design Assets</span>
             </li>
             <li>
-              <span class="bullet gold-bullet">✦</span>
+              <span class="bullet bullet-builder">✦</span>
               <span><strong>Days 4–6 (8–10 Oct):</strong> AI Video, Web/App Building & Workflow Automation</span>
             </li>
             <li>
-              <span class="bullet gold-bullet">✦</span>
+              <span class="bullet bullet-builder">✦</span>
               <span><strong>Day 7 (11 Oct):</strong> Build & Showcase Your Capstone AI Project</span>
             </li>
           </ul>
@@ -655,7 +706,7 @@ footer {
             <span class="price-val">PKR 4,999</span>
             <span class="price-sub">Regular (Premium PKR 5,999)</span>
           </div>
-          <a class="btn btn-gold" href="#details" onclick="switchTab('tab-cohort5', 'gold')">View Details & Register →</a>
+          <a class="btn btn-builder" href="#details" onclick="switchTab('tab-cohort5')">View Details & Register →</a>
         </div>
       </div>
 
@@ -673,10 +724,10 @@ footer {
 
     <!-- INTERACTIVE TAB BUTTONS -->
     <div class="tabs-container">
-      <button id="btn-tab-weekend" class="tab-btn active-purple" onclick="switchTab('tab-weekend', 'purple')">
+      <button id="btn-tab-weekend" class="tab-btn active-creator" onclick="switchTab('tab-weekend')">
         🎨 AI Content Creator Weekend (12 & 13 Sep)
       </button>
-      <button id="btn-tab-cohort5" class="tab-btn" onclick="switchTab('tab-cohort5', 'gold')">
+      <button id="btn-tab-cohort5" class="tab-btn" onclick="switchTab('tab-cohort5')">
         🚀 AI From Zero to AI Builder (5–11 Oct)
       </button>
     </div>
@@ -689,12 +740,12 @@ footer {
             <h3>🎨 AI Content Creator Weekend Syllabus</h3>
             <p><strong>Dates:</strong> 12 & 13 September 2026 (Saturday & Sunday) • <strong>Price:</strong> PKR 2,999</p>
           </div>
-          <span class="date-pill date-pill-purple">📅 12 & 13 SEP 2026</span>
+          <span class="date-pill pill-creator">📅 12 & 13 SEP 2026</span>
         </div>
 
         <div class="days-grid-2">
           <div class="day-detail-box">
-            <h4>Day 1 — Create With AI <span class="day-badge day-badge-purple">12 SEP (SAT)</span></h4>
+            <h4>Day 1 — Create With AI <span class="day-badge day-badge-creator">12 SEP (SAT)</span></h4>
             <ul>
               <li><strong>AI Image Generation:</strong> Create stunning graphics, artwork & post visuals</li>
               <li><strong>Posters & Banners:</strong> Design branded poster templates for social media</li>
@@ -704,7 +755,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 2 — Create Videos With AI <span class="day-badge day-badge-purple">13 SEP (SUN)</span></h4>
+            <h4>Day 2 — Create Videos With AI <span class="day-badge day-badge-creator">13 SEP (SUN)</span></h4>
             <ul>
               <li><strong>Short Video Creation:</strong> Generate clip sequences using simple AI tools</li>
               <li><strong>AI Voiceovers:</strong> Create natural, professional voice narration</li>
@@ -715,13 +766,13 @@ footer {
         </div>
 
         <!-- SINGLE CLEAN REGISTRATION BLOCK -->
-        <div class="registration-outcome-card purple-outcome">
+        <div class="registration-outcome-card outcome-creator">
           <div class="roc-info">
             <span class="roc-badge">🎁 KEY DELIVERABLE & OUTCOME</span>
             <h4>Complete Multi-Platform AI Content Pack</h4>
             <p>You leave with ready-to-publish graphics, short videos/reels, AI voiceovers, and reusable prompt templates.</p>
           </div>
-          <a class="btn btn-purple" href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Weekend Intensive (PKR 2,999) →</a>
+          <a class="btn btn-creator" href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Weekend Intensive (PKR 2,999) →</a>
         </div>
       </div>
     </div>
@@ -734,12 +785,12 @@ footer {
             <h3>🚀 7-Day Cohort 5 Syllabus</h3>
             <p><strong>Dates:</strong> 5–11 October 2026 (Monday to Sunday) • <strong>Price:</strong> PKR 4,999 (Regular) / PKR 5,999 (Premium)</p>
           </div>
-          <span class="date-pill date-pill-gold">📅 5–11 OCT 2026</span>
+          <span class="date-pill pill-builder">📅 5–11 OCT 2026</span>
         </div>
 
         <div class="days-grid-7">
           <div class="day-detail-box">
-            <h4>Day 1: AI Basics & Productivity <span class="day-badge">5 OCT</span></h4>
+            <h4>Day 1: AI Basics & Productivity <span class="day-badge day-badge-builder">5 OCT</span></h4>
             <ul>
               <li>Understand how AI models work from zero</li>
               <li>Master prompt engineering for daily tasks</li>
@@ -748,7 +799,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 2: Research & Documents <span class="day-badge">6 OCT</span></h4>
+            <h4>Day 2: Research & Documents <span class="day-badge day-badge-builder">6 OCT</span></h4>
             <ul>
               <li>Summarize long PDFs, books & reports</li>
               <li>Extract answers and key takeaways 10x faster</li>
@@ -757,7 +808,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 3: Images & Visual Content <span class="day-badge">7 OCT</span></h4>
+            <h4>Day 3: Images & Visual Content <span class="day-badge day-badge-builder">7 OCT</span></h4>
             <ul>
               <li>Create photorealistic graphics & images</li>
               <li>Design social media visual content</li>
@@ -766,7 +817,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 4: Video, Voice & Social <span class="day-badge">8 OCT</span></h4>
+            <h4>Day 4: Video, Voice & Social <span class="day-badge day-badge-builder">8 OCT</span></h4>
             <ul>
               <li>Create short-form video clips with AI</li>
               <li>Generate realistic human AI voices</li>
@@ -775,7 +826,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 5: Web & App Building <span class="day-badge">9 OCT</span></h4>
+            <h4>Day 5: Web & App Building <span class="day-badge day-badge-builder">9 OCT</span></h4>
             <ul>
               <li>Turn an idea into a functional website</li>
               <li>Build web tools without writing code</li>
@@ -784,7 +835,7 @@ footer {
           </div>
 
           <div class="day-detail-box">
-            <h4>Day 6: AI Automation <span class="day-badge">10 OCT</span></h4>
+            <h4>Day 6: AI Automation <span class="day-badge day-badge-builder">10 OCT</span></h4>
             <ul>
               <li>Automate repetitive tasks, forms & emails</li>
               <li>Connect web tools into automatic workflows</li>
@@ -793,7 +844,7 @@ footer {
           </div>
 
           <div class="day-detail-box" style="grid-column: 1 / -1;">
-            <h4>Day 7: Capstone AI Project & Graduation <span class="day-badge">11 OCT</span></h4>
+            <h4>Day 7: Capstone AI Project & Graduation <span class="day-badge day-badge-builder">11 OCT</span></h4>
             <ul>
               <li>Build your own custom AI project from scratch with mentor support</li>
               <li>Showcase your project and receive your official Core Lab Certificate</li>
@@ -802,13 +853,13 @@ footer {
         </div>
 
         <!-- SINGLE CLEAN REGISTRATION BLOCK -->
-        <div class="registration-outcome-card navy-outcome">
+        <div class="registration-outcome-card outcome-builder">
           <div class="roc-info">
             <span class="roc-badge">🏆 GRADUATION OUTCOME</span>
             <h4>7 Completed Projects & Official Core Lab Certificate</h4>
             <p>Gain real confidence with 7 completed projects and a capstone project for your resume and portfolio.</p>
           </div>
-          <a class="btn btn-gold" href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7RiMN-fY79iWMNIXExgRhtg4VoXTQ3uESU20le4qn-sgg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Cohort 5 (PKR 4,999) →</a>
+          <a class="btn btn-builder" href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7RiMN-fY79iWMNIXExgRhtg4VoXTQ3uESU20le4qn-sgg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Cohort 5 (PKR 4,999) →</a>
         </div>
       </div>
     </div>
@@ -826,7 +877,7 @@ footer {
     <div class="info-grid">
       <div class="info-card">
         <div style="font-size:2.5rem;">👨‍💻</div>
-        <strong>Abdullah</strong>
+        <strong>Muhammad Abdullah</strong>
         <span>FAST University Graduate<br>AI & Practical Technology</span>
       </div>
       <div class="info-card">
@@ -878,7 +929,7 @@ footer {
 </footer>
 
 <script>
-function switchTab(tabId, theme) {
+function switchTab(tabId) {
   const contents = document.querySelectorAll('.tab-content');
   contents.forEach(c => c.classList.remove('active'));
 
@@ -893,9 +944,9 @@ function switchTab(tabId, theme) {
   }
 
   if (tabId === 'tab-weekend') {
-    btnWeekend.classList.add('active-purple');
+    btnWeekend.classList.add('active-creator');
   } else {
-    btnCohort5.classList.add('active-gold');
+    btnCohort5.classList.add('active-builder');
   }
 }
 </script>
