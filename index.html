@@ -433,11 +433,20 @@ section { padding: 60px 0; }
 }
 
 .tab-content { display: none; }
-.tab-content.active { display: block; animation: fadeIn 0.35s ease; }
+.tab-content.active { 
+  display: block; 
+  animation: tabReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+}
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes tabReveal {
+  from { 
+    opacity: 0; 
+    transform: translateY(14px) scale(0.99); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
 }
 
 /* Detail Card Views */
@@ -447,6 +456,7 @@ section { padding: 60px 0; }
   border: 1px solid var(--line);
   padding: 38px;
   box-shadow: var(--shadow);
+  transition: box-shadow 0.3s ease;
 }
 .detail-header {
   border-bottom: 1px solid var(--line);
@@ -466,9 +476,16 @@ section { padding: 60px 0; }
 
 .day-detail-box {
   background: #f8fafc;
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--line);
   border-radius: 20px;
   padding: 24px;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.day-detail-box:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
 }
 .day-detail-box h4 { font-size: 1.2rem; margin: 0 0 14px; color: var(--core-navy); display: flex; align-items: center; justify-content: space-between; }
 .day-badge { font-size: 0.78rem; background: var(--core-navy); color: white; padding: 5px 12px; border-radius: 999px; font-weight: 800; }
@@ -520,48 +537,259 @@ section { padding: 60px 0; }
 .roc-info h4 { font-size: 1.4rem; margin: 0 0 6px; color: white; }
 .roc-info p { margin: 0; color: #e2e8f0; font-size: 0.98rem; max-width: 600px; }
 
-/* Mentors & Info */
-.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.info-card {
+/* Professional Section Badges */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: white;
   border: 1px solid var(--line);
-  border-radius: 20px;
-  padding: 28px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(14, 27, 46, 0.03);
-  transition: all 0.25s ease;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--core-navy);
+  margin-bottom: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
-.info-card:hover {
-  border-color: var(--core-navy);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(14, 27, 46, 0.08);
+.section-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--builder-gold);
 }
-.info-card strong { display: block; color: var(--core-navy); font-size: 1.15rem; margin-top: 10px; }
-.info-card span { color: var(--muted); font-size: 0.93rem; }
 
-/* FAQ */
-.faq { display: grid; gap: 14px; max-width: 850px; margin: auto; }
+/* Mentors & Instructors Section */
+.instructors-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.info-grid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 26px; 
+}
+.mentor-card {
+  background: white;
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  padding: 32px 26px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.mentor-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--creator-blue), var(--builder-gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.mentor-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(37, 99, 235, 0.3);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
+}
+.mentor-card:hover::before {
+  opacity: 1;
+}
+
+.mentor-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.mentor-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  flex-shrink: 0;
+  position: relative;
+}
+.avatar-blue {
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  color: #1d4ed8;
+  border: 1.5px solid #bfdbfe;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.15);
+}
+.avatar-gold {
+  background: linear-gradient(135deg, #fef3c7, #fffbeb);
+  color: #b45309;
+  border: 1.5px solid #fde68a;
+  box-shadow: 0 6px 16px rgba(217, 119, 6, 0.15);
+}
+.avatar-purple {
+  background: linear-gradient(135deg, #ede9fe, #f5f3ff);
+  color: #6d28d9;
+  border: 1.5px solid #ddd6fe;
+  box-shadow: 0 6px 16px rgba(109, 40, 217, 0.15);
+}
+
+.mentor-title-group h3 {
+  font-size: 1.25rem;
+  color: var(--core-navy);
+  margin: 0 0 4px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.mentor-badge-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #334155;
+}
+.mentor-card:hover .mentor-badge-tag {
+  background: #eff6ff;
+  color: var(--creator-blue);
+}
+
+.mentor-credential {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--core-navy);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.mentor-bio {
+  font-size: 0.93rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: 0 0 20px;
+  flex-grow: 1;
+}
+
+.mentor-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+.skill-pill {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  color: #475569;
+  transition: all 0.2s ease;
+}
+.mentor-card:hover .skill-pill {
+  background: white;
+  border-color: #cbd5e1;
+  color: var(--core-navy);
+}
+
+/* Custom Professional Animated FAQ Accordion */
+.faq-section {
+  background: #ffffff;
+  border-top: 1px solid var(--line);
+}
+.faq { 
+  display: grid; 
+  gap: 16px; 
+  max-width: 860px; 
+  margin: auto; 
+}
 .faq details {
   background: white;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 20px 24px;
-  transition: border-color 0.2s ease;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  padding: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+.faq details:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
 }
 .faq details[open] {
-  border-color: var(--core-gold);
+  border-color: var(--creator-blue);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.1);
+  background: #ffffff;
 }
-.faq summary { font-weight: 800; color: var(--core-navy); cursor: pointer; font-size: 1.05rem; }
-.faq p { margin: 12px 0 0; color: var(--muted); line-height: 1.65; }
+.faq summary {
+  padding: 22px 26px;
+  font-weight: 800;
+  color: var(--core-navy);
+  cursor: pointer;
+  font-size: 1.08rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::marker { display: none; }
+.faq summary:hover { color: var(--creator-blue); }
+.faq details[open] summary { color: var(--creator-blue); border-bottom: 1px solid #f1f5f9; }
+
+.faq-toggle-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--core-navy);
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq details[open] .faq-toggle-icon {
+  transform: rotate(45deg);
+  background: var(--creator-blue);
+  color: white;
+}
+.faq-content {
+  padding: 20px 26px 24px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.98rem;
+  animation: fadeInDown 0.3s ease;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 footer {
-  background: var(--core-navy-dark);
-  color: #cbd5e1;
-  padding: 34px 0;
+  background: #090e17;
+  color: #94a3b8;
+  padding: 40px 0;
   text-align: center;
   font-size: 0.92rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
+footer a { color: #e2e8f0; transition: color 0.2s; }
+footer a:hover { color: var(--builder-gold); }
 
 @media (max-width: 900px) {
   .dual-programs-grid, .days-grid-2, .days-grid-7, .info-grid { grid-template-columns: 1fr; }
@@ -868,54 +1096,149 @@ footer {
 </section>
 
 <!-- INSTRUCTORS SECTION -->
-<section id="instructors" style="background:white;border-top:1px solid var(--line);">
+<section id="instructors" class="instructors-section">
   <div class="container">
     <div class="section-title">
+      <div class="section-badge"><span class="dot"></span> FAST University Alumni</div>
       <h2>Meet Your Core Lab Instructors</h2>
       <p>Guided by FAST University graduates dedicated to practical, hands-on learning.</p>
     </div>
+    
     <div class="info-grid">
-      <div class="info-card">
-        <div style="font-size:2.5rem;">👨‍💻</div>
-        <strong>Muhammad Abdullah</strong>
-        <span>FAST University Graduate<br>AI & Practical Technology</span>
+      <!-- MENTOR 1: MUHAMMAD ABDULLAH -->
+      <div class="mentor-card">
+        <div class="mentor-header">
+          <div class="mentor-avatar avatar-blue">👨‍💻</div>
+          <div class="mentor-title-group">
+            <h3>Muhammad Abdullah</h3>
+            <span class="mentor-badge-tag">Lead AI & Systems</span>
+          </div>
+        </div>
+        <div class="mentor-credential">
+          <span>🎓</span> FAST-NUCES Graduate
+        </div>
+        <p class="mentor-bio">
+          Specializes in prompt engineering architectures, AI automation pipelines, and guiding beginners to deploy functional AI tools and web apps from day one.
+        </p>
+        <div class="mentor-skills">
+          <span class="skill-pill">Prompt Engineering</span>
+          <span class="skill-pill">AI Automation</span>
+          <span class="skill-pill">Web Tools</span>
+          <span class="skill-pill">LLMs</span>
+        </div>
       </div>
-      <div class="info-card">
-        <div style="font-size:2.5rem;">👩‍💻</div>
-        <strong>Munazzah</strong>
-        <span>FAST University Graduate<br>AI & Practical Technology</span>
+
+      <!-- MENTOR 2: MUNAZZAH -->
+      <div class="mentor-card">
+        <div class="mentor-header">
+          <div class="mentor-avatar avatar-gold">👩‍💻</div>
+          <div class="mentor-title-group">
+            <h3>Munazzah</h3>
+            <span class="mentor-badge-tag">AI Media & Design</span>
+          </div>
+        </div>
+        <div class="mentor-credential">
+          <span>🎓</span> FAST-NUCES Graduate
+        </div>
+        <p class="mentor-bio">
+          Specializes in generative visual computing, photorealistic design, short-form video generation, and multi-platform social media distribution engines.
+        </p>
+        <div class="mentor-skills">
+          <span class="skill-pill">Generative Art</span>
+          <span class="skill-pill">AI Video & Voice</span>
+          <span class="skill-pill">Visual Assets</span>
+          <span class="skill-pill">Reels/Shorts</span>
+        </div>
       </div>
-      <div class="info-card">
-        <div style="font-size:2.5rem;">🎓</div>
-        <strong>Student-Centered Mentorship</strong>
-        <span>Live interactive sessions & direct project guidance</span>
+
+      <!-- MENTOR 3: LIVE MENTORSHIP -->
+      <div class="mentor-card">
+        <div class="mentor-header">
+          <div class="mentor-avatar avatar-purple">🎓</div>
+          <div class="mentor-title-group">
+            <h3>Interactive Mentorship</h3>
+            <span class="mentor-badge-tag">100% Live Sessions</span>
+          </div>
+        </div>
+        <div class="mentor-credential">
+          <span>⚡</span> Direct Real-Time Support
+        </div>
+        <p class="mentor-bio">
+          No passive pre-recorded lectures. You get live interactive screen guidance, active problem solving, hands-on debugging, and individual capstone feedback.
+        </p>
+        <div class="mentor-skills">
+          <span class="skill-pill">Live Q&A</span>
+          <span class="skill-pill">Capstone Reviews</span>
+          <span class="skill-pill">Certificate</span>
+          <span class="skill-pill">1-on-1 Help</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FAQ SECTION -->
-<section id="faq">
+<section id="faq" class="faq-section">
   <div class="container">
     <div class="section-title">
+      <div class="section-badge"><span class="dot"></span> Clear Answers</div>
       <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about Core Lab programs, eligibility, and registration.</p>
     </div>
+
     <div class="faq">
       <details>
-        <summary>What is Core Lab?</summary>
-        <p><strong>Core Lab</strong> is a practical AI education initiative founded by FAST University graduates to teach hands-on AI tools, visual creation, productivity, and web building to Pakistani students and creators.</p>
+        <summary>
+          <span>What is Core Lab and who is it for?</span>
+          <span class="faq-toggle-icon">+</span>
+        </summary>
+        <div class="faq-content">
+          <strong>Core Lab</strong> is a practical AI education initiative founded by FAST University graduates. It is specifically designed for beginners, school & university students, creators, professionals, and curious parents who want real, usable AI superpowers without confusing academic jargon.
+        </div>
       </details>
+
       <details>
-        <summary>What are the dates for each program?</summary>
-        <p>The <strong>AI Content Creator Weekend</strong> takes place on <strong>12 & 13 September 2026</strong> (Saturday & Sunday). The <strong>7-Day Cohort 5</strong> runs from <strong>5–11 October 2026</strong> (Monday to Sunday).</p>
+        <summary>
+          <span>What are the exact dates for each program?</span>
+          <span class="faq-toggle-icon">+</span>
+        </summary>
+        <div class="faq-content">
+          We have two upcoming programs in Autumn 2026:
+          <ul>
+            <li><strong>AI Content Creator Weekend:</strong> Saturday & Sunday, <strong>12 & 13 September 2026</strong> (Intensive 2-day workshop).</li>
+            <li><strong>AI From Zero to AI Builder (Cohort 5):</strong> Monday to Sunday, <strong>5–11 October 2026</strong> (Complete 7-day flagship cohort).</li>
+          </ul>
+        </div>
       </details>
+
       <details>
-        <summary>Do students or parents need technical experience to join?</summary>
-        <p>No prior coding or technical experience is required! Both programs are designed step-by-step for beginners, students, creators, and parents.</p>
+        <summary>
+          <span>Do I need prior coding or technical knowledge to join?</span>
+          <span class="faq-toggle-icon">+</span>
+        </summary>
+        <div class="faq-content">
+          <strong>No prior programming or computer science experience is needed.</strong> Both programs start from scratch. We teach using intuitive visual tools, plain-English prompt engineering, and visual web builders that anyone with basic computer literacy can easily master.
+        </div>
       </details>
+
       <details>
-        <summary>How do I register?</summary>
-        <p>Click any "Register" or "View Details & Register" button. It will open the official Google Form for your selected program in a new tab.</p>
+        <summary>
+          <span>Will I receive a verified certificate after completing the program?</span>
+          <span class="faq-toggle-icon">+</span>
+        </summary>
+        <div class="faq-content">
+          Yes! All students who complete the hands-on project milestones receive an official <strong>Core Lab Certificate of Completion</strong> signed by FAST University graduates, which you can showcase on your CV, LinkedIn, or student portfolio.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          <span>How does the registration and payment process work?</span>
+          <span class="faq-toggle-icon">+</span>
+        </summary>
+        <div class="faq-content">
+          Click any <strong>"Register"</strong> or <strong>"View Details & Register"</strong> button on this page. It opens the official Google Form where you can submit your details and view simple payment instructions (via Easypaisa, JazzCash, or online bank transfer). Your seat will be confirmed via WhatsApp/Email.
+        </div>
       </details>
     </div>
   </div>
