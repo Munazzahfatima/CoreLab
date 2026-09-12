@@ -543,6 +543,77 @@ section { padding: 60px 0; }
 .roc-info h4 { font-size: 1.4rem; margin: 0 0 6px; color: white; }
 .roc-info p { margin: 0; color: #e2e8f0; font-size: 0.98rem; max-width: 600px; }
 
+.roc-action-area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.roc-contact-help {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.roc-help-label {
+  color: #cbd5e1;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+.roc-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 211, 102, 0.16);
+  border: 1px solid rgba(37, 211, 102, 0.45);
+  color: #86efac;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  transition: all 0.22s ease;
+}
+.roc-contact-link:hover {
+  background: rgba(37, 211, 102, 0.32);
+  border-color: #25d366;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.28);
+}
+.roc-contact-link svg {
+  color: #25d366;
+  flex-shrink: 0;
+}
+
+.form-help-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  color: #92400e;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  margin-top: 14px;
+  font-weight: 500;
+}
+.form-help-banner a {
+  color: #b45309;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-help-banner a:hover {
+  color: #78350f;
+}
+
 /* Professional Section Badges */
 .section-badge {
   display: inline-flex;
@@ -847,12 +918,81 @@ footer {
   border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #94a3b8;
+}
+.f-contact-label {
+  color: #94a3b8;
+}
+.footer-phone-link {
+  color: #25d366;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-phone-link:hover {
+  color: #86efac;
+  text-decoration: underline;
+}
+
+/* Floating WhatsApp Quick-Help Badge */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #25d366;
+  color: #05260f;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 11px 19px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 4px 10px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+.floating-whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  background: #20ba59;
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55), 0 6px 14px rgba(0, 0, 0, 0.16);
+  color: #021408;
+}
+.floating-whatsapp-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
 @media (max-width: 900px) {
   .dual-programs-grid, .days-grid-2, .days-grid-7, .info-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .card-footer, .registration-outcome-card, .footer-inner { flex-direction: column; align-items: stretch; text-align: center; }
-  .footer-right, .footer-brand { justify-content: center; }
+  .footer-right, .footer-brand, .footer-contact { justify-content: center; }
   .price-display { align-items: center; margin-bottom: 12px; }
+  .roc-action-area {
+    align-items: center;
+    width: 100%;
+  }
+  .roc-contact-help {
+    justify-content: center;
+    text-align: center;
+  }
+  .footer-contact {
+    width: 100%;
+    margin-top: 4px;
+  }
 
   /* Mobile Header Alignment & Proportions */
   .nav {
@@ -899,6 +1039,20 @@ footer {
   }
   .brand-sub {
     font-size: 0.55rem;
+  }
+  .floating-whatsapp-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 15px;
+    font-size: 0.82rem;
+  }
+  .floating-whatsapp-btn .float-label-prefix {
+    display: none;
+  }
+  .form-help-banner {
+    border-radius: 14px;
+    padding: 10px 14px;
+    text-align: center;
   }
 }
 </style>
@@ -1055,6 +1209,9 @@ footer {
     <div class="section-title">
       <h2>Full Program Details & Registration</h2>
       <p>Click below to inspect the day-by-day syllabus details and access the official Google Form registration links.</p>
+      <div class="form-help-banner">
+        <span>⚠️ Can't fill the form?</span> Register directly via WhatsApp / Call at <a href="https://wa.me/923127586251" target="_blank" rel="noopener"><strong>+92 312 7586251</strong></a>
+      </div>
     </div>
 
     <!-- INTERACTIVE TAB BUTTONS -->
@@ -1107,7 +1264,16 @@ footer {
             <h4>Complete Multi-Platform AI Content Pack</h4>
             <p>You leave with ready-to-publish graphics, short videos/reels, AI voiceovers, and reusable prompt templates.</p>
           </div>
-          <a class="btn btn-creator" href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Weekend Intensive (PKR 2,999) →</a>
+          <div class="roc-action-area">
+            <a class="btn btn-creator" href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Weekend Intensive (PKR 2,999) →</a>
+            <div class="roc-contact-help">
+              <span class="roc-help-label">Can't fill the form?</span>
+              <a class="roc-contact-link" href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20want%20to%20register%20for%20the%20AI%20Content%20Creator%20Weekend." target="_blank" rel="noopener">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+                <span>WhatsApp / Call: <strong>+92 312 7586251</strong></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1194,7 +1360,16 @@ footer {
             <h4>7 Completed Projects & Official Core Lab Certificate</h4>
             <p>Gain real confidence with 7 completed projects and a capstone project for your resume and portfolio.</p>
           </div>
-          <a class="btn btn-builder" href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7RiMN-fY79iWMNIXExgRhtg4VoXTQ3uESU20le4qn-sgg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Cohort 5 (PKR 4,999) →</a>
+          <div class="roc-action-area">
+            <a class="btn btn-builder" href="https://docs.google.com/forms/d/e/1FAIpQLSe-i7RiMN-fY79iWMNIXExgRhtg4VoXTQ3uESU20le4qn-sgg/viewform?usp=publish-editor" target="_blank" rel="noopener" style="padding:16px 36px;font-size:1.05rem;">Register for Cohort 5 (PKR 4,999) →</a>
+            <div class="roc-contact-help">
+              <span class="roc-help-label">Can't fill the form?</span>
+              <a class="roc-contact-link" href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20want%20to%20register%20for%20AI%20Cohort%205." target="_blank" rel="noopener">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+                <span>WhatsApp / Call: <strong>+92 312 7586251</strong></span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1330,7 +1505,10 @@ footer {
           <span class="faq-toggle-icon">+</span>
         </summary>
         <div class="faq-content">
-          Click any <strong>"Register"</strong> or <strong>"View Details & Register"</strong> button on this page. It opens the official Google Form where you can submit your details and view simple payment instructions (via Easypaisa, JazzCash, or online bank transfer). Your seat will be confirmed via WhatsApp/Email.
+          <p>Click any <strong>"Register"</strong> or <strong>"View Details & Register"</strong> button on this page. It opens the official Google Form where you can submit your details and view simple payment instructions (via Easypaisa, JazzCash, or online bank transfer). Your seat will be confirmed via WhatsApp/Email.</p>
+          <div style="margin-top: 10px; padding: 12px 16px; background: #f8fafc; border-radius: 12px; border-left: 4px solid var(--builder-gold); font-size: 0.93rem; color: #334155;">
+            <strong>Can't fill the Google Form?</strong> You can register directly by sending a WhatsApp message or calling <a href="https://wa.me/923127586251" target="_blank" rel="noopener" style="color: #047857; font-weight: 700; text-decoration: underline;">+92 312 7586251</a>, and our support team will guide you through instant manual registration.
+          </div>
         </div>
       </details>
     </div>
@@ -1356,6 +1534,14 @@ footer {
         <div class="f-name">Core Lab</div>
         <div class="f-sub">AI Education & Bootcamps</div>
       </div>
+    </div>
+
+    <div class="footer-contact">
+      <span class="f-contact-label">Can't fill form? WhatsApp / Call:</span>
+      <a href="https://wa.me/923127586251" target="_blank" rel="noopener" class="footer-phone-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+        <span>+92 312 7586251</span>
+      </a>
     </div>
 
     <div class="footer-right">
@@ -1390,6 +1576,12 @@ function switchTab(tabId) {
   }
 }
 </script>
+
+<a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20have%20a%20question%20or%20need%20help%20registering%20for%20a%20program." target="_blank" rel="noopener" class="floating-whatsapp-btn" aria-label="WhatsApp Support +92 312 7586251">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+  <span class="float-label-prefix">Can't fill form? </span>
+  <span>+92 312 7586251</span>
+</a>
 
 </body>
 </html>
