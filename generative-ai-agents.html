@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generative AI, LLMs & AI Agents Bootcamp (12–22 Oct 2026) — Core Lab</title>
+  <meta name="description" content="10-Day technical AI engineering bootcamp. Build systems that reason, retrieve vector embeddings (RAG), execute tool calling, and orchestrate autonomous multi-step agents.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="brand" aria-label="Core Lab Home">
+        <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="25" y1="50" x2="50" y2="25" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="25" x2="80" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="80" y1="50" x2="50" y2="80" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="25" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="60" y2="52" stroke="#0e1b2e" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="50" cy="25" r="11" fill="#0e1b2e"/>
+          <circle cx="80" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="50" cy="80" r="11" fill="#0e1b2e"/>
+          <circle cx="25" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="60" cy="50" r="9" fill="#d97706"/>
+        </svg>
+        <div class="brand-text">
+          <div class="brand-title"><b>Core</b><span>Lab</span></div>
+          <div class="brand-tagline">AI Education & Bootcamps</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="programs.html" class="nav-link active">Programs</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#register" class="btn btn-purple btn-sm btn-header">Register (Early Bird PKR 10k)</a>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" role="dialog" aria-modal="true">
+    <div class="mobile-drawer-content">
+      <a href="index.html">Home</a>
+      <a href="programs.html" class="active">Programs & Learning Paths</a>
+      <a href="projects.html">Ongoing Projects</a>
+      <a href="about.html">About & Mentors</a>
+      <a href="faq.html">Frequently Asked Questions</a>
+      <div style="margin-top: 10px;">
+        <a href="#register" class="btn btn-purple" style="width: 100%; text-align: center;">Register (Early Bird PKR 10k)</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Program Hero -->
+    <section class="hero" style="padding: 60px 0 40px;">
+      <div class="container hero-content">
+        <div class="hero-tag-pills">
+          <span class="hero-pill" style="background:#f5f3ff; color:#6d28d9; border:1px solid #ddd6fe;">🤖 ADVANCED AI ENGINEERING</span>
+          <span class="hero-pill hero-pill-navy">📅 12–22 October 2026 (10-Day Bootcamp)</span>
+        </div>
+
+        <h1>Generative AI, LLMs & <span class="gradient-purple">AI Agents</span></h1>
+        <p class="hero-subheadline">
+          From your first LLM API call to building AI systems that can reason, use tools, retrieve information, and perform tasks. Master the engineering foundation powering next-generation autonomous software.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#register" class="btn btn-purple btn-lg">Register Now — PKR 12,000 →</a>
+          <a href="#curriculum" class="btn btn-outline btn-lg">Inspect 10-Day Curriculum</a>
+        </div>
+
+        <!-- Quick Summary Box -->
+        <div class="trust-bar" style="margin-top: 20px;">
+          <div class="trust-item"><span>⏱️</span> 10-Day Intensive (12–22 Oct Window)</div>
+          <div class="trust-item"><span>💰</span> PKR 12,000 Regular | PKR 10,000 Early Bird</div>
+          <div class="trust-item"><span>🛠️</span> RAG, Vector Search & Tool Calling</div>
+          <div class="trust-item"><span>🚀</span> Outcome: Deploy Your Own AI-Powered Application</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering Architecture Strip -->
+    <section style="background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 34px 0;">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 18px;">
+          <span style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);">Modern AI Engineering & Agent Architecture</span>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap;">
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">⚡ LLM APIs</span>
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">🔍 Vector Embeddings & RAG</span>
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">🛠️ Function & Tool Calling</span>
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">🤖 Autonomous Agent Loops</span>
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">⚙️ n8n AI Automation</span>
+          <span class="tech-tag" style="padding: 8px 16px; font-size: 0.88rem; font-weight: 800; font-family: monospace;">🧠 Memory & State Management</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed 10-Day Agent Curriculum -->
+    <section id="curriculum" class="curriculum-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge badge-purple"><span class="dot"></span> Engineering Syllabus</div>
+          <h2>10 Days to Autonomous AI Systems</h2>
+          <p>Go beyond passive chat interfaces. Learn how to architect, ground, and deploy production AI agents that take autonomous actions in software.</p>
+        </div>
+
+        <div class="days-grid grid-10">
+
+          <!-- Day 1 -->
+          <div class="day-box" style="border-left: 4px solid var(--purple);">
+            <div class="day-box-header">
+              <h4>Day 1 — LLM Foundations</h4>
+              <span class="day-pill day-pill-purple">DAY 01</span>
+            </div>
+            <ul>
+              <li>Transformer mechanics, self-attention, tokenization, and temperature parameters.</li>
+              <li>Understanding context window limits, KV caching, and latency tradeoffs.</li>
+              <li>Comparing open-source vs. proprietary frontier models (Llama 3, DeepSeek, Claude, GPT-4).</li>
+            </ul>
+          </div>
+
+          <!-- Day 2 -->
+          <div class="day-box" style="border-left: 4px solid var(--purple);">
+            <div class="day-box-header">
+              <h4>Day 2 — Advanced Prompt Engineering</h4>
+              <span class="day-pill day-pill-purple">DAY 02</span>
+            </div>
+            <ul>
+              <li>System prompts, structured role constraints, and few-shot calibration.</li>
+              <li>Chain-of-Thought (CoT), Tree-of-Thoughts, and ReAct (Reason + Act) prompting.</li>
+              <li>Guarding against hallucinations and enforcing deterministic JSON / Pydantic outputs.</li>
+            </ul>
+          </div>
+
+          <!-- Day 3 -->
+          <div class="day-box" style="border-left: 4px solid var(--purple);">
+            <div class="day-box-header">
+              <h4>Day 3 — LLM APIs & Integration</h4>
+              <span class="day-pill day-pill-purple">DAY 03</span>
+            </div>
+            <ul>
+              <li>Writing robust Python clients for modern LLM provider endpoints.</li>
+              <li>Streaming tokens via SSE, handling rate limits, backoff logic, and token cost tracking.</li>
+              <li>Structured output generation and schema validation for production codebases.</li>
+            </ul>
+          </div>
+
+          <!-- Day 4 -->
+          <div class="day-box" style="border-left: 4px solid var(--purple);">
+            <div class="day-box-header">
+              <h4>Day 4 — RAG & Vector Embeddings</h4>
+              <span class="day-pill day-pill-purple">DAY 04</span>
+            </div>
+            <ul>
+              <li>Generating dense semantic vector embeddings from custom enterprise documents.</li>
+              <li>Chunking strategies: recursive splitting, semantic boundaries, and metadata enrichment.</li>
+              <li>Vector database retrieval (ChromaDB / Pinecone), cosine similarity, and grounded context synthesis.</li>
+            </ul>
+          </div>
+
+          <!-- Day 5 -->
+          <div class="day-box" style="border-left: 4px solid var(--gold);">
+            <div class="day-box-header">
+              <h4>Day 5 — AI Agents Architecture</h4>
+              <span class="day-pill day-pill-gold">DAY 05</span>
+            </div>
+            <ul>
+              <li>The difference between simple chains and autonomous agent loops.</li>
+              <li>Perception, planning, execution, and evaluation cycles in autonomous agents.</li>
+              <li>Designing agent personas, boundaries, and failure-recovery mechanisms.</li>
+            </ul>
+          </div>
+
+          <!-- Day 6 -->
+          <div class="day-box" style="border-left: 4px solid var(--gold);">
+            <div class="day-box-header">
+              <h4>Day 6 — Tool Calling & External APIs</h4>
+              <span class="day-pill day-pill-gold">DAY 06</span>
+            </div>
+            <ul>
+              <li>Function calling mechanisms: schemas, model invocation, and argument parsing.</li>
+              <li>Giving LLMs hands: web search tools, database queries, calculators, and API triggers.</li>
+              <li>Executing tools safely in sandbox environments with error fallback handling.</li>
+            </ul>
+          </div>
+
+          <!-- Day 7 -->
+          <div class="day-box" style="border-left: 4px solid var(--gold);">
+            <div class="day-box-header">
+              <h4>Day 7 — n8n + AI Workflow Automation</h4>
+              <span class="day-pill day-pill-gold">DAY 07</span>
+            </div>
+            <ul>
+              <li>Connecting modern AI nodes inside visual production workflow orchestrators (n8n).</li>
+              <li>Triggering multi-step workflows from Slack, email, webhooks, and forms.</li>
+              <li>Combining visual workflow nodes with custom Python and JavaScript agent logic.</li>
+            </ul>
+          </div>
+
+          <!-- Day 8 -->
+          <div class="day-box" style="border-left: 4px solid var(--gold);">
+            <div class="day-box-header">
+              <h4>Day 8 — Memory & Multi-Step Agents</h4>
+              <span class="day-pill day-pill-gold">DAY 08</span>
+            </div>
+            <ul>
+              <li>Short-term buffer memory vs. long-term persistent vector memory stores.</li>
+              <li>Conversation state tracking across sessions and multi-turn user intent resolution.</li>
+              <li>Orchestrating multi-agent collaboration: supervisor agents, research agents, and critique agents.</li>
+            </ul>
+          </div>
+
+          <!-- Day 9 -->
+          <div class="day-box" style="border-left: 4px solid var(--core-navy);">
+            <div class="day-box-header">
+              <h4>Day 9 — Build Your AI Product</h4>
+              <span class="day-pill day-pill-purple">DAY 09</span>
+            </div>
+            <ul>
+              <li>Full-day implementation studio: building your original AI product agent.</li>
+              <li>Connecting your chosen frontend (FastAPI / Streamlit / Next.js) to the agent backend.</li>
+              <li>Optimizing latency, system prompt guardrails, and handling real user queries.</li>
+            </ul>
+          </div>
+
+          <!-- Day 10 -->
+          <div class="day-box" style="border-left: 4px solid var(--core-navy);">
+            <div class="day-box-header">
+              <h4>Day 10 — Deployment & Portfolio</h4>
+              <span class="day-pill day-pill-purple">DAY 10</span>
+            </div>
+            <ul>
+              <li>Deploying the AI agent backend to production cloud hosting (Render / Fly.io / Vercel).</li>
+              <li>Environment variable security, API key management, and production usage observability.</li>
+              <li>Project presentation, code architecture walkthrough, and certification graduation.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Potential Final Projects Grid -->
+        <div style="margin-top: 50px;">
+          <div style="text-align: center; margin-bottom: 24px;">
+            <h3 style="font-size: 1.4rem;">Possible Capstone Project Domains</h3>
+            <p style="font-size: 0.95rem;">Choose one of these industry archetypes or propose your own custom problem to solve:</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;" class="mentor-grid-responsive">
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">🎧 Customer Support Agent</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Grounds answers in real company knowledge bases, tickets issues, and escalates to human agents when sentiment drops.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">🔬 Autonomous Research Agent</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Scrapes domain websites, synthesizes findings across 20+ sources, cross-checks facts, and writes executive briefs.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">📧 Executive Email Agent</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Classifies incoming communication, extracts urgent action items, queries calendar availability, and drafts contextual replies.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">📅 Appointment Booking Agent</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Conversational booking agent that checks real-time database slots, handles rescheduling, and syncs with Google Calendar.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">💼 Inbound Sales Qualifier</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Interviews inbound leads via natural chat, scores their budget/need, and logs enriched records into CRM software.</p>
+            </div>
+            <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px;">
+              <h4 style="color: var(--purple); font-size: 1.05rem;">📄 Document Intelligence AI</h4>
+              <p style="font-size: 0.88rem; margin: 0;">Parses unstructured invoices, legal contracts, and financial statements into verified, queryable tabular database entries.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Outcome Card -->
+        <div class="reg-outcome-card bg-dark-navy" style="margin-top: 40px;">
+          <div>
+            <span class="badge-deliverable" style="color: #c4b5fd;">Engineering Capstone Outcome</span>
+            <h3>Build and Deploy Your Own AI-Powered Application</h3>
+            <p>
+              Graduate with a functioning, production-deployed AI system running in the cloud with live API integrations, vector search grounding, and autonomous decision-making.
+            </p>
+          </div>
+          <div class="reg-actions-box">
+            <span style="font-size: 1.6rem; font-weight: 900; color: white;">PKR 12,000</span>
+            <span style="font-size: 0.82rem; color: #cbd5e1;">Early Bird: PKR 10,000 | Premium: PKR 15,000</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" style="padding: 80px 0; background: white; border-top: 1px solid var(--line);">
+      <div class="container-narrow">
+        <div class="section-header">
+          <div class="section-badge badge-purple"><span class="dot"></span> Cohort Admissions</div>
+          <h2>Register for Generative AI & AI Agents</h2>
+          <p>Dates: 12–22 October 2026 (10-Day Bootcamp). Limited cohort capacity for hands-on code reviews.</p>
+        </div>
+
+        <div style="background: var(--bg-main); border: 1.5px solid var(--line); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-sm);">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px;" class="pricing-tiers-grid">
+            <div style="background: white; border: 1.5px solid var(--purple); border-radius: 16px; padding: 20px; text-align: center;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--purple); text-transform: uppercase;">Early Bird Pass</span>
+              <div style="font-size: 1.4rem; font-weight: 900; color: var(--core-navy); margin: 6px 0;">PKR 10,000</div>
+              <p style="font-size: 0.82rem; margin: 0;">Limited to first 10 seats</p>
+            </div>
+            <div style="background: white; border: 1.5px solid var(--line); border-radius: 16px; padding: 20px; text-align: center;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--muted); text-transform: uppercase;">Regular Pass</span>
+              <div style="font-size: 1.4rem; font-weight: 900; color: var(--core-navy); margin: 6px 0;">PKR 12,000</div>
+              <p style="font-size: 0.82rem; margin: 0;">Full 10-day bootcamp access</p>
+            </div>
+            <div style="background: white; border: 1.5px solid var(--gold); border-radius: 16px; padding: 20px; text-align: center;">
+              <span style="font-size: 0.72rem; font-weight: 800; color: var(--gold-hover); text-transform: uppercase;">Premium Pass</span>
+              <div style="font-size: 1.4rem; font-weight: 900; color: var(--core-navy); margin: 6px 0;">PKR 15,000</div>
+              <p style="font-size: 0.82rem; margin: 0;">Includes 1-on-1 architecture review</p>
+            </div>
+          </div>
+
+          <div style="text-align: center;">
+            <p style="font-size: 0.98rem; margin-bottom: 20px; color: var(--ink-secondary);">
+              Registration and seat verification for the GenAI & Agents Bootcamp are handled directly by the admissions team:
+            </p>
+            <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20want%20to%20register%20for%20the%20Generative%20AI%20%26%20AI%20Agents%20Bootcamp%20(12-22%20Oct)." target="_blank" rel="noopener" class="btn btn-purple btn-lg" style="width: 100%; max-width: 520px; margin: 0 auto;">
+              Register via Admissions WhatsApp (+92 312 7586251) →
+            </a>
+            <div style="margin-top: 14px; font-size: 0.84rem; color: var(--muted);">
+              Instant confirmation • Online bank transfer, JazzCash & Easypaisa accepted
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sibling Program Banner -->
+    <div class="container" style="margin: 60px auto;">
+      <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--blue);">Parallel Technical Bootcamp</span>
+          <h4 style="margin: 4px 0 0; font-size: 1.15rem;">Prefer predictive analytics & tabular models? Explore Data Science & ML</h4>
+        </div>
+        <a href="data-science-machine-learning.html" class="btn btn-primary btn-sm">Explore Data Science Bootcamp (12–22 Oct) →</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="25" y1="50" x2="50" y2="25" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="25" x2="80" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="80" y1="50" x2="50" y2="80" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="80" x2="25" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="50" cy="25" r="11" fill="#cbd5e1"/>
+              <circle cx="80" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="50" cy="80" r="11" fill="#cbd5e1"/>
+              <circle cx="25" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="60" cy="50" r="9" fill="#d97706"/>
+            </svg>
+            <div class="brand-text">
+              <div class="brand-title" style="color:white;"><b>Core</b><span>Lab</span></div>
+              <div class="brand-tagline">AI Education & Bootcamps</div>
+            </div>
+          </div>
+          <p>
+            Empowering students, creators, and future technical builders with practical, hands-on artificial intelligence education.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Programs</div>
+          <ul class="footer-nav-list">
+            <li><a href="ai-content-creator.html">AI Content Creator (19–20 Sep)</a></li>
+            <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
+            <li><a href="data-science-machine-learning.html">Data Science & ML (12–22 Oct)</a></li>
+            <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-nav-list">
+            <li><a href="programs.html">All Programs Hub</a></li>
+            <li><a href="projects.html">Ongoing Projects</a></li>
+            <li><a href="about.html">About Core Lab</a></li>
+            <li><a href="faq.html">FAQ & Help</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Admissions & Contact</div>
+          <ul class="footer-nav-list">
+            <li><span style="font-size: 0.88rem;">Call / WhatsApp:</span></li>
+            <li>
+              <a href="https://wa.me/923127586251" target="_blank" rel="noopener" class="footer-phone-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+                <span>+92 312 7586251</span>
+              </a>
+            </li>
+            <li style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">Bank transfer, JazzCash, Easypaisa accepted</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Core Lab. Founded by FAST University Graduates. All rights reserved.</div>
+        <div>Practical, hands-on technology education.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick-Help Badge -->
+  <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20have%20a%20question%20about%20the%20Generative%20AI%20Bootcamp." target="_blank" rel="noopener" class="floating-whatsapp" aria-label="Chat with Core Lab admissions on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+    <span class="float-label-prefix">Need Help? </span>
+    <span>WhatsApp Us</span>
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

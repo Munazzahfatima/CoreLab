@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Core Lab | Making AI Practical</title>
+  <meta name="description" content="Core Lab was founded by FAST University graduates to bridge the gap between theoretical AI lectures and real-world implementation. Learn our story, ethos, and meet our mentors.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="brand" aria-label="Core Lab Home">
+        <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="25" y1="50" x2="50" y2="25" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="25" x2="80" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="80" y1="50" x2="50" y2="80" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="25" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="60" y2="52" stroke="#0e1b2e" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="50" cy="25" r="11" fill="#0e1b2e"/>
+          <circle cx="80" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="50" cy="80" r="11" fill="#0e1b2e"/>
+          <circle cx="25" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="60" cy="50" r="9" fill="#d97706"/>
+        </svg>
+        <div class="brand-text">
+          <div class="brand-title"><b>Core</b><span>Lab</span></div>
+          <div class="brand-tagline">AI Education & Bootcamps</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="programs.html" class="btn btn-gold btn-sm btn-header">Register Now</a>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" role="dialog" aria-modal="true">
+    <div class="mobile-drawer-content">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs & Learning Paths</a>
+      <a href="projects.html">Ongoing Projects</a>
+      <a href="about.html" class="active">About & Mentors</a>
+      <a href="faq.html">Frequently Asked Questions</a>
+      <div style="margin-top: 10px;">
+        <a href="programs.html" class="btn btn-gold" style="width: 100%; text-align: center;">Register Now</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="hero" style="padding: 70px 0 45px;">
+      <div class="container hero-content">
+        <div class="section-badge"><span class="dot"></span> Our Origin & Mission</div>
+        <h1>Making AI <span class="gradient-gold">Practical.</span></h1>
+        <p class="hero-subheadline">
+          Core Lab began through interactive university workshops and evolved into a structured practical AI education platform founded by FAST University graduates.
+        </p>
+
+        <div class="trust-bar" style="margin-top: 24px;">
+          <div class="trust-item"><span>🎓</span> FAST-NUCES Technical Heritage</div>
+          <div class="trust-item"><span>🛠️</span> 100% Code-First, Project-Based</div>
+          <div class="trust-item"><span>💬</span> Direct Live Mentor Guidance</div>
+          <div class="trust-item"><span>📜</span> Verifiable Capstone Certificates</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Origin Story -->
+    <section style="padding: 70px 0; background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center;" class="courses-grid-2">
+          <div>
+            <div class="section-badge"><span class="dot"></span> The Genesis</div>
+            <h2 style="margin-top: 8px;">From University Labs to Real-World Impact</h2>
+            <p style="color: var(--ink-secondary); font-size: 1.05rem; line-height: 1.75; margin-bottom: 18px;">
+              During our engineering studies at <strong>FAST-NUCES</strong>, one truth became glaringly clear: university curricula excel at teaching mathematical foundations and algorithmic proofs, but often leave students unprepared to build, ship, and deploy modern AI systems.
+            </p>
+            <p style="color: var(--ink-secondary); font-size: 1.05rem; line-height: 1.75; margin-bottom: 18px;">
+              Meanwhile, self-learning was plagued by superficial 10-minute tutorials showing pre-baked notebooks without explaining how APIs actually authenticate, how autonomous agents maintain persistent state, or how machine learning models are deployed into production web apps.
+            </p>
+            <p style="color: var(--ink-secondary); font-size: 1.05rem; line-height: 1.75;">
+              What started as interactive university workshops rapidly grew. We founded <strong>Core Lab</strong> to eliminate gatekeeping and teach hands-on AI engineering through live, guided build sprints. Whether you are creating automated content workflows or engineering autonomous agents, you leave with real software that works.
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="background: var(--bg-main); border: 1.5px solid var(--line); border-left: 4px solid var(--gold); border-radius: var(--radius-lg); padding: 24px;">
+              <h4 style="color: var(--gold); margin-bottom: 6px; font-size: 1.15rem;">FAST-NUCES Heritage</h4>
+              <p style="color: var(--ink-secondary); font-size: 0.94rem; margin: 0; line-height: 1.6;">
+                Rooted in the rigorous technical culture of Pakistan's premier computing university. We bring academic discipline and production engineering standards together.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-main); border: 1.5px solid var(--line); border-left: 4px solid var(--blue); border-radius: var(--radius-lg); padding: 24px;">
+              <h4 style="color: var(--blue); margin-bottom: 6px; font-size: 1.15rem;">100% Project-Based</h4>
+              <p style="color: var(--ink-secondary); font-size: 0.94rem; margin: 0; line-height: 1.6;">
+                Every session connects to working code in your Git repository or live on a public URL. You build production-grade deliverables from Day 1.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-main); border: 1.5px solid var(--line); border-left: 4px solid #10b981; border-radius: var(--radius-lg); padding: 24px;">
+              <h4 style="color: #10b981; margin-bottom: 6px; font-size: 1.15rem;">Direct Community Support</h4>
+              <p style="color: var(--ink-secondary); font-size: 0.94rem; margin: 0; line-height: 1.6;">
+                Direct mentor access via private WhatsApp cohort channels. Debugging help, code reviews, and continuous guidance throughout your learning journey.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 4 Principles -->
+    <section style="padding: 70px 0;">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><span class="dot"></span> The Core Lab Ethos</div>
+          <h2>Principles That Guide Every Cohort</h2>
+          <p>We designed our learning model around the realities of modern artificial intelligence and software engineering.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;" class="pathways-grid">
+          <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🔨</div>
+            <h4 style="margin-bottom: 8px;">Builder-First Pedagogy</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+              Theory is introduced only when it directly solves a problem in the code you are actively writing.
+            </p>
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🎯</div>
+            <h4 style="margin-bottom: 8px;">Fluff-Free Curriculums</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+              No superficial slides or outdated libraries. Every tool, script, and API taught is actively used in the industry today.
+            </p>
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🚀</div>
+            <h4 style="margin-bottom: 8px;">Production Deliverables</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+              Students graduate with live cloud deployments, functional web apps, and clean GitHub repositories.
+            </p>
+          </div>
+
+          <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-lg); padding: 26px; box-shadow: var(--shadow-xs);">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🤝</div>
+            <h4 style="margin-bottom: 8px;">Live Mentorship</h4>
+            <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+              100% live interactive video sessions with real-time screen sharing, interactive debugging, and code reviews.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mentors Section -->
+    <section class="mentors-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-badge"><span class="dot"></span> University Roots</div>
+          <h2>Meet Your Instructors & Mentors</h2>
+          <p>Taught directly by FAST-NUCES graduates actively researching and building AI systems.</p>
+        </div>
+
+        <div class="mentors-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 900px; margin: 0 auto;">
+          <!-- Mentor 1 -->
+          <div class="mentor-card">
+            <div class="mentor-header-group">
+              <div class="mentor-avatar-box avatar-blue">👨‍💻</div>
+              <div class="mentor-title-box">
+                <h3>Muhammad Abdullah</h3>
+                <span class="mentor-tag">Instructor & Co-Founder</span>
+              </div>
+            </div>
+            <div class="mentor-credential-badge">
+              <span>🎓</span> FAST University Graduate | AI & Practical Technology
+            </div>
+            <p class="mentor-bio">
+              Specializes in AI systems and practical technology education. Experienced in translating complex machine learning workflows into intuitive, build-first student curriculums with full-stack deployments.
+            </p>
+            <div class="mentor-pills-row">
+              <span class="mentor-pill">AI & Practical Tech</span>
+              <span class="mentor-pill">System Architecture</span>
+              <span class="mentor-pill">Hands-On Mentorship</span>
+            </div>
+          </div>
+
+          <!-- Mentor 2 -->
+          <div class="mentor-card">
+            <div class="mentor-header-group">
+              <div class="mentor-avatar-box avatar-gold">👩‍💻</div>
+              <div class="mentor-title-box">
+                <h3>Syeda Munazzah Fatima</h3>
+                <span class="mentor-tag">Instructor & Co-Founder</span>
+              </div>
+            </div>
+            <div class="mentor-credential-badge">
+              <span>🎓</span> FAST University Graduate | AI & Practical Technology
+            </div>
+            <p class="mentor-bio">
+              Computer scientist and AI practitioner specializing in computer vision, TinyML, and multimodal models. TA for university Machine Learning and active researcher behind FabriSense and SmartBand-AI.
+            </p>
+            <div class="mentor-pills-row">
+              <span class="mentor-pill">Computer Vision</span>
+              <span class="mentor-pill">TinyML & Edge AI</span>
+              <span class="mentor-pill">Multimodal Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificate Standard -->
+    <section style="padding: 70px 0; background: white; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;" class="courses-grid-2">
+          <div>
+            <div class="section-badge"><span class="dot"></span> Credential Integrity</div>
+            <h2 style="margin-top: 8px;">A Certificate That Actually Verifies Completed Work</h2>
+            <p style="color: var(--ink-secondary); font-size: 1.02rem; line-height: 1.7; margin-bottom: 18px;">
+              Many online platforms grant certificates for simply playing videos in the background. Core Lab certificates represent verified completion of hands-on capstone engineering.
+            </p>
+            <p style="color: var(--ink-secondary); font-size: 1.02rem; line-height: 1.7; margin-bottom: 24px;">
+              Every <strong>Core Lab Certificate of Completion</strong> is issued only after review of your required cohort capstone projects. Signed directly by our FAST University graduate instructors, it carries authentic proof of what you engineered.
+            </p>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;">
+              <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--core-navy);">
+                <span style="color: var(--gold);">✦</span> Issued with verified capstone deliverables
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--core-navy);">
+                <span style="color: var(--gold);">✦</span> Signed by FAST University alumni instructors
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--core-navy);">
+                <span style="color: var(--gold);">✦</span> Ready to attach to LinkedIn, CVs, and portfolios
+              </li>
+            </ul>
+            <a href="programs.html" class="btn btn-primary">Find Your Program →</a>
+          </div>
+
+          <div style="background: var(--bg-main); border: 2px solid var(--line); border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-sm); position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 20px;">
+              <div class="brand">
+                <div class="brand-text">
+                  <div class="brand-title"><b>Core</b><span>Lab</span></div>
+                  <div class="brand-tagline">AI Education & Bootcamps</div>
+                </div>
+              </div>
+              <span class="badge-ongoing" style="background: #fffbeb; border-color: #fde68a; color: #b45309;">
+                <span class="pulse-dot" style="background: #d97706;"></span> Verified Credential
+              </span>
+            </div>
+
+            <div style="text-align: center; padding: 18px 0;">
+              <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 800;">Certificate of Completion</span>
+              <h3 style="font-size: 1.5rem; color: var(--core-navy); margin: 8px 0;">Practical AI Engineering</h3>
+              <p style="font-size: 0.88rem; color: var(--ink-secondary); line-height: 1.6; max-width: 360px; margin: 0 auto;">
+                Awarded upon live demonstration, code review, and successful cloud deployment of the cohort capstone deliverables.
+              </p>
+            </div>
+
+            <div style="border-top: 1px dashed var(--line); padding-top: 18px; display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.82rem; color: var(--muted);">
+              <div>
+                <strong style="color: var(--core-navy); display: block;">Muhammad Abdullah</strong>
+                FAST University Graduate
+              </div>
+              <div style="text-align: right;">
+                <strong style="color: var(--core-navy); display: block;">Syeda Munazzah Fatima</strong>
+                FAST University Graduate
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Callout -->
+    <div class="container" style="margin: 60px auto;">
+      <div class="reg-outcome-card bg-dark-navy">
+        <div>
+          <span class="badge-deliverable">Connect With Our Team</span>
+          <h3>Want to Discuss Which Cohort Fits You?</h3>
+          <p>
+            Reach out directly to our founding mentors on WhatsApp. We are happy to review your background and recommend the optimal learning roadmap.
+          </p>
+        </div>
+        <div class="reg-actions-box">
+          <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20want%20to%20learn%20more%20about%20your%20story%20and%20programs." target="_blank" rel="noopener" class="btn btn-gold btn-lg">
+            Chat on WhatsApp (+92 312 7586251) →
+          </a>
+          <span class="whatsapp-help-row">Direct instructor consultation</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="25" y1="50" x2="50" y2="25" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="25" x2="80" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="80" y1="50" x2="50" y2="80" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="80" x2="25" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="50" cy="25" r="11" fill="#cbd5e1"/>
+              <circle cx="80" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="50" cy="80" r="11" fill="#cbd5e1"/>
+              <circle cx="25" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="60" cy="50" r="9" fill="#d97706"/>
+            </svg>
+            <div class="brand-text">
+              <div class="brand-title" style="color:white;"><b>Core</b><span>Lab</span></div>
+              <div class="brand-tagline">AI Education & Bootcamps</div>
+            </div>
+          </div>
+          <p>
+            Empowering students, creators, and future technical builders with practical, hands-on artificial intelligence education.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Programs</div>
+          <ul class="footer-nav-list">
+            <li><a href="ai-content-creator.html">AI Content Creator (19–20 Sep)</a></li>
+            <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
+            <li><a href="data-science-machine-learning.html">Data Science & ML (12–22 Oct)</a></li>
+            <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-nav-list">
+            <li><a href="programs.html">All Programs Hub</a></li>
+            <li><a href="projects.html">Ongoing Projects</a></li>
+            <li><a href="about.html">About Core Lab</a></li>
+            <li><a href="faq.html">FAQ & Help</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Admissions & Contact</div>
+          <ul class="footer-nav-list">
+            <li><span style="font-size: 0.88rem;">Call / WhatsApp:</span></li>
+            <li>
+              <a href="https://wa.me/923127586251" target="_blank" rel="noopener" class="footer-phone-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+                <span>+92 312 7586251</span>
+              </a>
+            </li>
+            <li style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">Bank transfer, JazzCash, Easypaisa accepted</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Core Lab. Founded by FAST University Graduates. All rights reserved.</div>
+        <div>Practical, hands-on technology education.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Quick-Help Badge -->
+  <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20have%20a%20question%20about%20your%20story%20and%20programs." target="_blank" rel="noopener" class="floating-whatsapp" aria-label="Chat with Core Lab on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
+    <span class="float-label-prefix">Need Help? </span>
+    <span>WhatsApp Us</span>
+  </a>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
