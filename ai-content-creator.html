@@ -3,12 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Content Creator Weekend (19–20 Sep 2026) — Core Lab</title>
-  <meta name="description" content="2-Day intensive AI workshop for students, social media creators, and marketers. Master visual content creation, AI image generation, voiceovers, and short-form videos.">
+  <title>AI Content Creator Weekend (3–4 Oct 2026) — Core Lab</title>
+  <meta name="description" content="Learn how to create AI-powered visual stories, custom avatars, engaging short videos, and natural voiceovers. In this beginner-friendly 2-day intensive, turn one idea into a complete creative project while exploring responsible AI use and digital safety.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .course-info-table { width: 100%; border-collapse: collapse; }
+    .course-info-table tr { border-bottom: 1px solid var(--line); }
+    .course-info-table tr:last-child { border-bottom: none; }
+    .course-info-table td { padding: 14px 16px; font-size: 0.93rem; }
+    .course-info-table td:first-child { font-weight: 700; color: var(--ink-secondary); width: 38%; }
+    .course-info-table td:last-child { color: var(--ink); font-weight: 600; }
+    .module-card { background: white; border: 1.5px solid var(--line); border-radius: 14px; padding: 24px 28px; margin-bottom: 20px; transition: box-shadow 0.2s, border-color 0.2s; }
+    .module-card:hover { box-shadow: 0 8px 24px rgba(15,23,42,0.08); border-color: var(--blue-border); }
+    .module-num { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: var(--blue-gradient); color: white; border-radius: 8px; font-size: 0.8rem; font-weight: 900; flex-shrink: 0; }
+    .module-title-row { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 10px; }
+    .module-card h4 { font-size: 1.04rem; font-weight: 800; color: var(--core-navy); margin: 0; }
+    .module-card .module-tagline { font-size: 0.88rem; color: var(--muted); margin: 2px 0 0; }
+    .module-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .module-card ul li { font-size: 0.87rem; color: var(--ink-secondary); display: flex; align-items: center; gap: 6px; }
+    .module-card ul li::before { content: "\2192"; color: var(--blue); font-weight: 700; }
+    .day-label { display: inline-flex; align-items: center; gap: 8px; background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 999px; padding: 5px 14px; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 18px; }
+    .ethics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+    .ethics-card { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 18px 20px; }
+    .ethics-card h5 { font-size: 0.9rem; font-weight: 800; color: #15803d; margin-bottom: 6px; }
+    .ethics-card p { font-size: 0.84rem; color: #166534; margin: 0; line-height: 1.5; }
+    .outcomes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 24px; }
+    .outcome-item { display: flex; align-items: flex-start; gap: 12px; background: white; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .outcome-icon { width: 28px; height: 28px; background: var(--blue-gradient); border-radius: 7px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; color: white; font-weight: 900; }
+    .outcome-item p { margin: 0; font-size: 0.88rem; color: var(--ink-secondary); line-height: 1.5; }
+    .who-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .who-tag { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 999px; padding: 7px 16px; font-size: 0.85rem; font-weight: 700; }
+    .deliverable-list { list-style: none; padding: 0; margin: 0; }
+    .deliverable-list li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.93rem; color: #e2e8f0; }
+    .deliverable-list li:last-child { border-bottom: none; }
+    .deliverable-list li::before { content: "\2713"; color: #4ade80; font-weight: 900; font-size: 1rem; }
+    @media (max-width: 768px) { .module-card ul { flex-direction: column; gap: 6px; } }
+  </style>
 </head>
 <body>
 
@@ -58,7 +91,7 @@
     <div class="mobile-drawer-content">
       <a href="index.html">Home</a>
       <a href="programs.html" class="active">Programs & Learning Paths</a>
-      <a href="projects.html">Ongoing Projects</a>
+      <a href="projects.html">Course Projects</a>
       <a href="about.html">About & Mentors</a>
       <a href="faq.html">Frequently Asked Questions</a>
       <div style="margin-top: 10px;">
@@ -73,7 +106,7 @@
       <div class="container hero-content">
         <div class="hero-tag-pills">
           <span class="hero-pill" style="background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe;">⚡ NEXT UPCOMING WORKSHOP</span>
-          <span class="hero-pill hero-pill-navy">📅 19 & 20 September 2026 (Weekend)</span>
+          <span class="hero-pill hero-pill-navy">📅 3 & 4 October 2026 (Weekend)</span>
         </div>
 
         <h1>AI Content <span class="gradient-blue">Creator Weekend</span></h1>
@@ -111,7 +144,7 @@
           <div class="day-box" style="border-left: 4px solid var(--blue);">
             <div class="day-box-header">
               <h4>Day 1: Create With AI</h4>
-              <span class="day-pill day-pill-blue">19 SEP (SATURDAY)</span>
+              <span class="day-pill day-pill-blue">3 OCT (SATURDAY)</span>
             </div>
             <ul>
               <li><strong>AI Image Generation:</strong> Master prompting techniques to generate photorealistic imagery, creative artwork, and custom branding graphics.</li>
@@ -125,7 +158,7 @@
           <div class="day-box" style="border-left: 4px solid var(--blue);">
             <div class="day-box-header">
               <h4>Day 2: Create Videos With AI</h4>
-              <span class="day-pill day-pill-blue">20 SEP (SUNDAY)</span>
+              <span class="day-pill day-pill-blue">4 OCT (SUNDAY)</span>
             </div>
             <ul>
               <li><strong>Short Video Creation:</strong> Generate cinematic clip sequences, transitions, and dynamic visual hooks for TikTok, Instagram Reels, and YouTube Shorts.</li>
@@ -154,48 +187,35 @@
       </div>
     </section>
 
-    <!-- Registration Section -->
-    <section id="register" style="padding: 80px 0;">
+    <!-- ═══════════ 10. REGISTRATION ═══════════ -->
+    <section id="register" style="padding: 80px 0; background: var(--bg-alt); border-top: 1px solid var(--line);">
       <div class="container-narrow">
         <div class="section-header">
           <div class="section-badge badge-blue"><span class="dot"></span> Confirm Your Seat</div>
           <h2>Register for AI Content Creator Weekend</h2>
-          <p>Seats are limited to maintain an intimate live interactive environment with personalized mentor feedback.</p>
+          <p>Seats are limited to maintain an intimate, hands-on environment with personalized mentor feedback.</p>
         </div>
-
-        <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-md);">
-          <div style="margin-bottom: 28px;">
-            <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Option 1: Official Google Form Registration</h3>
-            <p style="font-size: 0.95rem;">
-              Fill out your student details on the official registration form to reserve your seat and receive automated payment instructions (Bank Transfer, JazzCash, Easypaisa):
-            </p>
-            <div style="margin-top: 18px;">
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxMt2pikc2e0EE8xG9ZjZqpPo9_-Hz0b7QB6LWlk7AHBn2dw/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn btn-blue btn-lg" style="width: 100%;">
-                Open Google Form Registration (PKR 2,999) →
-              </a>
-            </div>
-          </div>
-
-          <div style="border-top: 1px dashed var(--line); padding-top: 28px;">
-            <h3 style="font-size: 1.3rem; margin-bottom: 6px;">Option 2: Direct WhatsApp Registration</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 16px;">
-              Can't open or fill Google Forms? Message our admissions team directly. We will manually register your seat and verify your payment immediately:
-            </p>
-            <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20want%20to%20register%20for%20the%20AI%20Content%20Creator%20Weekend%20(PKR%202%2C999)." target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; border-color: #25d366; color: #15803d;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: #25d366;"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
-              <span>Instant Manual Registration via WhatsApp (+92 312 7586251)</span>
+        <div style="background: white; border: 1.5px solid var(--line); border-radius: var(--radius-xl); padding: 48px 36px; box-shadow: var(--shadow-md); text-align: center;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; background: #eff6ff; color: var(--blue); font-weight: 800; font-size: 0.78rem; padding: 5px 14px; border-radius: 999px; text-transform: uppercase;">⚡ 2-Day Live Weekend Workshop</div>
+          <h3 style="font-size: 1.6rem; margin-bottom: 10px;">Reserve Your Seat — AI Content Creator Weekend</h3>
+          <p style="font-size: 1rem; color: var(--ink-secondary); max-width: 600px; margin: 0 auto 10px;">Dates: <strong>3–4 October 2026 (Sat &amp; Sun)</strong> · Tuition: <strong>PKR 2,999</strong></p>
+          <p style="font-size: 0.9rem; color: var(--muted); max-width: 560px; margin: 0 auto 28px;">Complete your enrollment and submit your payment verification on our secure checkout page.</p>
+          <div>
+            <a href="register.html?program=creator" class="btn btn-blue btn-lg" style="min-width: 320px; justify-content: center; font-size: 1.1rem; display: inline-flex;">
+              Proceed to Registration &amp; Checkout (PKR 2,999) →
             </a>
           </div>
+          <div style="margin-top: 14px; font-size: 0.85rem; color: var(--muted);">Limited capacity for hands-on feedback • Instant seat reservation via Checkout</div>
         </div>
       </div>
     </section>
 
     <!-- Next in Sequence Callout -->
-    <div class="container" style="margin-bottom: 70px;">
+    <div class="container" style="margin-bottom: 70px; margin-top: 40px;">
       <div style="background: white; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
         <div>
           <span style="font-size: 0.76rem; font-weight: 800; text-transform: uppercase; color: var(--gold);">Next Step In Your Journey</span>
-          <h4 style="margin: 4px 0 0; font-size: 1.15rem;">Ready to build full applications? Check out AI From Zero to AI Builder (5–11 Oct)</h4>
+          <h4 style="margin: 4px 0 0; font-size: 1.15rem;">Ready to build full AI applications? Check out AI From Zero to AI Builder (5–11 Oct)</h4>
         </div>
         <a href="ai-from-zero-to-builder.html" class="btn btn-outline-gold btn-sm">Explore 7-Day Cohort 5 →</a>
       </div>
@@ -232,7 +252,7 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-nav-list">
-            <li><a href="ai-content-creator.html">AI Content Creator (19–20 Sep)</a></li>
+            <li><a href="ai-content-creator.html">AI Content Creator (3–4 Oct)</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
             <li><a href="data-science-machine-learning.html">Data Science & ML (12–22 Oct)</a></li>
             <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
@@ -243,7 +263,7 @@
           <div class="footer-col-title">Platform</div>
           <ul class="footer-nav-list">
             <li><a href="programs.html">All Programs Hub</a></li>
-            <li><a href="projects.html">Ongoing Projects</a></li>
+            <li><a href="projects.html">Course Projects</a></li>
             <li><a href="about.html">About Core Lab</a></li>
             <li><a href="faq.html">FAQ & Help</a></li>
           </ul>

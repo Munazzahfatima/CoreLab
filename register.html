@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout & Registration — Core Lab AI Bootcamps</title>
+  <meta name="description" content="Complete your enrollment for Core Lab AI bootcamps. Secure your seat via Easypaisa, upload your payment receipt, and get verified instantly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    :root {
+      --checkout-bg: #f8fafc;
+      --card-bg: #ffffff;
+    }
+    body {
+      background-color: var(--checkout-bg);
+    }
+    .checkout-header {
+      background: linear-gradient(135deg, #090e17 0%, #111d31 60%, #0d1726 100%);
+      color: white;
+      padding: 46px 0 36px;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .checkout-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(217,119,6,0.18);
+      border: 1px solid rgba(217,119,6,0.4);
+      color: #fbbf24;
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .checkout-header h1 {
+      color: #ffffff;
+      font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .checkout-header p {
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+    }
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 32px;
+      max-width: 1120px;
+      margin: -24px auto 70px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+    @media (max-width: 900px) {
+      .checkout-layout {
+        grid-template-columns: 1fr;
+        margin-top: 16px;
+      }
+    }
+    .checkout-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+    }
+    .checkout-card h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .checkout-card .subtitle {
+      color: var(--ink-muted);
+      font-size: 0.88rem;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+      color: var(--ink-secondary);
+    }
+    .form-group label span.req {
+      color: #ef4444;
+      margin-left: 2px;
+    }
+    .form-control, .form-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--ink-main);
+      background-color: #fdfdfd;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+    .form-control:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(217,119,6,0.15);
+      background-color: #ffffff;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 580px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .plan-selector-box {
+      background: #f8fafc;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+    .plan-selector-box:hover {
+      border-color: var(--gold);
+      background: #fffdfa;
+    }
+    .plan-selector-box.active {
+      border-color: var(--gold);
+      background: #fffbf2;
+      box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.25);
+    }
+    .plan-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .custom-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .plan-selector-box.active .custom-radio {
+      border-color: var(--gold);
+    }
+    .plan-selector-box.active .custom-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+    }
+    .plan-info-text strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--ink-main);
+    }
+    .plan-info-text small {
+      color: var(--ink-muted);
+      font-size: 0.78rem;
+    }
+    .plan-price-text {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--gold-hover);
+    }
+    /* Coupon Container */
+    .coupon-card {
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+    }
+    .coupon-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .coupon-input-wrap {
+      display: flex;
+      gap: 8px;
+    }
+    .coupon-input-wrap input {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .payment-instructions-box {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .payment-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+    }
+    .easypaisa-pill {
+      background: #10b981;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+    }
+    .account-detail-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    .account-detail-row:last-child {
+      margin-bottom: 0;
+    }
+    .account-num-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .account-num-wrap code {
+      font-family: inherit;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: #fbbf24;
+      letter-spacing: 0.05em;
+    }
+    .copy-btn {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .upload-zone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold);
+      background: #fffdf7;
+    }
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .preview-container {
+      margin-top: 14px;
+      display: none;
+      position: relative;
+      max-width: 220px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .preview-container img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .remove-img-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ef4444;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.8rem;
+      line-height: 1;
+    }
+    .whatsapp-verification-card {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 20px;
+      margin-bottom: 24px;
+    }
+    .wa-icon-bubble {
+      background: #22c55e;
+      color: white;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+    .wa-content h4 {
+      font-size: 0.98rem;
+      color: #14532d;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+    .wa-content p {
+      font-size: 0.84rem;
+      color: #166534;
+      margin: 0 0 10px;
+      line-height: 1.4;
+    }
+    .wa-quick-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #22c55e;
+      color: white !important;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(34, 197, 94, 0.3);
+      transition: background 0.2s;
+    }
+    .wa-quick-btn:hover {
+      background: #16a34a;
+    }
+    .summary-card {
+      /* sticky is now handled by the parent grid column div */
+    }
+    .summary-col {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.9rem;
+    }
+    .summary-item:last-of-type {
+      border-bottom: none;
+    }
+    .summary-total {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 18px;
+      border: 1px dashed var(--line);
+    }
+    .summary-total .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .summary-total .total-row strong {
+      font-size: 1.4rem;
+      color: var(--gold-hover);
+      font-weight: 900;
+    }
+    .guarantee-box {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+    .guarantee-box li {
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    /* Premium features panel */
+    .premium-perks-panel {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #0f172a 0%, #1c1a0f 100%);
+      border: 1.5px solid rgba(217,119,6,0.45);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: none;
+    }
+    .premium-perks-panel .perks-heading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 12px;
+    }
+    .premium-perks-panel .perks-heading span.crown {
+      font-size: 1rem;
+    }
+    .premium-perks-panel ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .premium-perks-panel ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #e2e8f0;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .premium-perks-panel ul li:last-child { margin-bottom: 0; }
+    .premium-perks-panel ul li .perk-check {
+      color: #fbbf24;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .premium-perks-panel ul li strong {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+    /* Modals */
+    .success-overlay, .admin-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .success-modal {
+      background: white;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 36px 30px;
+      text-align: center;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .admin-modal {
+      background: white;
+      border-radius: 18px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 28px;
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes popIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: #dcfce7;
+      color: #16a34a;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+      margin-top: 14px;
+    }
+    .admin-table th, .admin-table td {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+    .admin-table th {
+      background: #f1f5f9;
+      font-weight: 800;
+      color: var(--core-navy);
+    }
+  </style>
+</head>
+<body>
+  <!-- Sticky Professional Navbar -->
+  <header>
+    <div class="container navbar">
+      <a href="index.html" class="brand" aria-label="Core Lab Home">
+        <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="25" y1="50" x2="50" y2="25" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="25" x2="80" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="80" y1="50" x2="50" y2="80" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="25" y2="50" stroke="#0e1b2e" stroke-width="6" stroke-linecap="round"/>
+          <line x1="50" y1="80" x2="60" y2="52" stroke="#0e1b2e" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="50" cy="25" r="11" fill="#0e1b2e"/>
+          <circle cx="80" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="50" cy="80" r="11" fill="#0e1b2e"/>
+          <circle cx="25" cy="50" r="11" fill="#0e1b2e"/>
+          <circle cx="60" cy="50" r="9" fill="#d97706"/>
+        </svg>
+        <div class="brand-text">
+          <div class="brand-title"><b>Core</b><span>Lab</span></div>
+          <div class="brand-tagline">AI Education & Bootcamps</div>
+        </div>
+      </a>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="programs.html" class="nav-link">Programs</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="faq.html" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="programs.html" class="btn btn-outline btn-sm btn-header">← Back to Programs</a>
+        <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" style="display:none;">
+    <div class="mobile-drawer-content">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="faq.html">FAQ</a>
+      <div style="margin-top: 10px;">
+        <a href="programs.html" class="btn btn-outline" style="width: 100%; text-align: center;">← Back to Programs</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Header Banner -->
+  <section class="checkout-header">
+    <div class="container">
+      <div class="checkout-badge">
+        <span>⚡</span> Direct Checkout & Verification
+      </div>
+      <h1 id="checkoutPageTitle">Complete Your Registration</h1>
+      <p id="checkoutPageSubtitle">Lock in your seat, transfer via Easypaisa, and upload your payment proof for instant verification.</p>
+    </div>
+  </section>
+
+  <!-- Main Checkout Grid -->
+  <main class="container">
+    <div class="checkout-layout">
+
+      <!-- Left Column: Registration Form -->
+      <div class="checkout-card">
+        <h2><span>1.</span> Student Information</h2>
+        <p class="subtitle">Please provide accurate contact details so we can invite you to the private student portal and live sessions.</p>
+
+        <form id="registrationForm" onsubmit="handleRegistrationSubmit(event)">
+          <!-- Select Program -->
+          <div class="form-group">
+            <label for="programSelect">Select Program <span class="req">*</span></label>
+            <select id="programSelect" class="form-select" onchange="onProgramChange(this.value)" required>
+              <option value="creator">AI Content Creator Weekend (3–4 Oct)</option>
+              <option value="builder" selected>AI From Zero to AI Builder (5–11 Oct)</option>
+              <option value="datascience">Data Science & Machine Learning (12–22 Oct)</option>
+              <option value="genai">Generative AI & AI Agents (12–22 Oct)</option>
+            </select>
+          </div>
+
+          <!-- Coupon Code Box (Unlocked via valid private coupon) -->
+          <div class="coupon-card" id="couponBox">
+            <div class="coupon-header-row">
+              <label for="couponInput" style="font-size: 0.78rem; font-weight: 800; color: var(--ink-secondary); text-transform: uppercase; margin: 0;">
+                🎟️ Have a Coupon or Promo Code?
+              </label>
+              <span id="couponBadge" style="font-size: 0.75rem; font-weight: 700; color: #16a34a; display: none;">✓ Code Applied</span>
+            </div>
+            <div class="coupon-input-wrap">
+              <input type="text" id="couponInput" class="form-control" placeholder="Enter coupon or promo code" />
+              <button type="button" class="btn btn-gold btn-sm" onclick="applyCoupon()" style="padding: 10px 18px; white-space: nowrap;">Apply Code</button>
+              <button type="button" id="removeCouponBtn" class="btn btn-outline btn-sm" onclick="removeCoupon()" style="display: none; padding: 10px 12px; color: #ef4444; border-color: #fca5a5;">Remove</button>
+            </div>
+            <div id="couponMsg" style="font-size: 0.8rem; margin-top: 6px; display: none;"></div>
+          </div>
+
+          <!-- Select Pass Tier -->
+          <div class="form-group">
+            <label>Select Pass Tier <span class="req">*</span></label>
+            <div id="tierSelectorContainer">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentName">Full Name <span class="req">*</span></label>
+              <input type="text" id="studentName" class="form-control" placeholder="e.g. Syeda Fatima" required />
+            </div>
+            <div class="form-group">
+              <label for="studentWhatsapp">WhatsApp Number <span class="req">*</span></label>
+              <input type="tel" id="studentWhatsapp" class="form-control" placeholder="e.g. 03361234567" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="studentEmail">Email Address <span class="req">*</span></label>
+              <input type="email" id="studentEmail" class="form-control" placeholder="e.g. name@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="studentCity">City / Location <span class="req">*</span></label>
+              <input type="text" id="studentCity" class="form-control" placeholder="e.g. Karachi / Online" required />
+            </div>
+          </div>
+
+          <!-- Payment Section -->
+          <div style="margin-top: 32px; border-top: 1.5px solid var(--line); padding-top: 28px;">
+            <h2><span>2.</span> Easypaisa Payment Transfer</h2>
+            <p class="subtitle">Transfer the exact tuition fee to our official Easypaisa account below via your mobile wallet or banking app:</p>
+
+            <!-- Easypaisa Account Details Box -->
+            <div class="payment-instructions-box">
+              <div class="payment-header">
+                <span class="easypaisa-pill">EASYPAISA OFFICIAL ACCOUNT</span>
+                <span style="font-size: 0.8rem; color: #94a3b8;">Instant Verification</span>
+              </div>
+              <div class="account-detail-row">
+                <span style="color: #cbd5e1;">Account Number (Mobile):</span>
+                <div class="account-num-wrap">
+                  <code id="epNumber">03369146789</code>
+                  <button type="button" class="copy-btn" onclick="copyAccountNumber()">Copy</button>
+                </div>
+              </div>
+              <div class="account-detail-row">
+                <span style="color: #cbd5e1;">Account Title:</span>
+                <strong style="color: #ffffff; font-size: 1.05rem;">Syeda Munazzah Fatima</strong>
+              </div>
+              <div class="account-detail-row">
+                <span style="color: #cbd5e1;">Amount to Send:</span>
+                <strong id="displayPayAmount" style="color: #fbbf24; font-size: 1.15rem;">PKR 4,999</strong>
+              </div>
+            </div>
+
+            <!-- Verification & Sender Details -->
+            <h2><span>3.</span> Verify Your Payment</h2>
+            <p class="subtitle">Enter the sender details and attach your payment receipt screenshot so our team can immediately activate your seat.</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="senderName">Sender Account Name <span class="req">*</span></label>
+                <input type="text" id="senderName" class="form-control" placeholder="Name on sender Easypaisa / Bank app" required />
+                <small style="color: var(--ink-muted); font-size: 0.74rem;">From which person's name was this sent?</small>
+              </div>
+              <div class="form-group">
+                <label for="senderBank">Sender Bank / Wallet <span class="req">*</span></label>
+                <select id="senderBank" class="form-select" onchange="onBankChange(this.value)" required>
+                  <option value="" disabled selected>Select sending bank or wallet</option>
+                  <option value="Easypaisa">Easypaisa</option>
+                  <option value="JazzCash">JazzCash</option>
+                  <option value="Nayapay">Nayapay</option>
+                  <option value="Sadapay">Sadapay</option>
+                  <option value="Meezan Bank">Meezan Bank</option>
+                  <option value="HBL">HBL (Habib Bank Limited)</option>
+                  <option value="Bank Alfalah">Bank Alfalah</option>
+                  <option value="UBL">UBL (United Bank Limited)</option>
+                  <option value="MCB">MCB Bank</option>
+                  <option value="Faysal Bank">Faysal Bank</option>
+                  <option value="Other Bank">Other Bank / Transfer</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dynamic 'Other Bank' Input Field -->
+            <div class="form-group" id="otherBankGroup" style="display: none; background: #fffdfa; border: 1.5px solid var(--gold); border-radius: 10px; padding: 12px 14px;">
+              <label for="otherBankName" style="color: var(--gold-hover);">Please Specify Your Bank / Wallet Name <span class="req">*</span></label>
+              <input type="text" id="otherBankName" class="form-control" placeholder="e.g. Bank of Punjab, Allied Bank, Askari Bank, Raast" />
+              <small style="color: var(--ink-muted); font-size: 0.74rem;">Write the exact bank name so we can verify quickly.</small>
+            </div>
+
+            <div class="form-group">
+              <label for="trxId">Transaction ID / Reference Number</label>
+              <input type="text" id="trxId" class="form-control" placeholder="e.g. TRX-982183921 (found on SMS/receipt)" />
+            </div>
+
+            <!-- Upload Payment Screenshot -->
+            <div class="form-group">
+              <label>Upload Payment Screenshot <span class="req">*</span></label>
+              <div class="upload-zone" id="dropZone">
+                <input type="file" id="screenshotFile" accept="image/*" onchange="previewScreenshot(this)" required />
+                <div id="uploadPlaceholder">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 10px;">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <circle cx="9" cy="9" r="2"/>
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                  </svg>
+                  <p style="font-weight: 700; margin: 0 0 4px; color: var(--ink-main); font-size: 0.95rem;">
+                    Click or Drag & Drop Payment Screenshot
+                  </p>
+                  <span style="font-size: 0.78rem; color: var(--ink-muted);">Supports PNG, JPG, JPEG, WEBP (Max 10MB)</span>
+                </div>
+                <div class="preview-container" id="previewContainer">
+                  <img id="previewImg" src="" alt="Payment Screenshot Preview" />
+                  <button type="button" class="remove-img-btn" onclick="removeScreenshot()">✕</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- WhatsApp Direct Confirmation Card -->
+            <div class="whatsapp-verification-card">
+              <div class="wa-icon-bubble">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.24 8.24-1.44 0-2.85-.38-4.08-1.1l-.29-.17-3.03.79.81-2.95-.19-.3a8.21 8.21 0 0 1-1.26-4.32c0-4.54 3.69-8.23 8.23-8.23m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.75-.67-1.25-1.49-1.39-1.74-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.45-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43l-.48-.01c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.13.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.44.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/>
+                </svg>
+              </div>
+              <div class="wa-content">
+                <h4>Drop Your Screenshot on WhatsApp As Well</h4>
+                <p>For fastest verification, send your payment screenshot directly to our verification team on WhatsApp:</p>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px;">
+                  <a id="whatsappDropBtn" href="https://wa.me/923369146789?text=Hi%20Core%20Lab%2C%20I%20have%20transferred%20the%20fee%20via%20Easypaisa%20and%20dropping%20my%20screenshot%20here%20for%20verification." target="_blank" rel="noopener" class="wa-quick-btn">
+                    <span>WhatsApp 1: +92 336 9146789 (Syeda Munazzah Fatima) →</span>
+                  </a>
+                  <a id="whatsappDropBtn2" href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20have%20transferred%20the%20fee%20via%20Easypaisa%20and%20dropping%20my%20screenshot%20here%20for%20verification." target="_blank" rel="noopener" class="wa-quick-btn" style="background: #15803d;">
+                    <span>WhatsApp 2: +92 312 7586251 (Admissions Desk) →</span>
+                  </a>
+                </div>
+                <div style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 6px 10px; border-radius: 6px; font-size: 0.76rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
+                  <span>⚠️</span> WhatsApp Messages Only — STRICTLY NO CALLS
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-gold btn-lg" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 16px;">
+              Confirm Registration & Submit Payment Proof →
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right Column: Order Summary Box -->
+      <div class="summary-col">
+        <div class="checkout-card">
+          <h2>Order Summary</h2>
+          <p class="subtitle">Review your selected cohort details</p>
+
+          <div class="summary-item">
+            <span style="color: var(--ink-muted);">Program</span>
+            <strong id="sumProgramTitle" style="text-align: right; max-width: 60%;">AI From Zero to AI Builder</strong>
+          </div>
+
+          <div class="summary-item">
+            <span style="color: var(--ink-muted);">Schedule</span>
+            <strong id="sumProgramSchedule" style="color: var(--gold-hover);">5–11 October 2026 (7 Days)</strong>
+          </div>
+
+          <div class="summary-item">
+            <span style="color: var(--ink-muted);">Selected Tier</span>
+            <span id="sumTierName" class="badge-regular" style="font-size: 0.76rem; padding: 3px 8px; border-radius: 6px; font-weight: 800;">Regular Pass</span>
+          </div>
+
+          <div class="summary-item" id="summaryDiscountRow" style="display: none;">
+            <span style="color: #16a34a; font-weight: 700;">Coupon Discount</span>
+            <span id="summaryDiscountAmount" style="color: #16a34a; font-weight: 800;">- PKR 2,000</span>
+          </div>
+
+          <div class="summary-item">
+            <span style="color: var(--ink-muted);">Format</span>
+            <span>Live Zoom + Interactive Labs</span>
+          </div>
+
+          <div class="summary-total">
+            <div class="total-row">
+              <span style="font-weight: 700; color: var(--ink-secondary);">Total Fee:</span>
+              <strong id="sumTotalAmount">PKR 4,999</strong>
+            </div>
+            <small style="display: block; margin-top: 6px; color: var(--ink-muted); font-size: 0.74rem;">
+              No additional taxes. Includes live recordings, project repositories & certificate.
+            </small>
+          </div>
+
+          <ul class="guarantee-box" id="guaranteeFeaturesList" style="list-style: none; padding: 0; transition: all 0.3s ease;">
+            <li><span style="color:#22c55e;">✔</span> Official Core Lab Certificate of Completion</li>
+            <li><span style="color:#22c55e;">✔</span> Direct Access to WhatsApp Cohort Community</li>
+            <li><span style="color:#22c55e;">✔</span> Instructor Code Reviews &amp; Project Mentorship</li>
+            <li><span style="color:#22c55e;">✔</span> Lifetime access to code repositories &amp; slides</li>
+          </ul>
+
+          <div style="margin-top: 24px; text-align: center; border-top: 1px solid var(--line); padding-top: 18px;">
+            <span style="font-size: 0.8rem; color: var(--ink-muted);">Need help registering?</span><br>
+            <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+              <a href="https://wa.me/923369146789?text=Hi%20Core%20Lab%2C%20I%20have%20a%20question%20regarding%20registration%20and%20payment." target="_blank" rel="noopener" style="color: var(--gold-hover); font-weight: 800; font-size: 0.86rem; text-decoration: underline;">
+                💬 Chat with Admissions (+92 336 9146789)
+              </a>
+              <a href="https://wa.me/923127586251?text=Hi%20Core%20Lab%2C%20I%20have%20a%20question%20regarding%20registration%20and%20payment." target="_blank" rel="noopener" style="color: var(--gold-hover); font-weight: 800; font-size: 0.86rem; text-decoration: underline;">
+                💬 Chat with Admissions (+92 312 7586251)
+              </a>
+            </div>
+            <div style="background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; font-weight: 800; margin-top: 8px; display: inline-block;">
+              🚫 WhatsApp Messages Only — No Phone Calls
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Success Modal -->
+  <div class="success-overlay" id="successModal">
+    <div class="success-modal">
+      <div class="success-icon">✓</div>
+      <h2 style="font-size: 1.4rem; font-weight: 900; margin-bottom: 8px;">Registration Submitted!</h2>
+      <p style="color: var(--ink-muted); font-size: 0.92rem; margin-bottom: 20px;">
+        Thank you <strong id="modalStudentName">Student</strong>! We have received your registration and payment verification request for <strong id="modalProgramName">Core Lab</strong>.
+      </p>
+
+      <div style="background: #f8fafc; border: 1.5px dashed var(--line); border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: left; font-size: 0.86rem;">
+        <div style="margin-bottom: 6px;"><strong>Registration ID:</strong> <code id="modalRegId" style="color: var(--gold-hover); font-weight: 800;"></code></div>
+        <div style="margin-bottom: 6px;"><strong>Sender Name:</strong> <span id="modalSender"></span></div>
+        <div style="margin-bottom: 6px;"><strong>Bank / Method:</strong> <span id="modalBank"></span></div>
+        <div style="margin-bottom: 6px;"><strong>Amount:</strong> <span id="modalAmount" style="color: var(--gold-hover); font-weight: 800;"></span></div>
+        <div><strong>Status:</strong> <span style="background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.78rem;">Saved &amp; Pending Verification</span></div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <p style="font-size: 0.85rem; color: #166534; font-weight: 700; margin-bottom: 10px;">
+          ⚡ Final Step: Forward payment receipt to WhatsApp to get verified immediately!
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%; justify-content: center;">
+            Send to WhatsApp 1 (+92 336 9146789) →
+          </a>
+          <a id="modalWhatsAppBtn2" href="#" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center; border-color: #22c55e; color: #166534; font-weight: 800;">
+            Send to WhatsApp 2 (+92 312 7586251) →
+          </a>
+        </div>
+        <div style="color: #991b1b; font-size: 0.75rem; font-weight: 800; margin-top: 8px;">
+          ⚠️ WhatsApp Text Messages Only • No Voice / Cellular Calls
+        </div>
+      </div>
+
+      <a href="index.html" class="btn btn-outline" style="width: 100%; justify-content: center;">
+        Return to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- Admin Database & Sheets Export Modal -->
+  <div class="admin-overlay" id="adminModal">
+    <div class="admin-modal">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 style="font-size: 1.3rem; margin: 0;">📊 Stored Registrations Database</h2>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeAdminModal()">✕ Close</button>
+      </div>
+      <p style="font-size: 0.86rem; color: var(--ink-muted); margin-bottom: 14px;">
+        All submitted student checkout records stored locally in browser database. You can export directly to CSV / Excel or copy into Google Sheets.
+      </p>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-gold btn-sm" onclick="exportToCSV()">
+          📥 Export CSV (For Google Sheets / Excel)
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" style="color: #ef4444; border-color: #fca5a5;" onclick="clearDatabase()">
+          Clear Records
+        </button>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="admin-table" id="adminRecordsTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Student Name</th>
+              <th>WhatsApp</th>
+              <th>Program</th>
+              <th>Tier</th>
+              <th>Amount</th>
+              <th>Sender</th>
+              <th>Bank</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="adminRecordsBody">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <div class="brand">
+            <svg class="brand-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="25" y1="50" x2="50" y2="25" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="25" x2="80" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="80" y1="50" x2="50" y2="80" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <line x1="50" y1="80" x2="25" y2="50" stroke="#cbd5e1" stroke-width="6" stroke-linecap="round"/>
+              <circle cx="50" cy="25" r="11" fill="#cbd5e1"/>
+              <circle cx="80" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="50" cy="80" r="11" fill="#cbd5e1"/>
+              <circle cx="25" cy="50" r="11" fill="#cbd5e1"/>
+              <circle cx="60" cy="50" r="9" fill="#d97706"/>
+            </svg>
+            <div class="brand-text">
+              <div class="brand-title" style="color:white;"><b>Core</b><span>Lab</span></div>
+              <div class="brand-tagline">AI Education & Bootcamps</div>
+            </div>
+          </div>
+          <p>
+            Empowering students, creators, and future technical builders with practical, hands-on artificial intelligence education.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Programs</div>
+          <ul class="footer-links">
+            <li><a href="ai-content-creator.html">AI Content Creator Weekend</a></li>
+            <li><a href="ai-from-zero-to-builder.html">AI From Zero to AI Builder (Cohort 5)</a></li>
+            <li><a href="data-science-machine-learning.html">Data Science &amp; Machine Learning</a></li>
+            <li><a href="generative-ai-agents.html">Generative AI &amp; AI Agents</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="programs.html">All Programs</a></li>
+            <li><a href="projects.html">Course Projects</a></li>
+            <li><a href="about.html">About Core Lab</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Admissions & Verification</div>
+          <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5; margin-bottom: 12px;">
+            Easypaisa: <strong>03369146789</strong> (Syeda Munazzah Fatima)<br>
+            WhatsApp 1: <strong>+92 336 9146789</strong><br>
+            WhatsApp 2: <strong>+92 312 7586251</strong><br>
+            <span style="color: #fbbf24; font-weight: 700; font-size: 0.78rem;">⚠️ WhatsApp Messages Only — No Calls</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div>© 2026 Core Lab. All rights reserved. Practical AI Education for Builders.</div>
+        <div>
+          <button type="button" onclick="openAdminModal()" style="background: none; border: none; color: #64748b; font-size: 0.74rem; cursor: pointer; text-decoration: underline;">
+            Admin DB / Google Sheets Export
+          </button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script>
+    // Program Data with Early Bird unlocked via Coupon Corelab2711
+    const PROGRAM_DATA = {
+      creator: {
+        title: "AI Content Creator Weekend",
+        schedule: "3–4 October 2026 (Sat & Sun)",
+        tiers: [
+          { id: "launch", name: "Launch Pass", price: 2999, desc: "2-Day intensive live workshop & content templates" }
+        ]
+      },
+      builder: {
+        title: "AI From Zero to AI Builder (Cohort 5)",
+        schedule: "5–11 October 2026 (7 Days)",
+        tiers: [
+          { id: "regular", name: "Regular Pass", price: 4999, desc: "Full 7-day live bootcamp & 7 guided projects" },
+          { id: "premium", name: "Premium Pass", price: 5999, desc: "Includes 1-on-1 mentorship & custom capstone review", highlight: true }
+        ]
+      },
+      datascience: {
+        title: "Data Science & Machine Learning Bootcamp",
+        schedule: "12–22 October 2026 (10 Days)",
+        tiers: [
+          { id: "regular", name: "Regular Pass", price: 12000, desc: "Full 10-day hands-on technical curriculum" },
+          { id: "premium", name: "Premium Pass", price: 15000, desc: "Includes 1-on-1 portfolio review & project mentoring", highlight: true }
+        ],
+        earlyBirdTier: {
+          id: "earlybird",
+          name: "Early Bird Pass",
+          price: 10000,
+          desc: "Special Early Bird Rate (PKR 2,000 Off)",
+          highlight: true
+        }
+      },
+      genai: {
+        title: "Generative AI & AI Agents Bootcamp",
+        schedule: "12–22 October 2026 (10 Days)",
+        tiers: [
+          { id: "regular", name: "Regular Pass", price: 12000, desc: "Full 10-day autonomous agents & RAG curriculum" },
+          { id: "premium", name: "Premium Pass", price: 15000, desc: "Includes 1-on-1 production agent architecture review", highlight: true }
+        ],
+        earlyBirdTier: {
+          id: "earlybird",
+          name: "Early Bird Pass",
+          price: 10000,
+          desc: "Special Early Bird Rate (PKR 2,000 Off)",
+          highlight: true
+        }
+      }
+    };
+
+    let currentProgram = "builder";
+    let selectedTierIndex = 0;
+    let isCouponApplied = false;
+    let couponCodeApplied = "";
+
+    // Google Apps Script Webhook — connected to CoreLab Google Sheet
+    const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyNPnkc9_G4a8uJX0CsfvnEx2e4_n174Dnit-3eMFQv_uzXK4ZOkyyRZvIQB4nTkzTdwA/exec";
+
+    function updateCouponVisibility() {
+      const prog = PROGRAM_DATA[currentProgram];
+      const couponBox = document.getElementById('couponBox');
+      if (couponBox) {
+        couponBox.style.display = prog.earlyBirdTier ? 'block' : 'none';
+      }
+    }
+
+    function initFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const progParam = params.get('program');
+      const couponParam = params.get('coupon');
+
+      if (progParam && PROGRAM_DATA[progParam]) {
+        currentProgram = progParam;
+        document.getElementById('programSelect').value = progParam;
+      }
+
+      updateCouponVisibility();
+
+      if (couponParam && couponParam.toUpperCase() === "CORELAB2711") {
+        document.getElementById('couponInput').value = couponParam;
+        applyCoupon();
+      } else {
+        renderTiers();
+      }
+
+      if (params.get('admin') === 'true') {
+        openAdminModal();
+      }
+    }
+
+    function onProgramChange(val) {
+      currentProgram = val;
+      selectedTierIndex = 0;
+      // If the new program has no early bird, clear any active coupon so fee is correct
+      if (!PROGRAM_DATA[val].earlyBirdTier && isCouponApplied) {
+        isCouponApplied = false;
+        couponCodeApplied = '';
+        const el = (id) => document.getElementById(id);
+        if (el('couponInput')) el('couponInput').value = '';
+        if (el('couponBadge')) el('couponBadge').style.display = 'none';
+        if (el('removeCouponBtn')) el('removeCouponBtn').style.display = 'none';
+        if (el('couponMsg')) el('couponMsg').style.display = 'none';
+      }
+      updateCouponVisibility();
+      renderTiers();
+    }
+
+    function getActiveTiers() {
+      const prog = PROGRAM_DATA[currentProgram];
+      let list = [...prog.tiers];
+
+      // If coupon is active and program has an earlyBirdTier, place it at the top
+      if (isCouponApplied && prog.earlyBirdTier) {
+        list = [prog.earlyBirdTier, ...prog.tiers];
+      }
+      return list;
+    }
+
+    function renderTiers() {
+      const list = getActiveTiers();
+      const container = document.getElementById('tierSelectorContainer');
+      container.innerHTML = '';
+
+      if (selectedTierIndex >= list.length) {
+        selectedTierIndex = 0;
+      }
+
+      list.forEach((tier, idx) => {
+        const box = document.createElement('div');
+        box.className = `plan-selector-box ${idx === selectedTierIndex ? 'active' : ''}`;
+        box.onclick = () => selectTier(idx);
+
+        box.innerHTML = `
+          <div class="plan-title-area">
+            <span class="custom-radio"></span>
+            <div class="plan-info-text">
+              <strong>${tier.name} ${tier.highlight ? '<span style="background:#fef3c7; color:#b45309; font-size:0.7rem; padding:2px 6px; border-radius:4px; margin-left:4px;">RECOMMENDED</span>' : ''}</strong>
+              <small>${tier.desc}</small>
+            </div>
+          </div>
+          <div class="plan-price-text">PKR ${tier.price.toLocaleString()}</div>
+        `;
+
+        container.appendChild(box);
+      });
+
+      updateSummary();
+    }
+
+    function selectTier(idx) {
+      selectedTierIndex = idx;
+      const boxes = document.querySelectorAll('.plan-selector-box');
+      boxes.forEach((b, i) => {
+        if (i === idx) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const prog = PROGRAM_DATA[currentProgram];
+      const list = getActiveTiers();
+      const tier = list[selectedTierIndex] || list[0];
+
+      document.getElementById('sumProgramTitle').innerText = prog.title;
+      document.getElementById('sumProgramSchedule').innerText = prog.schedule;
+      document.getElementById('sumTierName').innerText = tier.name;
+      document.getElementById('sumTotalAmount').innerText = `PKR ${tier.price.toLocaleString()}`;
+      document.getElementById('displayPayAmount').innerText = `PKR ${tier.price.toLocaleString()}`;
+
+      // Update discount row in summary
+      const discountRow = document.getElementById('summaryDiscountRow');
+      if (isCouponApplied && (currentProgram === 'datascience' || currentProgram === 'genai')) {
+        discountRow.style.display = 'flex';
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      // Swap feature list in-place based on tier (no extra panel / no scroll needed)
+      const isPremium = tier.id === 'premium';
+      const guaranteeList = document.getElementById('guaranteeFeaturesList');
+      if (guaranteeList) {
+        if (isPremium) {
+          guaranteeList.style.background = 'linear-gradient(135deg,#0f172a,#1c1a0f)';
+          guaranteeList.style.border = '1.5px solid rgba(217,119,6,0.45)';
+          guaranteeList.style.borderRadius = '12px';
+          guaranteeList.style.padding = '14px 16px';
+          guaranteeList.style.marginTop = '16px';
+          guaranteeList.innerHTML = `
+            <li style="margin-bottom:10px; font-size:0.78rem; font-weight:900; color:#fbbf24; text-transform:uppercase; letter-spacing:0.06em;">
+              <span style="font-size:1rem; margin-right:6px;">👑</span> Premium Pass — Exclusive Perks
+            </li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">1-on-1 Mentorship</strong> session with the instructor</li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Custom Capstone Review</strong> — written personal feedback</li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Priority WhatsApp Support</strong> (2-hr response window)</li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Premium Study Pack</strong> — prompt libraries &amp; bonus notebooks</li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">LinkedIn Recommendation</strong> from Core Lab</li>
+            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> Certificate + all Regular Pass benefits included</li>
+          `;
+        } else {
+          guaranteeList.style.background = '';
+          guaranteeList.style.border = '';
+          guaranteeList.style.borderRadius = '';
+          guaranteeList.style.padding = '0';
+          guaranteeList.style.marginTop = '';
+          guaranteeList.innerHTML = `
+            <li><span style="color:#22c55e;">✔</span> Official Core Lab Certificate of Completion</li>
+            <li><span style="color:#22c55e;">✔</span> Direct Access to WhatsApp Cohort Community</li>
+            <li><span style="color:#22c55e;">✔</span> Instructor Code Reviews &amp; Project Mentorship</li>
+            <li><span style="color:#22c55e;">✔</span> Lifetime access to code repositories &amp; slides</li>
+          `;
+        }
+      }
+
+      // Update WhatsApp quick link text for both numbers
+      const waText = encodeURIComponent(
+        `Hi Core Lab,\n\nI am registering for: *${prog.title}*\nTier: *${tier.name}* (PKR ${tier.price.toLocaleString()})\n\nI have sent the payment via Easypaisa to 03369146789. Dropping my payment screenshot here for quick verification.`
+      );
+      document.getElementById('whatsappDropBtn').href = `https://wa.me/923369146789?text=${waText}`;
+      if (document.getElementById('whatsappDropBtn2')) {
+        document.getElementById('whatsappDropBtn2').href = `https://wa.me/923127586251?text=${waText}`;
+      }
+    }
+
+    // Coupon logic
+    function applyCoupon() {
+      const input = document.getElementById('couponInput');
+      const val = (input.value || "").trim().toUpperCase();
+      const msg = document.getElementById('couponMsg');
+      const badge = document.getElementById('couponBadge');
+      const removeBtn = document.getElementById('removeCouponBtn');
+
+      if (!val) {
+        msg.style.display = 'block';
+        msg.style.color = '#ef4444';
+        msg.innerText = 'Please enter a coupon code.';
+        return;
+      }
+
+      if (val === 'CORELAB2711') {
+        isCouponApplied = true;
+        couponCodeApplied = 'Corelab2711';
+        badge.style.display = 'inline';
+        removeBtn.style.display = 'inline-block';
+        msg.style.display = 'block';
+        msg.style.color = '#15803d';
+        msg.innerHTML = '🎉 Coupon successfully applied! Early Bird rate of <strong>PKR 10,000</strong> unlocked!';
+
+        selectedTierIndex = 0; // select the newly unlocked Early Bird
+        renderTiers();
+      } else {
+        msg.style.display = 'block';
+        msg.style.color = '#ef4444';
+        msg.innerText = '❌ Invalid or expired coupon code. Please check and try again.';
+      }
+    }
+
+    function removeCoupon() {
+      isCouponApplied = false;
+      couponCodeApplied = '';
+      document.getElementById('couponInput').value = '';
+      document.getElementById('couponBadge').style.display = 'none';
+      document.getElementById('removeCouponBtn').style.display = 'none';
+      const msg = document.getElementById('couponMsg');
+      msg.style.display = 'block';
+      msg.style.color = '#64748b';
+      msg.innerText = 'Coupon removed.';
+      selectedTierIndex = 0;
+      renderTiers();
+    }
+
+    // Other bank toggle
+    function onBankChange(val) {
+      const otherGroup = document.getElementById('otherBankGroup');
+      const otherInput = document.getElementById('otherBankName');
+      if (val === 'Other Bank') {
+        otherGroup.style.display = 'block';
+        otherInput.required = true;
+        otherInput.focus();
+      } else {
+        otherGroup.style.display = 'none';
+        otherInput.required = false;
+        otherInput.value = '';
+      }
+    }
+
+    function copyAccountNumber() {
+      const num = "03369146789";
+      navigator.clipboard.writeText(num).then(() => {
+        const btn = event.target;
+        const orig = btn.innerText;
+        btn.innerText = "Copied!";
+        setTimeout(() => btn.innerText = orig, 2000);
+      });
+    }
+
+    function previewScreenshot(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('previewImg').src = e.target.result;
+          document.getElementById('previewContainer').style.display = 'block';
+          document.getElementById('uploadPlaceholder').style.display = 'none';
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function removeScreenshot() {
+      document.getElementById('screenshotFile').value = '';
+      document.getElementById('previewImg').src = '';
+      document.getElementById('previewContainer').style.display = 'none';
+      document.getElementById('uploadPlaceholder').style.display = 'block';
+    }
+
+    // Form Submission & Storage in Database / Google Sheets
+    function handleRegistrationSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('studentName').value.trim();
+      const phone = document.getElementById('studentWhatsapp').value.trim();
+      const email = document.getElementById('studentEmail').value.trim();
+      const city = document.getElementById('studentCity').value.trim();
+      const sender = document.getElementById('senderName').value.trim();
+      const bankSelect = document.getElementById('senderBank').value;
+      const otherBank = document.getElementById('otherBankName').value.trim();
+      const trx = document.getElementById('trxId').value.trim();
+      const fileInput = document.getElementById('screenshotFile');
+
+      if (!fileInput.files || fileInput.files.length === 0) {
+        alert("Please upload your payment screenshot before submitting.");
+        return;
+      }
+
+      const finalBank = bankSelect === 'Other Bank' ? (otherBank ? `${otherBank} (Other)` : 'Other Bank') : bankSelect;
+      const prog = PROGRAM_DATA[currentProgram];
+      const list = getActiveTiers();
+      const tier = list[selectedTierIndex] || list[0];
+      const regId = 'REG-' + Date.now().toString(36).toUpperCase();
+      const timestamp = new Date().toLocaleString();
+
+      // Create database record
+      const record = {
+        id: regId,
+        timestamp: timestamp,
+        studentName: name,
+        whatsapp: phone,
+        email: email,
+        city: city,
+        program: prog.title,
+        tier: tier.name,
+        amount: `PKR ${tier.price.toLocaleString()}`,
+        coupon: isCouponApplied ? couponCodeApplied : 'None',
+        senderName: sender,
+        senderBank: finalBank,
+        trxId: trx || 'N/A',
+        status: 'Pending Verification'
+      };
+
+      // Save to localStorage simple DB
+      saveRegistrationToDatabase(record);
+
+      // Optional Google Sheet POST Webhook
+      if (GOOGLE_SHEET_WEBHOOK_URL) {
+        try {
+          fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(record)
+          }).catch(err => console.log('Google Sheet sync attempted:', err));
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      // Prepare WhatsApp message
+      const waMsg = encodeURIComponent(
+        `*Core Lab Enrollment & Payment Verification*\n\n` +
+        `• *Registration ID:* ${regId}\n` +
+        `• *Student Name:* ${name}\n` +
+        `• *WhatsApp:* ${phone}\n` +
+        `• *Email:* ${email}\n` +
+        `• *Course:* ${prog.title}\n` +
+        `• *Tier:* ${tier.name} (PKR ${tier.price.toLocaleString()})\n` +
+        (isCouponApplied ? `• *Coupon Applied:* ${couponCodeApplied}\n` : '') +
+        `\n*Payment Verification Details:*\n` +
+        `• *Sender Account Name:* ${sender}\n` +
+        `• *Sender Bank / Wallet:* ${finalBank}\n` +
+        (trx ? `• *Trx ID / Ref:* ${trx}\n` : '') +
+        `• *Sent To:* Easypaisa 03369146789 (Syeda Munazzah Fatima)\n\n` +
+        `Attached below is my payment screenshot for seat confirmation.`
+      );
+
+      document.getElementById('modalRegId').innerText = regId;
+      document.getElementById('modalStudentName').innerText = name;
+      document.getElementById('modalProgramName').innerText = prog.title;
+      document.getElementById('modalSender').innerText = sender;
+      document.getElementById('modalBank').innerText = finalBank;
+      document.getElementById('modalAmount').innerText = `PKR ${tier.price.toLocaleString()}`;
+      document.getElementById('modalWhatsAppBtn').href = `https://wa.me/923369146789?text=${waMsg}`;
+      if (document.getElementById('modalWhatsAppBtn2')) {
+        document.getElementById('modalWhatsAppBtn2').href = `https://wa.me/923127586251?text=${waMsg}`;
+      }
+
+      document.getElementById('successModal').style.display = 'flex';
+    }
+
+    // Database functions
+    function getDatabaseRecords() {
+      try {
+        const data = localStorage.getItem('corelab_db_registrations');
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRegistrationToDatabase(record) {
+      const records = getDatabaseRecords();
+      records.unshift(record); // newest first
+      localStorage.setItem('corelab_db_registrations', JSON.stringify(records));
+    }
+
+    function openAdminModal() {
+      const records = getDatabaseRecords();
+      const tbody = document.getElementById('adminRecordsBody');
+      tbody.innerHTML = '';
+
+      if (records.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:#94a3b8; padding:24px;">No registration records yet. Submissions will appear here automatically.</td></tr>`;
+      } else {
+        records.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><code>${r.id}</code></td>
+            <td>${r.timestamp}</td>
+            <td><strong>${r.studentName}</strong></td>
+            <td>${r.whatsapp}</td>
+            <td>${r.program}</td>
+            <td>${r.tier}</td>
+            <td style="color:#d97706; font-weight:800;">${r.amount}</td>
+            <td>${r.senderName}</td>
+            <td>${r.senderBank}</td>
+            <td><span style="background:#fef3c7; color:#b45309; padding:2px 6px; border-radius:4px; font-weight:700; font-size:0.75rem;">${r.status}</span></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+      document.getElementById('adminModal').style.display = 'flex';
+    }
+
+    function closeAdminModal() {
+      document.getElementById('adminModal').style.display = 'none';
+    }
+
+    function exportToCSV() {
+      const records = getDatabaseRecords();
+      if (records.length === 0) {
+        alert('No records to export yet.');
+        return;
+      }
+
+      const headers = ["ID", "Timestamp", "Student Name", "WhatsApp", "Email", "City", "Program", "Tier", "Amount", "Coupon", "Sender Name", "Sender Bank", "TRX ID", "Status"];
+      const rows = records.map(r => [
+        `"${r.id}"`,
+        `"${r.timestamp}"`,
+        `"${r.studentName.replace(/"/g, '""')}"`,
+        `"${r.whatsapp}"`,
+        `"${r.email}"`,
+        `"${r.city}"`,
+        `"${r.program.replace(/"/g, '""')}"`,
+        `"${r.tier}"`,
+        `"${r.amount}"`,
+        `"${r.coupon}"`,
+        `"${r.senderName.replace(/"/g, '""')}"`,
+        `"${r.senderBank.replace(/"/g, '""')}"`,
+        `"${r.trxId}"`,
+        `"${r.status}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `CoreLab_Registrations_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    function clearDatabase() {
+      if (confirm('Are you sure you want to clear all stored registration records from this browser?')) {
+        localStorage.removeItem('corelab_db_registrations');
+        openAdminModal();
+      }
+    }
+
+    function toggleMobileNav() {
+      const drawer = document.getElementById('mobileDrawer');
+      drawer.style.display = drawer.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Drag & drop enhancements
+    const dropZone = document.getElementById('dropZone');
+    ['dragenter', 'dragover'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+      }, false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+      dropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+      }, false);
+    });
+
+    // Run on load
+    window.addEventListener('DOMContentLoaded', initFromUrl);
+  </script>
+</body>
+</html>

@@ -1085,6 +1085,84 @@ header.scrolled {
   border-radius: var(--radius-full);
 }
 
+.badge-capstone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  color: #b45309;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.badge-capstone .star-icon {
+  color: #d97706;
+}
+
+.course-origin-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-alt);
+  border: 1px solid var(--line);
+  color: var(--core-navy);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+}
+
+.project-key-outcomes {
+  margin: 14px 0 20px;
+  padding: 12px 14px;
+  background: var(--bg-main);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--gold);
+}
+
+.project-key-outcomes-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--core-navy);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-key-outcomes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.project-key-outcomes li {
+  font-size: 0.86rem;
+  color: var(--ink-secondary);
+  line-height: 1.45;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.project-key-outcomes li::before {
+  content: "✓";
+  color: #10b981;
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
 .badge-ongoing .pulse-dot {
   width: 6px;
   height: 6px;

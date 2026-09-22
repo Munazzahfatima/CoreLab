@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initActiveNavLinks();
   initFaqAccordion();
   initProgramFilters();
+  initProjectFilters();
   initHeroCanvas();
 });
 
@@ -159,6 +160,33 @@ function initProgramFilters() {
 
       const filter = btn.getAttribute('data-filter');
       programCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+}
+
+/* ==========================================================================
+   4b. Project Filters (Projects & Capstone Showcase Page)
+   ========================================================================== */
+function initProjectFilters() {
+  const filterBtns = document.querySelectorAll('.project-filter-btn');
+  const projectCards = document.querySelectorAll('.project-card-filterable');
+
+  if (!filterBtns.length || !projectCards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+      projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
