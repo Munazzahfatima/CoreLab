@@ -1710,15 +1710,22 @@ footer {
   .reg-outcome-card {
     flex-direction: column;
     align-items: flex-start;
+    padding: 24px 20px;
   }
 
   .reg-actions-box {
-    align-items: flex-start;
+    align-items: stretch;
     width: 100%;
   }
 
   .reg-actions-box .btn {
     width: 100%;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+    padding: 14px 16px;
   }
 }
 
