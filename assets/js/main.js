@@ -1,8 +1,19 @@
 /**
- * Core Lab — Unified JavaScript Interactions
+ * Core Lab — Unified JavaScript Interactions & Theme Engine
  */
 
+// Immediate theme execution to prevent flash
+// Default is ALWAYS dark. Light can be toggled but dark is the baseline.
+(function() {
+  const saved = localStorage.getItem('corelab_theme');
+  // If no saved preference, or saved preference was 'light' from an older session
+  // we want dark as the default. Only honour 'light' if explicitly set.
+  const theme = (saved === 'light') ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initStickyHeader();
   initMobileNavigation();
   initActiveNavLinks();
@@ -11,6 +22,43 @@ document.addEventListener('DOMContentLoaded', () => {
   initProjectFilters();
   initHeroCanvas();
 });
+
+/* ==========================================================================
+   Theme Switcher Engine (Dark / Light)
+   ========================================================================== */
+function initThemeToggle() {
+  const getPreferredTheme = () => {
+    return localStorage.getItem('corelab_theme') || 'dark';
+  };
+
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('corelab_theme', theme);
+
+    // Update all toggle buttons in header and mobile drawer
+    const toggleBtns = document.querySelectorAll('.theme-toggle-btn');
+    toggleBtns.forEach(btn => {
+      const isDark = theme === 'dark';
+      btn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+      btn.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    });
+
+    // Notify canvas or other listeners
+    window.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
+  };
+
+  const currentTheme = getPreferredTheme();
+  applyTheme(currentTheme);
+
+  // Bind clicks
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.theme-toggle-btn');
+    if (!btn) return;
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+  });
+}
 
 /* ==========================================================================
    0. Sticky Header Elevation on Scroll
@@ -56,7 +104,7 @@ function initMobileNavigation() {
   });
 
   // Close drawer when a navigation link is clicked
-  const drawerLinks = drawer.querySelectorAll('a');
+  const drawerLinks = drawer.querySelectorAll('a:not(.theme-toggle-btn)');
   drawerLinks.forEach(link => {
     link.addEventListener('click', () => {
       drawer.classList.remove('open');
@@ -123,17 +171,17 @@ function initFaqAccordion() {
     });
   });
 
-  // Category Filtering on FAQ Page
-  if (catButtons.length > 0) {
+  // Category Filtering for FAQs
+  if (catButtons.length) {
     catButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         catButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        const category = btn.getAttribute('data-cat');
+        const cat = btn.getAttribute('data-cat');
         faqItems.forEach(item => {
           const itemCat = item.getAttribute('data-cat');
-          if (category === 'all' || itemCat === category) {
+          if (cat === 'all' || itemCat === cat) {
             item.style.display = 'block';
           } else {
             item.style.display = 'none';
@@ -145,13 +193,13 @@ function initFaqAccordion() {
 }
 
 /* ==========================================================================
-   4. Program Filters (Programs Hub Page)
+   4. Filterable Grids (Programs & Projects)
    ========================================================================== */
 function initProgramFilters() {
   const filterBtns = document.querySelectorAll('.prog-filter-btn');
-  const programCards = document.querySelectorAll('.program-card-filterable');
+  const courseCards = document.querySelectorAll('.schedule-section .course-card');
 
-  if (!filterBtns.length || !programCards.length) return;
+  if (!filterBtns.length || !courseCards.length) return;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -159,7 +207,7 @@ function initProgramFilters() {
       btn.classList.add('active');
 
       const filter = btn.getAttribute('data-filter');
-      programCards.forEach(card => {
+      courseCards.forEach(card => {
         const category = card.getAttribute('data-category');
         if (filter === 'all' || category === filter) {
           card.style.display = 'flex';
@@ -171,12 +219,9 @@ function initProgramFilters() {
   });
 }
 
-/* ==========================================================================
-   4b. Project Filters (Projects & Capstone Showcase Page)
-   ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.project-filter-btn');
-  const projectCards = document.querySelectorAll('.project-card-filterable');
+  const projectCards = document.querySelectorAll('.projects-grid .project-card');
 
   if (!filterBtns.length || !projectCards.length) return;
 
@@ -199,7 +244,7 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   5. Subtle Technical Background Canvas (Particles & Grid)
+   5. Dynamic Technical Canvas (Particles & Constellations)
    ========================================================================== */
 function initHeroCanvas() {
   const canvas = document.getElementById('heroCanvas');
@@ -208,15 +253,23 @@ function initHeroCanvas() {
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
-  const particleCount = 28;
+  const particleCount = 36;
 
   function resize() {
+    if (!canvas.parentElement) return;
     width = canvas.width = canvas.parentElement.offsetWidth;
     height = canvas.height = canvas.parentElement.offsetHeight;
   }
 
   window.addEventListener('resize', resize);
   resize();
+
+  const getThemePalette = () => {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    return isDark 
+      ? ['#f59e0b', '#3b82f6', '#a855f7', '#14b8a6', '#60a5fa'] 
+      : ['#d97706', '#2563eb', '#7c3aed', '#0d9488'];
+  };
 
   class Particle {
     constructor() {
@@ -225,11 +278,12 @@ function initHeroCanvas() {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.45;
-      this.vy = (Math.random() - 0.5) * 0.45;
-      this.radius = Math.random() * 2 + 1.2;
-      this.alpha = Math.random() * 0.4 + 0.2;
-      this.color = Math.random() > 0.6 ? '#d97706' : '#2563eb';
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 2.2 + 1.2;
+      this.alpha = Math.random() * 0.5 + 0.3;
+      const palette = getThemePalette();
+      this.color = palette[Math.floor(Math.random() * palette.length)];
     }
     update() {
       this.x += this.vx;
@@ -243,30 +297,46 @@ function initHeroCanvas() {
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.globalAlpha = this.alpha;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = this.color;
       ctx.fill();
+      ctx.shadowBlur = 0;
     }
   }
 
-  for (let i = 0; i < particleCount; i++) {
-    particles.push(new Particle());
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
   }
+  initParticles();
+
+  // Listen to theme switch and refresh particle colors
+  window.addEventListener('themechange', () => {
+    const palette = getThemePalette();
+    particles.forEach(p => {
+      p.color = palette[Math.floor(Math.random() * palette.length)];
+    });
+  });
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
 
-    // Draw connecting lines
+    // Draw connecting constellation lines
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 120) {
+        if (dist < 130) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = '#94a3b8';
-          ctx.globalAlpha = (1 - dist / 120) * 0.18;
+          ctx.strokeStyle = isDark ? '#38bdf8' : '#94a3b8';
+          ctx.globalAlpha = (1 - dist / 130) * (isDark ? 0.22 : 0.16);
           ctx.lineWidth = 1;
           ctx.stroke();
         }
