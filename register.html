@@ -88,18 +88,18 @@
     @media (max-width: 600px) {
       .checkout-layout {
         margin-top: 12px;
-        padding: 0 12px;
+        padding: 0 10px;
         gap: 16px;
       }
       .checkout-card {
-        padding: 20px 16px;
+        padding: 18px 14px;
         border-radius: 14px;
       }
       .checkout-header {
-        padding: 32px 16px 28px;
+        padding: 28px 14px 22px;
       }
       .checkout-header h1 {
-        font-size: clamp(1.5rem, 7vw, 2rem);
+        font-size: clamp(1.4rem, 6.5vw, 1.85rem);
       }
       .form-row {
         grid-template-columns: 1fr !important;
@@ -108,13 +108,70 @@
         font-size: 0.76rem;
       }
       .plan-selector-box {
-        padding: 12px 14px;
+        padding: 12px 12px;
       }
       .summary-col {
         position: static !important;
       }
       .checkout-card h2 {
         font-size: 1.1rem;
+      }
+      /* Easypaisa Box Mobile Fixes */
+      .payment-instructions-box {
+        padding: 14px 12px !important;
+        border-radius: 12px;
+      }
+      .payment-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 6px !important;
+      }
+      .account-detail-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+        padding: 8px 0 !important;
+        border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      }
+      .account-detail-row:last-child {
+        border-bottom: none !important;
+        padding-bottom: 0 !important;
+      }
+      .account-detail-row span:first-child {
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #94a3b8 !important;
+      }
+      .account-num-wrap {
+        width: 100%;
+        justify-content: space-between;
+      }
+      /* WhatsApp Card Mobile Fixes */
+      .whatsapp-verification-card {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 14px !important;
+        gap: 10px !important;
+      }
+      .wa-quick-btn {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
+        font-size: 0.8rem !important;
+        padding: 10px 12px !important;
+        text-align: left !important;
+      }
+      /* Button General Mobile Fix */
+      .btn {
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        line-height: 1.35 !important;
+        text-align: center !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
     }
     .checkout-card {
@@ -270,8 +327,10 @@
     .coupon-input-wrap {
       display: flex;
       gap: 8px;
+      flex-wrap: wrap;
     }
     .coupon-input-wrap input {
+      flex: 1 1 170px;
       text-transform: uppercase;
       font-weight: 700;
       letter-spacing: 0.05em;
@@ -282,11 +341,16 @@
       border-radius: 14px;
       padding: 20px;
       margin-bottom: 24px;
+      overflow: hidden;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,0.08);
     }
     .payment-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-bottom: 14px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       padding-bottom: 12px;
@@ -296,9 +360,11 @@
       color: white;
       font-size: 0.75rem;
       font-weight: 800;
-      padding: 4px 10px;
+      padding: 5px 12px;
       border-radius: 6px;
       letter-spacing: 0.04em;
+      white-space: nowrap;
+      display: inline-block;
     }
     .account-detail-row {
       display: flex;
@@ -845,15 +911,15 @@
                     <span>WhatsApp 2: +92 312 7586251 (Admissions Desk) →</span>
                   </a>
                 </div>
-                <div style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; padding: 6px 10px; border-radius: 6px; font-size: 0.76rem; font-weight: 800; display: inline-flex; align-items: center; gap: 6px;">
-                  <span>⚠️</span> WhatsApp Messages Only — STRICTLY NO CALLS
+                <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; padding: 7px 12px; border-radius: 8px; font-size: 0.76rem; font-weight: 800; display: flex; align-items: center; gap: 6px; width: 100%; box-sizing: border-box; line-height: 1.35;">
+                  <span>⚠️</span> <span>WhatsApp Messages Only — STRICTLY NO CALLS</span>
                 </div>
               </div>
             </div>
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-gold btn-lg" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 16px;">
-              Confirm Registration & Submit Payment Proof →
+            <button type="submit" class="btn btn-gold btn-lg" style="width: 100%; max-width: 100%; justify-content: center; font-size: 1.05rem; padding: 15px 18px; white-space: normal; word-break: normal; overflow-wrap: break-word; line-height: 1.35; text-align: center; box-sizing: border-box;">
+              Confirm Registration &amp; Submit Payment Proof →
             </button>
           </div>
         </form>
@@ -917,7 +983,7 @@
                 💬 Chat with Admissions (+92 312 7586251)
               </a>
             </div>
-            <div style="background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; border-radius: 6px; padding: 4px 8px; font-size: 0.72rem; font-weight: 800; margin-top: 8px; display: inline-block;">
+            <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5; border-radius: 6px; padding: 5px 10px; font-size: 0.72rem; font-weight: 800; margin-top: 8px; display: inline-block;">
               🚫 WhatsApp Messages Only — No Phone Calls
             </div>
           </div>
@@ -936,27 +1002,27 @@
         Thank you <strong id="modalStudentName">Student</strong>! We have received your registration and payment verification request for <strong id="modalProgramName">Core Lab</strong>.
       </p>
 
-      <div style="background: #f8fafc; border: 1.5px dashed var(--line); border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: left; font-size: 0.86rem;">
+      <div style="background: var(--bg-alt); border: 1.5px dashed var(--line); border-radius: 12px; padding: 16px; margin-bottom: 24px; text-align: left; font-size: 0.86rem; color: var(--ink);">
         <div style="margin-bottom: 6px;"><strong>Registration ID:</strong> <code id="modalRegId" style="color: var(--gold-hover); font-weight: 800;"></code></div>
         <div style="margin-bottom: 6px;"><strong>Sender Name:</strong> <span id="modalSender"></span></div>
         <div style="margin-bottom: 6px;"><strong>Bank / Method:</strong> <span id="modalBank"></span></div>
         <div style="margin-bottom: 6px;"><strong>Amount:</strong> <span id="modalAmount" style="color: var(--gold-hover); font-weight: 800;"></span></div>
-        <div><strong>Status:</strong> <span style="background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.78rem;">Saved &amp; Pending Verification</span></div>
+        <div><strong>Status:</strong> <span style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 0.78rem;">Saved &amp; Pending Verification</span></div>
       </div>
 
       <div style="margin-bottom: 20px;">
-        <p style="font-size: 0.85rem; color: #166534; font-weight: 700; margin-bottom: 10px;">
+        <p style="font-size: 0.85rem; color: #4ade80; font-weight: 700; margin-bottom: 10px;">
           ⚡ Final Step: Forward payment receipt to WhatsApp to get verified immediately!
         </p>
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%; justify-content: center;">
+          <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%; justify-content: center; white-space: normal; line-height: 1.35;">
             Send to WhatsApp 1 (+92 336 9146789) →
           </a>
-          <a id="modalWhatsAppBtn2" href="#" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center; border-color: #22c55e; color: #166534; font-weight: 800;">
+          <a id="modalWhatsAppBtn2" href="#" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center; border-color: #22c55e; color: #4ade80; font-weight: 800; white-space: normal; line-height: 1.35;">
             Send to WhatsApp 2 (+92 312 7586251) →
           </a>
         </div>
-        <div style="color: #991b1b; font-size: 0.75rem; font-weight: 800; margin-top: 8px;">
+        <div style="color: #fca5a5; font-size: 0.75rem; font-weight: 800; margin-top: 8px;">
           ⚠️ WhatsApp Text Messages Only • No Voice / Cellular Calls
         </div>
       </div>

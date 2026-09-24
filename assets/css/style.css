@@ -179,7 +179,7 @@
    Base & Reset
    ========================================================================== */
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -2014,12 +2014,17 @@ header.scrolled {
    ========================================================================== */
 
 .comparison-table-wrap {
-  background: white;
+  background: var(--bg-card);
   border-radius: var(--radius-xl);
   border: 1px solid var(--line);
   box-shadow: var(--shadow-sm);
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   margin-top: 40px;
+}
+
+[data-theme="light"] .comparison-table-wrap {
+  background: white;
 }
 
 .comp-table {
@@ -2030,16 +2035,17 @@ header.scrolled {
 }
 
 .comp-table th, .comp-table td {
-  padding: 18px 22px;
+  padding: 16px 18px;
   border-bottom: 1px solid var(--line);
-  font-size: 0.94rem;
+  font-size: 0.92rem;
+  color: var(--ink);
 }
 
 .comp-table th {
   background: var(--bg-alt);
   font-weight: 800;
-  color: var(--core-navy);
-  font-size: 0.88rem;
+  color: var(--ink);
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -2223,13 +2229,17 @@ footer {
 
 @media (max-width: 980px) {
   .courses-grid-2,
+  .courses-grid-3,
   .courses-grid-4,
   .projects-grid,
   .days-grid,
   .days-grid.grid-10,
   .mentors-grid,
-  .pathways-grid {
-    grid-template-columns: 1fr;
+  .pathways-grid,
+  .pricing-tiers-grid,
+  .mentor-grid-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
   }
 
   .nav-menu, .nav-actions .btn-header {
@@ -2261,7 +2271,7 @@ footer {
     justify-content: center;
     white-space: normal;
     word-break: break-word;
-    line-height: 1.3;
+    line-height: 1.35;
     padding: 14px 16px;
   }
 
@@ -2275,6 +2285,24 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  /* Prevent any button text overflow on mobile/tablet */
+  .btn {
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+    line-height: 1.35 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-lg {
+    padding: 14px 20px;
+    font-size: 0.98rem;
+    border-radius: 12px;
+  }
+}
+
 @media (max-width: 600px) {
   .footer-grid {
     grid-template-columns: 1fr;
@@ -2283,11 +2311,12 @@ footer {
   .trust-bar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 14px 18px;
+    padding: 16px 18px;
+    gap: 12px;
   }
 
   .course-card, .project-card, .mentor-card {
-    padding: 26px 20px;
+    padding: 22px 16px;
   }
 
   .floating-whatsapp .float-label-prefix {
@@ -2323,17 +2352,105 @@ footer {
 
   /* Hero section tighter on mobile */
   .hero {
-    padding: 55px 0 45px;
+    padding: 50px 0 40px;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero-subheadline {
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+
+  /* Hero CTA group: stack vertically for easy tapping */
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-tag-pills {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .hero-pill {
+    font-size: 0.74rem;
+    padding: 6px 14px;
+    text-align: center;
+    justify-content: center;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   /* Section headers */
   .section-header {
-    margin-bottom: 34px;
+    margin-bottom: 30px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
+  }
+
+  /* Card bottom row: price on top, full-width button below */
+  .card-bottom-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .card-bottom-row .price-box {
+    text-align: left;
+  }
+
+  .card-bottom-row .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Next step / progression callout cards */
+  div[style*="justify-content: space-between"][style*="flex-wrap: wrap"] {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+  }
+
+  div[style*="justify-content: space-between"][style*="flex-wrap: wrap"] .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
   }
 
   /* Days grid single column */
   .days-grid, .days-grid.grid-10 {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reg-outcome-card h3 {
+    font-size: clamp(1.2rem, 5vw, 1.55rem);
+  }
+
+  /* Pricing tiers grid */
+  .pricing-tiers-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
   }
 
   /* FAQ categories tabs: scroll horizontally */
@@ -2348,6 +2465,7 @@ footer {
     padding: 6px 8px;
     width: 100%;
     box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
   }
 
   .faq-cat-btn, .prog-filter-btn, .project-filter-btn {
@@ -2359,18 +2477,18 @@ footer {
 
   /* Registration CTA button */
   .btn-lg {
-    padding: 14px 20px;
-    font-size: 0.98rem;
+    padding: 14px 18px;
+    font-size: 0.95rem;
   }
 
   /* Card section padding */
   .course-card {
-    padding: 24px 18px;
+    padding: 20px 16px;
   }
 
   /* Footer section */
   footer {
-    padding: 44px 0 24px;
+    padding: 40px 0 20px;
   }
 }
 
