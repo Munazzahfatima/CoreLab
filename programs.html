@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>!function(){var t=localStorage.getItem('corelab_theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}();</script>
 </head>
 <body>
 
@@ -45,6 +46,10 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <a href="#courses" class="btn btn-gold btn-sm btn-header">Register Now</a>
         <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -64,23 +69,39 @@
       <div style="margin-top: 10px;">
         <a href="#courses" class="btn btn-gold" style="width: 100%; text-align: center;">Register Now</a>
       </div>
+      <div class="mobile-drawer-theme-row">
+        <span>Theme</span>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <main>
     <!-- Page Header -->
-    <section class="hero" style="padding: 60px 0 40px;">
+    <section class="hero">
+      <div class="hero-canvas-wrap">
+        <canvas id="heroCanvas" class="hero-canvas"></canvas>
+      </div>
       <div class="container hero-content">
         <div class="section-badge"><span class="dot"></span> Comprehensive Curriculum</div>
         <h1>AI Programs & <span class="gradient-gold">Learning Paths</span></h1>
         <p class="hero-subheadline">
-          Choose the right track for your goals — from weekend creative workflows and foundational builder cohorts to intensive technical data science and agent engineering bootcamps.
+          Choose the right track for your goals — from foundational builder cohorts to intensive technical data science and agent engineering bootcamps.
         </p>
+
+        <!-- Visual Highlights -->
+        <div class="hero-tag-pills" style="margin: 18px auto 26px;">
+          <span class="hero-pill hero-pill-gold">⚡ October 2026 Cohorts Live</span>
+          <span class="hero-pill hero-pill-navy">🎓 Founded by FAST Alumni</span>
+          <span class="hero-pill hero-pill-blue">🛠️ 100% Portfolio Outcomes</span>
+        </div>
 
         <!-- Category Filters -->
         <div class="faq-categories-tabs" style="margin-bottom: 0;">
-          <button class="prog-filter-btn faq-cat-btn active" data-filter="all">All Programs (4)</button>
-          <button class="prog-filter-btn faq-cat-btn" data-filter="creator">🎨 Creator</button>
+          <button class="prog-filter-btn faq-cat-btn active" data-filter="all">All Programs (3)</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="builder">🚀 Beginner / Builder</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="technical">📊 Technical (DS/ML)</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="advanced">🤖 Advanced AI (Agents)</button>
@@ -93,40 +114,9 @@
       <div class="container">
         <div class="courses-grid-4">
 
-          <!-- 1. AI Content Creator Weekend (3–4 Oct) -->
-          <div class="course-card is-next-up program-card-filterable" data-category="creator">
+          <!-- 1. AI From Zero to AI Builder (5–11 Oct) -->
+          <div class="course-card program-card-filterable is-next-up" data-category="builder">
             <div class="next-up-ribbon">⚡ NEXT UP</div>
-            <div>
-              <div class="course-badge-row">
-                <span class="course-category-tag tag-creator">CREATOR TRACK</span>
-                <span class="course-date-pill">📅 26–27 September 2026</span>
-              </div>
-              <h3>AI Content Creator Weekend</h3>
-              <div class="course-duration-meta">
-                <span>⏱️ 2-Day Intensive (Sat & Sun)</span>
-                <span>•</span>
-                <span>Beginner Friendly</span>
-              </div>
-              <p class="course-desc">
-                Learn how to generate viral visual media, high-engagement posters, AI video sequences, natural human voiceovers, animated auto-captions, and multi-platform content repurposing.
-              </p>
-              <ul class="course-highlights-list">
-                <li><span class="highlight-bullet">✦</span> <strong>Day 1 (3 Oct):</strong> AI Image Generation, Poster Design, Copywriting & Hook Engines</li>
-                <li><span class="highlight-bullet">✦</span> <strong>Day 2 (4 Oct):</strong> Short Videos, Realistic AI Voiceovers, Subtitles & Multi-Post Distribution</li>
-                <li><span class="highlight-bullet">✦</span> <strong>Key Deliverable:</strong> Complete Ready-to-Publish Multi-Platform Content Pack</li>
-              </ul>
-            </div>
-            <div class="card-bottom-row">
-              <div class="price-box">
-                <span class="price-main">PKR 2,999</span>
-                <span class="price-tier-sub">Student Launch Pass</span>
-              </div>
-              <a href="ai-content-creator.html" class="btn btn-blue btn-sm">Explore Curriculum & Register →</a>
-            </div>
-          </div>
-
-          <!-- 2. AI From Zero to AI Builder (5–11 Oct) -->
-          <div class="course-card program-card-filterable" data-category="builder">
             <div>
               <div class="course-badge-row">
                 <span class="course-category-tag tag-builder">BEGINNER / BUILDER TRACK</span>
@@ -156,18 +146,18 @@
             </div>
           </div>
 
-          <!-- 3. Data Science & Machine Learning (12–22 Oct) -->
+          <!-- 3. Data Science & Machine Learning (5–15 Oct) -->
           <div class="course-card program-card-filterable" data-category="technical">
             <div>
               <div class="course-badge-row">
                 <span class="course-category-tag tag-datascience">TECHNICAL TRACK</span>
-                <span class="course-date-pill">📅 12–22 October 2026</span>
+                <span class="course-date-pill">📅 5–15 October 2026</span>
               </div>
               <h3>Data Science & Machine Learning</h3>
               <div class="course-duration-meta">
                 <span>⏱️ 10-Day Bootcamp</span>
                 <span>•</span>
-                <span>Scheduled 12–22 Oct Window</span>
+                <span>Scheduled 5–15 Oct Window</span>
               </div>
               <p class="course-desc">
                 Go from raw datasets to trained and deployed machine learning models. Built for aspiring data scientists, students, and engineers who want practical code fluency and deployed portfolio projects.
@@ -245,18 +235,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>AI Content Creator</strong></td>
-                <td><span class="course-category-tag tag-creator">Creator</span></td>
-                <td>3–4 Oct (2 Days)</td>
-                <td>None (Basic Computer Literacy)</td>
-                <td>Complete Multi-Platform Content Pack</td>
-                <td><strong>PKR 2,999</strong><br><span style="font-size:0.8em;color:#64748b;">Launch Pass (No Premium)</span></td>
-                <td>
-                  <a href="register.html?program=creator" class="btn btn-blue btn-sm" style="padding: 4px 10px; font-size: 0.78rem; display: inline-block; margin-bottom: 4px;">Register →</a><br>
-                  <a href="ai-content-creator.html" class="text-blue" style="font-weight: 700; font-size: 0.8rem;">Details</a>
-                </td>
-              </tr>
+
               <tr>
                 <td><strong>AI From Zero to AI Builder</strong></td>
                 <td><span class="course-category-tag tag-builder">Beginner / Builder</span></td>
@@ -272,7 +251,7 @@
               <tr>
                 <td><strong>Data Science & Machine Learning</strong></td>
                 <td><span class="course-category-tag tag-datascience">Technical</span></td>
-                <td>12–22 Oct (10 Days)</td>
+                <td>5–15 Oct (10 Days)</td>
                 <td>Basic logic / python interest</td>
                 <td>2+ ML Projects + Deployed Streamlit App</td>
                 <td><strong>PKR 12,000</strong><br><span style="font-size:0.8em;color:#64748b;">EB: 10,000 | Premium: 15,000</span></td>
@@ -349,9 +328,8 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-nav-list">
-            <li><a href="ai-content-creator.html">AI Content Creator (3–4 Oct)</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
-            <li><a href="data-science-machine-learning.html">Data Science & ML (12–22 Oct)</a></li>
+            <li><a href="data-science-machine-learning.html">Data Science & ML (5–15 Oct)</a></li>
             <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
           </ul>
         </div>

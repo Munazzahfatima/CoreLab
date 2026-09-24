@@ -26,21 +26,18 @@ The platform is structured into dedicated, modular pages:
 
 | Program | Dates | Duration | Pricing | Registration Link |
 | :--- | :--- | :--- | :--- | :--- |
-| **AI Content Creator Weekend** | 3–4 Oct 2026 | 2-Day Weekend Intensive | PKR 2,999 (Launch Pass) | [Checkout & Upload Screenshot](register.html?program=creator) |
 | **AI From Zero to AI Builder (Cohort 5)** | 5–11 Oct 2026 | 7-Day Bootcamp | Regular: PKR 4,999<br>Premium: PKR 5,999 | [Checkout & Upload Screenshot](register.html?program=builder) |
-| **Data Science & Machine Learning** | 12–22 Oct 2026 | 10-Day Technical Bootcamp | Regular: PKR 12,000<br>Early Bird: PKR 10,000<br>Premium: PKR 15,000 | [Checkout & Upload Screenshot](register.html?program=datascience) |
+| **Data Science & Machine Learning** | 5–15 Oct 2026 | 10-Day Technical Bootcamp | Regular: PKR 12,000<br>Early Bird: PKR 10,000<br>Premium: PKR 15,000 | [Checkout & Upload Screenshot](register.html?program=datascience) |
 | **Generative AI, LLMs & AI Agents** | 12–22 Oct 2026 | 10-Day Advanced Engineering | Regular: PKR 12,000<br>Early Bird: PKR 10,000<br>Premium: PKR 15,000 | [Checkout & Upload Screenshot](register.html?program=genai) |
 
 ---
 
 ## 🚀 Projects Achieved After Completing The Courses
 
-1. **Viral Omnichannel AI Brand Studio & Video Engine** (AI Content Creator Weekend) — Full commercial marketing assets, cloned AI voices, animated video sequences, and kinetic captions.
-2. **Smart Document Intelligence & Workflow Automation Web App** (AI From Zero to AI Builder) — Live Q&A web app over multi-page PDFs with page-level citations and webhook integrations.
-3. **Production Customer Churn & Credit Risk Prediction App** (Data Science & Machine Learning Bootcamp) — Supervised ML classification pipeline, SHAP explainability, and interactive Streamlit Cloud dashboard.
-4. **Autonomous Multi-Tool Research Agent & RAG System** (Generative AI, LLMs & AI Agents Bootcamp) — Multi-step ReAct agent loop, tool calling, vector database retrieval, and FastAPI deployment.
-5. **AI E-Commerce Catalog & Dynamic Ad Creative Suite** (Creator & Builder Tracks) — Batch commercial generation of lifestyle product mockups, copy, and webhook integrations.
-6. **Real Estate Valuation & Predictive Market Intelligence Dashboard** (Data Science Track) — Geospatial market regression models with interactive price estimation maps.
+1. **Smart Document Intelligence & Workflow Automation Web App** (AI From Zero to AI Builder) — Live Q&A web app over multi-page PDFs with page-level citations and webhook integrations.
+2. **Production Customer Churn & Credit Risk Prediction App** (Data Science & Machine Learning Bootcamp) — Supervised ML classification pipeline, SHAP explainability, and interactive Streamlit Cloud dashboard.
+3. **Autonomous Multi-Tool Research Agent & RAG System** (Generative AI, LLMs & AI Agents Bootcamp) — Multi-step ReAct agent loop, tool calling, vector database retrieval, and FastAPI deployment.
+4. **Real Estate Valuation & Predictive Market Intelligence Dashboard** (Data Science Track) — Geospatial market regression models with interactive price estimation maps.
 
 ---
 

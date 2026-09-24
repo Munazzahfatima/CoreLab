@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>!function(){var t=localStorage.getItem('corelab_theme');document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');}();</script>
 </head>
 <body>
 
@@ -45,6 +46,10 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <a href="programs.html" class="btn btn-gold btn-sm btn-header">Register Now</a>
         <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -64,12 +69,22 @@
       <div style="margin-top: 10px;">
         <a href="programs.html" class="btn btn-gold" style="width: 100%; text-align: center;">Register Now</a>
       </div>
+      <div class="mobile-drawer-theme-row">
+        <span>Theme</span>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 
   <main>
     <!-- Page Hero -->
-    <section class="hero" style="padding: 70px 0 40px;">
+    <section class="hero">
+      <div class="hero-canvas-wrap">
+        <canvas id="heroCanvas" class="hero-canvas"></canvas>
+      </div>
       <div class="container hero-content">
         <div class="section-badge"><span class="dot"></span> Student Knowledge Base</div>
         <h1>Frequently Asked <span class="gradient-gold">Questions</span></h1>
@@ -114,7 +129,7 @@
             </div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Yes! We offer beginner-friendly entry points. The <strong>AI Content Creator Weekend (26–27 September)</strong> requires zero programming experience and focuses on visual media, video creation, and AI voiceovers. The <strong>AI From Zero to AI Builder Bootcamp (5–11 October)</strong> is designed to take complete beginners step-by-step through prompt engineering, document analysis, no-code web tools, and automated pipelines.
+                Yes! We offer beginner-friendly entry points. The <strong>AI From Zero to AI Builder Bootcamp (5–11 October)</strong> is designed to take complete beginners step-by-step through prompt engineering, document analysis, no-code web tools, and automated pipelines.
               </div>
             </div>
           </div>
@@ -141,9 +156,8 @@
               <div class="faq-answer-inner">
                 Follow our clear progression path:
                 <br><br>
-                • <strong>CREATOR (3–4 Oct):</strong> AI Content Creator Weekend — for marketers, creators, and entrepreneurs wanting viral visuals, video reels, and multi-platform content packs.<br>
                 • <strong>BEGINNER (5–11 Oct):</strong> AI From Zero to AI Builder — for students and professionals seeking a comprehensive end-to-end foundation and 7 completed projects.<br>
-                • <strong>TECHNICAL (12–22 Oct):</strong> Data Science & Machine Learning — for aspiring data scientists wanting data cleaning, statistical modeling with Scikit-learn, and Streamlit deployment.<br>
+                • <strong>TECHNICAL (5–15 Oct):</strong> Data Science & Machine Learning — for aspiring data scientists wanting data cleaning, statistical modeling with Scikit-learn, and Streamlit deployment.<br>
                 • <strong>ADVANCED AI (12–22 Oct):</strong> Generative AI, LLMs & AI Agents — for developers ready to build RAG pipelines, vector search, tool calling, and autonomous multi-agent software.
               </div>
             </div>
@@ -169,7 +183,7 @@
             </div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Yes. Both technical bootcamps are scheduled within the 12–22 October 2026 window. Live session timings are arranged without schedule conflicts, and all lectures are recorded. Ambitious learners taking both tracks can reach out to admissions on WhatsApp (+92 312 7586251) for dual-enrollment guidance and package pricing.
+                Yes. Live session timings are arranged without schedule conflicts, and all lectures are recorded. Ambitious learners taking both tracks can reach out to admissions on WhatsApp (+92 312 7586251) for dual-enrollment guidance and package pricing.
               </div>
             </div>
           </div>
@@ -231,7 +245,7 @@
             </div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                For the <strong>AI Content Creator</strong> and <strong>Zero to AI Builder</strong> programs, you can register directly via the official Google Forms provided on their course pages. For the <strong>Technical Bootcamps</strong> (Data Science & GenAI), registration is handled directly via WhatsApp (+92 312 7586251). We accept online bank transfers, JazzCash, and Easypaisa.
+                For the <strong>Zero to AI Builder</strong> program, you can register directly via the official Google Form provided on its course page or via the registration portal. For the <strong>Technical Bootcamps</strong> (Data Science & GenAI), registration is handled directly via WhatsApp (+92 312 7586251). We accept online bank transfers, JazzCash, and Easypaisa.
               </div>
             </div>
           </div>
@@ -255,7 +269,7 @@
             </div>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                Yes. The Data Science & ML Bootcamp and Generative AI Bootcamp both offer an <strong>Early Bird tuition fee of PKR 10,000</strong> (regular PKR 12,000) for the first 10 confirmed registrations per cohort. The AI Content Creator Weekend has a special Student Launch Pass at PKR 2,999.
+                Yes. The Data Science & ML Bootcamp and Generative AI Bootcamp both offer an <strong>Early Bird tuition fee of PKR 10,000</strong> (regular PKR 12,000) for the first 10 confirmed registrations per cohort.
               </div>
             </div>
           </div>
@@ -339,9 +353,8 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-nav-list">
-            <li><a href="ai-content-creator.html">AI Content Creator (3–4 Oct)</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
-            <li><a href="data-science-machine-learning.html">Data Science & ML (12–22 Oct)</a></li>
+            <li><a href="data-science-machine-learning.html">Data Science & ML (5–15 Oct)</a></li>
             <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
           </ul>
         </div>

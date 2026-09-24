@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -619,9 +619,8 @@
           <div class="form-group">
             <label for="programSelect">Select Program <span class="req">*</span></label>
             <select id="programSelect" class="form-select" onchange="onProgramChange(this.value)" required>
-              <option value="creator">AI Content Creator Weekend (3–4 Oct)</option>
               <option value="builder" selected>AI From Zero to AI Builder (5–11 Oct)</option>
-              <option value="datascience">Data Science & Machine Learning (12–22 Oct)</option>
+              <option value="datascience">Data Science & Machine Learning (5–15 Oct)</option>
               <option value="genai">Generative AI & AI Agents (12–22 Oct)</option>
             </select>
           </div>
@@ -978,7 +977,6 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-links">
-            <li><a href="ai-content-creator.html">AI Content Creator Weekend</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to AI Builder (Cohort 5)</a></li>
             <li><a href="data-science-machine-learning.html">Data Science &amp; Machine Learning</a></li>
             <li><a href="generative-ai-agents.html">Generative AI &amp; AI Agents</a></li>
@@ -1022,13 +1020,6 @@
   <script>
     // Program Data with Early Bird unlocked via Coupon Corelab2711
     const PROGRAM_DATA = {
-      creator: {
-        title: "AI Content Creator Weekend",
-        schedule: "26–27 September 2026 (Sat & Sun)",
-        tiers: [
-          { id: "launch", name: "Launch Pass", price: 2999, desc: "2-Day intensive live workshop & content templates" }
-        ]
-      },
       builder: {
         title: "AI From Zero to AI Builder (Cohort 5)",
         schedule: "5–11 October 2026 (7 Days)",
@@ -1039,7 +1030,7 @@
       },
       datascience: {
         title: "Data Science & Machine Learning Bootcamp",
-        schedule: "12–22 October 2026 (10 Days)",
+        schedule: "5–15 October 2026 (10 Days)",
         tiers: [
           { id: "regular", name: "Regular Pass", price: 12000, desc: "Full 10-day hands-on technical curriculum" },
           { id: "premium", name: "Premium Pass", price: 15000, desc: "Includes 1-on-1 portfolio review & project mentoring", highlight: true }
