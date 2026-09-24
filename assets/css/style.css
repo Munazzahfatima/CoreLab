@@ -188,6 +188,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 body {
@@ -1206,6 +1207,14 @@ header.scrolled {
   box-shadow: var(--shadow-sm), var(--glass-specular);
   overflow-x: auto;
   gap: 16px;
+  /* Prevent overflow on mobile */
+  flex-wrap: nowrap;
+  scrollbar-width: none;   /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.pathways-step-strip::-webkit-scrollbar {
+  display: none; /* Chrome/Safari: hide scrollbar on step strip */
 }
 
 .path-step-badge {
@@ -2212,6 +2221,60 @@ footer {
   }
 }
 
+@media (max-width: 980px) {
+  .courses-grid-2,
+  .courses-grid-4,
+  .projects-grid,
+  .days-grid,
+  .days-grid.grid-10,
+  .mentors-grid,
+  .pathways-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-menu, .nav-actions .btn-header {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reg-outcome-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+
+  .reg-actions-box {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .reg-actions-box .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+    padding: 14px 16px;
+  }
+
+  /* Pathways step strip: show as scrollable row on tablet */
+  .pathways-step-strip {
+    justify-content: flex-start;
+    padding: 12px 18px;
+    border-radius: var(--radius-lg);
+    font-size: 0.82rem;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 600px) {
   .footer-grid {
     grid-template-columns: 1fr;
@@ -2236,6 +2299,78 @@ footer {
     right: 16px;
     padding: 10px 16px;
     font-size: 0.84rem;
+  }
+
+  /* Pathways step strip: stack vertically on small phones */
+  .pathways-step-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    gap: 10px;
+    overflow-x: visible;
+  }
+
+  .path-step-arrow {
+    transform: rotate(90deg);
+    display: none; /* hide arrows in vertical layout for cleanliness */
+  }
+
+  /* Pathways section padding */
+  .pathways-section {
+    padding: 50px 0;
+  }
+
+  /* Hero section tighter on mobile */
+  .hero {
+    padding: 55px 0 45px;
+  }
+
+  /* Section headers */
+  .section-header {
+    margin-bottom: 34px;
+  }
+
+  /* Days grid single column */
+  .days-grid, .days-grid.grid-10 {
+    grid-template-columns: 1fr;
+  }
+
+  /* FAQ categories tabs: scroll horizontally */
+  .faq-categories-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    border-radius: var(--radius-lg);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 6px 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .faq-cat-btn, .prog-filter-btn, .project-filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.82rem;
+    padding: 7px 14px;
+  }
+
+  /* Registration CTA button */
+  .btn-lg {
+    padding: 14px 20px;
+    font-size: 0.98rem;
+  }
+
+  /* Card section padding */
+  .course-card {
+    padding: 24px 18px;
+  }
+
+  /* Footer section */
+  footer {
+    padding: 44px 0 24px;
   }
 }
 
