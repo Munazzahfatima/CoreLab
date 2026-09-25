@@ -476,8 +476,8 @@
     ══════════════════════════════════════════ */
     #cg-chat {
       position: fixed;
-      bottom: 120px; right: 28px;
-      width: 360px; max-height: 540px;
+      bottom: 120px; right: 28px; left: auto;
+      width: 320px; max-height: 520px;
       background: rgba(255,253,249,.92);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
@@ -488,10 +488,18 @@
       pointer-events: all; z-index: 99992;
       opacity: 0; transform: translateY(20px) scale(.93);
       transform-origin: bottom right;
-      transition: opacity .32s ease, transform .32s cubic-bezier(.34,1.56,.64,1);
+      transition: opacity .32s ease, transform .32s cubic-bezier(.34,1.56,.64,1),
+                  left .6s cubic-bezier(.4,0,.2,1), right .6s cubic-bezier(.4,0,.2,1);
       visibility: hidden;
     }
     #cg-chat.open { opacity:1; transform:none; visibility:visible; }
+    /* When robot is on left — chat snaps to left side */
+    #cg-chat.chat-left {
+      right: auto;
+      left: 28px;
+      transform-origin: bottom left;
+      border-radius: 24px;
+    }
 
     #cg-chat-header {
       display: flex; align-items: center; justify-content: space-between;
@@ -700,7 +708,7 @@
     @media (max-width:600px) {
       #core-guide { bottom:90px; right:14px; }
       #cg-robot   { width:110px; height:125px; }
-      #cg-chat    { width:calc(100vw - 20px); right:10px; bottom:90px; max-height:70vh; }
+      #cg-chat    { width:calc(100vw - 24px); left:12px !important; right:12px !important; bottom:90px; max-height:70vh; }
       #cg-bubble  { width:200px; font-size:.8rem; }
     }
   `;
@@ -821,6 +829,20 @@
    * ═══════════════════════════════════════════════════════════ */
   function _openChat() {
     S.isChatOpen=true; S.phase=SM.USER_INTERACTING;
+
+    // Position chat panel on the correct side based on where robot currently is
+    const isLeft = S.currentZone && S.currentZone.includes('left');
+    const chatEl2 = document.getElementById('cg-chat');
+    if (chatEl2) {
+      if (isLeft) {
+        chatEl2.style.left  = '12px';
+        chatEl2.style.right = 'auto';
+      } else {
+        chatEl2.style.right = '28px';
+        chatEl2.style.left  = 'auto';
+      }
+    }
+
     chatEl.classList.add('open'); _hideBubble();
     _anim('wave',1800); inputEl.focus(); _initChips();
     if (!chatMsgsEl.children.length)
@@ -1353,6 +1375,18 @@
     // If zone is on the left half, flip bubble to the right side so it stays visible
     const isLeftZone = zoneName.includes('left');
     root.classList.toggle('bubble-right', isLeftZone);
+
+    // Move chat panel to same side as robot so it never goes off-screen
+    const chatEl2 = document.getElementById('cg-chat');
+    if (chatEl2) {
+      if (isLeftZone) {
+        chatEl2.style.left  = '12px';
+        chatEl2.style.right = 'auto';
+      } else {
+        chatEl2.style.right = '28px';
+        chatEl2.style.left  = 'auto';
+      }
+    }
 
     if (prefersReduced) { _setPos(target.x,target.y); S.isWalking=false; onDone&&onDone(); return; }
     const dx=target.x-_robotX;
