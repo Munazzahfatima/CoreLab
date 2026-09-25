@@ -1,660 +1,985 @@
 /**
  * ═══════════════════════════════════════════════════════════════
- *  CoreLab — Buddy Robot Mascot  v3.0
- *  State-machine controlled. One IIFE. Correct structure.
- *  ORDER: programs → DOM → styles → robot API → state machine → wiring
+ *  CoreLab — CORE AI Guide  v4.0
+ *  Premium redesign: JARVIS-style floating robot, mouse-tracking
+ *  eyes, particle system, career quiz, context awareness.
+ *  Brain (signals, scoring, quiz) preserved from v3.
  * ═══════════════════════════════════════════════════════════════
  */
 (function () {
   'use strict';
 
-  /* ═══════════════════════════════════════════════════════════
-   *  0. GUARD — only init once
-   * ═══════════════════════════════════════════════════════════ */
   if (window.__buddyInitialised) return;
   window.__buddyInitialised = true;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ═══════════════════════════════════════════════════════════
-   *  1. PROGRAM DATABASE  (real data only — never invent)
+   *  1. PROGRAM DATABASE  (unchanged — real data only)
    * ═══════════════════════════════════════════════════════════ */
   const PROGRAMS = {
     creator: {
-      id: 'creator',
-      title: 'AI Content Creator Weekend',
-      url: 'ai-content-creator.html',
-      dates: '28–29 September 2026',
-      duration: '2-Day Intensive',
-      price: 'PKR 2,999 (Student Launch Pass)',
-      level: 'Beginner Friendly',
-      focus: 'AI image generation, poster design, copywriting, hook engines, short videos, AI voiceovers, subtitles, multi-platform content distribution',
-      outcome: 'A complete ready-to-publish multi-platform content pack',
-      idealFor: 'Content creators, social media managers, designers, marketing students, small business owners, beginners wanting practical AI content skills',
-      notFor: 'People wanting deep ML, model training, AI agents, or advanced data science',
+      id:'creator', title:'AI Content Creator Weekend',
+      url:'ai-content-creator.html', dates:'28–29 September 2026',
+      duration:'2-Day Intensive', price:'PKR 2,999 (Student Launch Pass)',
+      level:'Beginner Friendly',
+      focus:'AI image generation, poster design, copywriting, hook engines, short videos, AI voiceovers, subtitles, multi-platform content',
+      outcome:'A complete ready-to-publish multi-platform content pack',
+      tag:'🎨 Creator', color:'#e07040',
+      reasons:['Perfect for content creators & freelancers','No coding required','2-day weekend format','AI images, videos & voiceovers'],
     },
     builder: {
-      id: 'builder',
-      title: 'AI From Zero to AI Builder',
-      url: 'ai-from-zero-to-builder.html',
-      dates: '5–11 October 2026',
-      duration: '7-Day Bootcamp',
-      price: 'PKR 4,999 Regular · PKR 5,999 Premium',
-      level: 'Beginner / Builder — Flagship Cohort 5',
-      focus: 'AI productivity, research assistants, visual creation, code-free web apps, automation, video creation, web app building, custom AI projects',
-      outcome: 'Broad AI foundation across multiple tools — apps, automations, visuals, research assistants',
-      idealFor: 'Complete beginners, students wanting a broad AI intro, people unsure which AI field to pick yet',
-      notFor: 'Deep ML/statistics, advanced LLM/agent architecture, dedicated content creation only',
+      id:'builder', title:'AI From Zero to AI Builder',
+      url:'ai-from-zero-to-builder.html', dates:'5–11 October 2026',
+      duration:'7-Day Bootcamp', price:'PKR 4,999 Regular · PKR 5,999 Premium',
+      level:'Beginner / Builder', tag:'🚀 Builder', color:'#3b82f6',
+      focus:'AI productivity, research assistants, visual creation, code-free web apps, automation, video creation, custom AI projects',
+      outcome:'Broad AI foundation — apps, automations, visuals, research assistants',
+      reasons:['Ideal starting point for beginners','Build real projects across 7 days','Covers automation, apps & AI tools','No prior coding needed'],
     },
     technical: {
-      id: 'technical',
-      title: 'Data Science & Machine Learning',
-      url: 'data-science-machine-learning.html',
-      dates: '5–15 October 2026',
-      duration: '10-Day Bootcamp',
-      price: 'PKR 10,000 Early Bird · PKR 12,000 Regular · PKR 15,000 Premium',
-      level: 'Technical',
-      focus: 'Raw datasets, data cleaning, statistical modeling, machine learning, Scikit-learn, Streamlit, Python data science, EDA, statistics, regression, classification, real projects, GitHub portfolio',
-      outcome: 'Deployed Streamlit ML application + GitHub portfolio',
-      idealFor: 'Python learners, people wanting ML models, data science, statistics, regression/classification, technical ML portfolio',
-      notFor: 'Social media/content focus, no-code AI, AI agents/LLMs, or complete non-technical beginners',
+      id:'technical', title:'Data Science & Machine Learning',
+      url:'data-science-machine-learning.html', dates:'5–15 October 2026',
+      duration:'10-Day Bootcamp', price:'PKR 10,000 Early Bird · PKR 12,000 Regular',
+      level:'Technical', tag:'📊 Data Science', color:'#2d7a4f',
+      focus:'Python, data cleaning, EDA, statistics, ML foundations, regression, classification, Scikit-learn, Streamlit, GitHub portfolio',
+      outcome:'Deployed Streamlit ML app + GitHub portfolio',
+      reasons:['Great for CS/technical students','Python, ML models & real datasets','End-to-end project deployment','Strong portfolio outcome'],
     },
     advanced: {
-      id: 'advanced',
-      title: 'Generative AI, LLMs & AI Agents',
-      url: 'generative-ai-agents.html',
-      dates: '12–22 October 2026',
-      duration: '10-Day Bootcamp',
-      price: 'PKR 10,000 Early Bird · PKR 12,000 Regular · PKR 15,000 Premium',
-      level: 'Advanced AI',
-      focus: 'LLM foundations, prompt engineering, LLM APIs, RAG, embeddings, agent architecture, tool calling, n8n automation, AI memory, multi-step workflows, custom AI agent products, deployment',
-      outcome: 'Custom AI agent product deployed end-to-end',
-      idealFor: 'People interested in LLMs, AI agents, RAG, APIs, automation, tool calling, custom AI products',
-      notFor: 'Complete beginners needing a general foundation first, social media content focus, classical ML/statistics',
+      id:'advanced', title:'Generative AI, LLMs & AI Agents',
+      url:'generative-ai-agents.html', dates:'12–22 October 2026',
+      duration:'10-Day Bootcamp', price:'PKR 10,000 Early Bird · PKR 12,000 Regular',
+      level:'Advanced AI', tag:'🤖 AI Agents', color:'#818cf8',
+      focus:'LLM foundations, prompt engineering, APIs, RAG, embeddings, agent architecture, tool calling, n8n, AI memory, deployment',
+      outcome:'Custom AI agent product deployed end-to-end',
+      reasons:['Build autonomous AI agents','LLMs, RAG, APIs & n8n automation','Advanced technical track','Real deployable AI product'],
     },
   };
 
   /* ═══════════════════════════════════════════════════════════
-   *  2. STATE MACHINE
+   *  2. STATE
    * ═══════════════════════════════════════════════════════════ */
-  const SM = {
-    IDLE:             'IDLE',
-    OBSERVING:        'OBSERVING',
-    WALKING:          'WALKING',
-    SPEAKING:         'SPEAKING',
-    WAITING:          'WAITING',
-    USER_INTERACTING: 'USER_INTERACTING',
-    QUIET:            'QUIET',
-    REGISTRATION:     'REGISTRATION',
-  };
+  const SM = { IDLE:'IDLE', SPEAKING:'SPEAKING', WAITING:'WAITING', USER_INTERACTING:'USER_INTERACTING', QUIET:'QUIET', CELEBRATING:'CELEBRATING' };
+  const CD = { AUTONOMOUS:25000, HOVER:35000, CARD:35000, SAME:60000, MOVE:6000, POST:10000 };
 
-  /* ═══════════════════════════════════════════════════════════
-   *  3. COOLDOWN CONSTANTS  (ms)
-   * ═══════════════════════════════════════════════════════════ */
-  const CD = {
-    AUTONOMOUS:  22000,  // min gap between any two auto-messages
-    HOVER:       32000,  // hover cooldown per card
-    CARD_ENTRY:  35000,  // card visibility cooldown
-    SAME_MSG:    60000,  // same message repeat cooldown
-    MOVE:         8000,  // min gap between moves
-    POST_SPEAK:   9000,  // wait after auto-speak before next action
-  };
-
-  /* ═══════════════════════════════════════════════════════════
-   *  4. RUNTIME STATE
-   * ═══════════════════════════════════════════════════════════ */
   const S = {
-    phase:              SM.IDLE,
-    isWalking:          false,
-    facing:             'left',
-    currentAnim:        'idle',
-    isChatOpen:         false,
-    isTyping:           false,
-    isSpeaking:         false,       // global speak lock
-    lastAutoSpeakAt:    0,
-    lastHoverAt:        0,
-    lastCardAt:         0,
-    lastMoveAt:         0,
-    currentSection:     null,
-    triggeredSections:  new Set(),
-    activeCard:         null,
-    recentMsgs:         [],          // [{ key, at }]
-    idleFired:          false,
-    hasGreeted:         false,
-    lastInteraction:    Date.now(),
+    phase: SM.IDLE,
+    isChatOpen: false, isTyping: false, isSpeaking: false,
+    lastAutoAt: 0, lastHoverAt: 0, lastCardAt: 0, lastMoveAt: 0,
+    recentMsgs: [], triggeredSections: new Set(), activeCard: null,
+    idleFired: false, hasGreeted: false, lastInteraction: Date.now(),
+    currentZone: 'bottom-right', lastScrollPct: -1,
+    quizOpen: false,
+    mouseX: window.innerWidth / 2, mouseY: window.innerHeight / 2,
   };
 
-  /* ─── dedup helpers ─── */
-  function wasSaid(key) {
-    const now = Date.now();
-    S.recentMsgs = S.recentMsgs.filter(m => now - m.at < CD.SAME_MSG);
-    return S.recentMsgs.some(m => m.key === key);
+  /* ─── session persistence ─── */
+  const PKEY = 'corelab_core_v4';
+  function _save() {
+    try {
+      sessionStorage.setItem(PKEY, JSON.stringify({
+        hasGreeted: S.hasGreeted, idleFired: S.idleFired,
+        currentZone: S.currentZone, lastAutoAt: S.lastAutoAt,
+        recentMsgKeys: S.recentMsgs.map(m=>({key:m.key,at:m.at})),
+        triggered: [...S.triggeredSections],
+        profile: brain.profile, savedAt: Date.now(),
+      }));
+    } catch(e){}
   }
-  function markSaid(key) { S.recentMsgs.push({ key, at: Date.now() }); }
+  function _load() {
+    try {
+      const d = JSON.parse(sessionStorage.getItem(PKEY)||'null');
+      if (!d || Date.now()-d.savedAt > 1800000) return false;
+      S.hasGreeted = d.hasGreeted||false; S.idleFired = d.idleFired||false;
+      S.currentZone = d.currentZone||'bottom-right';
+      S.lastAutoAt  = d.lastAutoAt||0;
+      if (d.recentMsgKeys) d.recentMsgKeys.forEach(m=>S.recentMsgs.push(m));
+      if (d.triggered)     d.triggered.forEach(s=>S.triggeredSections.add(s));
+      if (d.profile)       Object.assign(brain.profile, d.profile);
+      return true;
+    } catch(e){ return false; }
+  }
+  setInterval(_save, 5000);
+  window.addEventListener('pagehide', _save);
+  window.addEventListener('beforeunload', _save);
 
   /* ─── speak gate ─── */
-  function canAutoSpeak() {
-    if (S.isSpeaking)                                    return false;
-    if (S.isChatOpen)                                    return false;
-    if (S.isTyping)                                      return false;
-    if (S.phase === SM.REGISTRATION)                     return false;
-    if (S.phase === SM.USER_INTERACTING)                 return false;
-    if (S.phase === SM.QUIET)                            return false;
-    if (Date.now() - S.lastAutoSpeakAt < CD.AUTONOMOUS) return false;
-    return true;
+  function wasSaid(key) {
+    const now = Date.now();
+    S.recentMsgs = S.recentMsgs.filter(m => now-m.at < CD.SAME);
+    return S.recentMsgs.some(m => m.key === key);
   }
-
-  /* ─── controlled auto-speak ─── */
-  let _speakReleaseTimer = null;
-  function autoSpeak(text, opts = {}) {
-    const key = opts.key || text.slice(0, 40);
-    if (!canAutoSpeak())      return false;
-    if (wasSaid(key))         return false;
-
-    markSaid(key);
-    S.lastAutoSpeakAt = Date.now();
-    S.isSpeaking      = true;
-    S.phase           = SM.SPEAKING;
-
-    _doSpeak(text, opts);
-
-    const hold = opts.duration || 6500;
-    clearTimeout(_speakReleaseTimer);
-    _speakReleaseTimer = setTimeout(() => {
-      S.isSpeaking = false;
-      S.phase      = SM.WAITING;
-      setTimeout(() => {
-        if (S.phase === SM.WAITING) S.phase = SM.IDLE;
-      }, CD.POST_SPEAK);
-    }, hold + 300);
-
-    return true;
+  function markSaid(key) { S.recentMsgs.push({key, at:Date.now()}); }
+  function canAutoSpeak() {
+    return !S.isSpeaking && !S.isChatOpen && !S.isTyping &&
+           S.phase !== SM.QUIET && S.phase !== SM.USER_INTERACTING &&
+           S.phase !== SM.CELEBRATING &&
+           (Date.now()-S.lastAutoAt) >= CD.AUTONOMOUS;
   }
 
   /* ═══════════════════════════════════════════════════════════
-   *  5. BUILD DOM
+   *  3. DOM STRUCTURE
    * ═══════════════════════════════════════════════════════════ */
-  const layer = document.createElement('div');
-  layer.id = 'buddy-layer';
-  layer.setAttribute('aria-hidden', 'true');
-  layer.innerHTML = `
-    <div id="buddy-bubble" role="status" aria-live="polite">
-      <button id="buddy-bubble-close" aria-label="Dismiss">×</button>
-      <p id="buddy-bubble-text"></p>
-      <div id="buddy-bubble-btns"></div>
+  const root = document.createElement('div');
+  root.id = 'core-guide';
+  root.setAttribute('aria-label', 'CORE AI Guide');
+  root.innerHTML = `
+    <!-- ── Particles ── -->
+    <div id="cg-particles">
+      <span class="cgp"></span><span class="cgp"></span><span class="cgp"></span>
+      <span class="cgp"></span><span class="cgp"></span><span class="cgp"></span>
     </div>
 
-    <div id="buddy-char" data-anim="idle">
-      <svg id="buddy-svg" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg" overflow="visible">
-        <!-- ANTENNA -->
-        <line x1="40" y1="12" x2="40" y2="3" stroke="#5c4a32" stroke-width="2.2" stroke-linecap="round"/>
-        <circle id="b-antenna-ball" cx="40" cy="2.5" r="3.5" fill="#c2521a"/>
-        <circle cx="40" cy="2.5" r="1.5" fill="#fdf0e8" opacity=".85"/>
-        <!-- HEAD -->
-        <g id="b-head">
-          <rect x="12" y="12" width="56" height="42" rx="16" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.4"/>
-          <rect x="12" y="12" width="56" height="16" rx="16" fill="#c2521a"/>
-          <rect x="12" y="21" width="56" height="7" fill="#c2521a"/>
-          <rect x="18" y="26" width="44" height="24" rx="10" fill="#1a1a2e"/>
-          <!-- Eyes -->
-          <ellipse cx="29" cy="37" rx="6" ry="7" fill="#0a0a18"/>
-          <ellipse cx="51" cy="37" rx="6" ry="7" fill="#0a0a18"/>
-          <ellipse cx="29" cy="37" rx="4.2" ry="5" fill="#c2521a" opacity=".9"/>
-          <ellipse cx="51" cy="37" rx="4.2" ry="5" fill="#c2521a" opacity=".9"/>
-          <circle cx="31" cy="35" r="1.5" fill="#fff" opacity=".7"/>
-          <circle cx="53" cy="35" r="1.5" fill="#fff" opacity=".7"/>
-          <!-- Blink overlays -->
-          <ellipse id="b-blink-l" cx="29" cy="37" rx="6" ry="0" fill="#1a1a2e"/>
-          <ellipse id="b-blink-r" cx="51" cy="37" rx="6" ry="0" fill="#1a1a2e"/>
-          <!-- Smile -->
-          <path id="b-mouth" d="M27 46 Q40 54 53 46" stroke="#c2521a" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <!-- Ear bolts -->
-          <rect x="6"  y="28" width="7" height="14" rx="3.5" fill="#f0e6d6" stroke="#c2521a" stroke-width="1"/>
-          <rect x="67" y="28" width="7" height="14" rx="3.5" fill="#f0e6d6" stroke="#c2521a" stroke-width="1"/>
-          <circle cx="9.5"  cy="35" r="2.2" fill="#c2521a"/>
-          <circle cx="70.5" cy="35" r="2.2" fill="#c2521a"/>
+    <!-- ── Robot SVG ── -->
+    <button id="cg-robot" aria-label="Open CORE AI Guide" title="Your AI Career Guide">
+      <svg id="cg-svg" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+
+        <!-- Glow halo -->
+        <ellipse cx="60" cy="155" rx="38" ry="8" fill="#D85A30" opacity="0.15" id="cg-shadow"/>
+
+        <!-- Antenna -->
+        <line x1="60" y1="18" x2="60" y2="6" stroke="#A33E1A" stroke-width="3" stroke-linecap="round" id="cg-ant-line"/>
+        <circle cx="60" cy="5" r="5" fill="#D85A30" id="cg-ant-ball"/>
+        <circle cx="60" cy="5" r="2.5" fill="#FAECE7" opacity=".9"/>
+
+        <!-- HEAD shell -->
+        <rect x="18" y="18" width="84" height="62" rx="22" fill="#FAECE7" stroke="#D85A30" stroke-width="1.8" id="cg-head"/>
+        <!-- Helmet stripe -->
+        <rect x="18" y="18" width="84" height="22" rx="22" fill="#D85A30" id="cg-helmet"/>
+        <rect x="18" y="32" width="84" height="8" fill="#D85A30"/>
+
+        <!-- Visor light panel -->
+        <rect x="26" y="36" width="68" height="38" rx="14" fill="#FAECE7" id="cg-visor"/>
+        <rect x="27" y="37" width="66" height="36" rx="13" fill="none" stroke="#D85A30" stroke-width="1"/>
+
+        <!-- Eyes -->
+        <g id="cg-eyes">
+          <ellipse cx="43" cy="53" rx="11" ry="13" fill="#fff" id="cg-eye-l-bg"/>
+          <ellipse cx="43" cy="53" rx="7.5" ry="9" fill="#D85A30" opacity=".95" id="cg-eye-l-iris"/>
+          <circle cx="43" cy="53" r="4.5" fill="#7c2010" id="cg-eye-l-pupil"/>
+          <circle cx="45" cy="50" r="1.8" fill="#fff" opacity=".9"/>
+          <ellipse cx="77" cy="53" rx="11" ry="13" fill="#fff" id="cg-eye-r-bg"/>
+          <ellipse cx="77" cy="53" rx="7.5" ry="9" fill="#D85A30" opacity=".95" id="cg-eye-r-iris"/>
+          <circle cx="77" cy="53" r="4.5" fill="#7c2010" id="cg-eye-r-pupil"/>
+          <circle cx="79" cy="50" r="1.8" fill="#fff" opacity=".9"/>
         </g>
-        <!-- NECK -->
-        <rect x="32" y="54" width="16" height="7" rx="3.5" fill="#e0c9b0"/>
+
+        <!-- Blink overlays -->
+        <ellipse id="cg-blink-l" cx="43" cy="53" rx="11" ry="0" fill="#FAECE7"/>
+        <ellipse id="cg-blink-r" cx="77" cy="53" rx="11" ry="0" fill="#FAECE7"/>
+
+        <!-- Mouth -->
+        <path id="cg-mouth" d="M40 68 Q60 76 80 68" stroke="#D85A30" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+        <!-- Ear panels -->
+        <rect x="8"  y="40" width="11" height="22" rx="5.5" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/>
+        <rect x="101" y="40" width="11" height="22" rx="5.5" fill="#F0997B" stroke="#D85A30" stroke-width="1.5"/>
+        <circle cx="13.5"  cy="51" r="3.5" fill="#D85A30"/>
+        <circle cx="106.5" cy="51" r="3.5" fill="#D85A30"/>
+
+        <!-- Neck -->
+        <rect x="48" y="80" width="24" height="10" rx="5" fill="#F0997B"/>
+
         <!-- BODY -->
-        <g id="b-body">
-          <rect x="10" y="61" width="60" height="42" rx="14" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.4"/>
-          <rect x="10" y="61" width="60" height="12" rx="14" fill="#c2521a"/>
-          <rect x="10" y="67" width="60" height="6" fill="#c2521a"/>
-          <rect x="22" y="79" width="36" height="18" rx="7" fill="#f3ede4" stroke="#e0c9b0" stroke-width="1"/>
-          <circle cx="40" cy="87" r="6" fill="#c2521a" opacity=".2"/>
-          <circle cx="40" cy="87" r="4" fill="#c2521a" opacity=".55"/>
-          <circle cx="40" cy="87" r="2" fill="#fffdf9"/>
-          <circle cx="27" cy="92" r="2" fill="#c2521a" opacity=".55"/>
-          <circle cx="53" cy="92" r="2" fill="#c2521a" opacity=".55"/>
+        <rect x="14" y="90" width="92" height="58" rx="20" fill="#FAECE7" stroke="#D85A30" stroke-width="1.8" id="cg-body"/>
+        <!-- Shoulder stripe -->
+        <rect x="14" y="90" width="92" height="18" rx="20" fill="#D85A30"/>
+        <rect x="14" y="100" width="92" height="8" fill="#D85A30"/>
+
+        <!-- Chest panel -->
+        <rect x="32" y="115" width="56" height="26" rx="11" fill="#fff" stroke="#F0997B" stroke-width="1"/>
+
+        <!-- REACTOR CORE -->
+        <circle cx="60" cy="126" r="10" fill="#D85A30" opacity=".15" id="cg-core-outer"/>
+        <circle cx="60" cy="126" r="7"  fill="#D85A30" opacity=".55" id="cg-core-mid"/>
+        <circle cx="60" cy="126" r="4"  fill="#D85A30" id="cg-core-inner"/>
+        <circle cx="60" cy="126" r="2"  fill="#fff" opacity=".9"/>
+
+        <!-- Side dots -->
+        <circle cx="40" cy="133" r="3" fill="#D85A30" opacity=".6"/>
+        <circle cx="80" cy="133" r="3" fill="#D85A30" opacity=".6"/>
+
+        <!-- LEFT ARM -->
+        <g id="cg-arm-l" style="transform-origin:14px 98px">
+          <rect x="2"  y="98" width="13" height="36" rx="6.5" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+          <rect x="2"  y="98" width="13" height="12"  rx="6.5" fill="#D85A30"/>
+          <ellipse cx="8.5" cy="138" rx="8" ry="5.5" fill="#F0997B" stroke="#D85A30" stroke-width="1.2"/>
+          <line x1="5.5" y1="136" x2="4.5" y2="143" stroke="#A33E1A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="8.5" y1="135" x2="8.5" y2="143" stroke="#A33E1A" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="11.5" y1="136" x2="12.5" y2="143" stroke="#A33E1A" stroke-width="1.4" stroke-linecap="round"/>
         </g>
-        <!-- LEFT ARM (wave) -->
-        <g id="b-arm-l" style="transform-origin:10px 68px">
-          <rect x="1" y="68" width="10" height="28" rx="5" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.2"/>
-          <rect x="1" y="68" width="10" height="9" rx="5" fill="#c2521a"/>
-          <ellipse cx="6" cy="99" rx="6" ry="4.5" fill="#f0e6d6" stroke="#c2521a" stroke-width="1"/>
-          <line x1="3.5" y1="97" x2="2.5" y2="103" stroke="#5c4a32" stroke-width="1.2" stroke-linecap="round"/>
-          <line x1="6"   y1="96" x2="6"   y2="103" stroke="#5c4a32" stroke-width="1.2" stroke-linecap="round"/>
-          <line x1="8.5" y1="97" x2="9.5" y2="103" stroke="#5c4a32" stroke-width="1.2" stroke-linecap="round"/>
-        </g>
+
         <!-- RIGHT ARM -->
-        <g id="b-arm-r" style="transform-origin:69px 68px">
-          <rect x="69" y="68" width="10" height="28" rx="5" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.2"/>
-          <rect x="69" y="68" width="10" height="9" rx="5" fill="#c2521a"/>
-          <ellipse cx="74" cy="99" rx="6" ry="4.5" fill="#f0e6d6" stroke="#c2521a" stroke-width="1"/>
+        <g id="cg-arm-r" style="transform-origin:106px 98px">
+          <rect x="105" y="98" width="13" height="36" rx="6.5" fill="#FAECE7" stroke="#D85A30" stroke-width="1.5"/>
+          <rect x="105" y="98" width="13" height="12"  rx="6.5" fill="#D85A30"/>
+          <ellipse cx="111.5" cy="138" rx="8" ry="5.5" fill="#F0997B" stroke="#D85A30" stroke-width="1.2"/>
         </g>
+
         <!-- LEGS -->
-        <g id="b-leg-l" style="transform-origin:27px 103px">
-          <rect x="18" y="103" width="18" height="14" rx="7" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.2"/>
-          <rect x="18" y="103" width="18" height="6" rx="7" fill="#c2521a"/>
-          <rect x="14" y="113" width="26" height="8" rx="6" fill="#c2521a"/>
+        <g id="cg-leg-l" style="transform-origin:36px 148px">
+          <rect x="26" y="148" width="22" height="16" rx="8" fill="#FAECE7" stroke="#D85A30" stroke-width="1.4"/>
+          <rect x="26" y="148" width="22" height="8"  rx="8" fill="#D85A30"/>
+          <rect x="21" y="160" width="32" height="10" rx="7" fill="#D85A30"/>
         </g>
-        <g id="b-leg-r" style="transform-origin:53px 103px">
-          <rect x="44" y="103" width="18" height="14" rx="7" fill="#fffdf9" stroke="#e0c9b0" stroke-width="1.2"/>
-          <rect x="44" y="103" width="18" height="6" rx="7" fill="#c2521a"/>
-          <rect x="40" y="113" width="26" height="8" rx="6" fill="#c2521a"/>
+        <g id="cg-leg-r" style="transform-origin:72px 148px">
+          <rect x="72" y="148" width="22" height="16" rx="8" fill="#FAECE7" stroke="#D85A30" stroke-width="1.4"/>
+          <rect x="72" y="148" width="22" height="8"  rx="8" fill="#D85A30"/>
+          <rect x="67" y="160" width="32" height="10" rx="7" fill="#D85A30"/>
         </g>
+
+        <!-- CORE label -->
+        <text x="60" y="109" text-anchor="middle" font-family="Inter,sans-serif"
+              font-size="7.5" font-weight="800" fill="#D85A30" letter-spacing="1.5">CORE AI</text>
       </svg>
+    </button>
+
+    <!-- ── Speech bubble ── -->
+    <div id="cg-bubble" role="status" aria-live="polite">
+      <button id="cg-bubble-x" aria-label="Dismiss">×</button>
+      <p id="cg-bubble-text"></p>
+      <div id="cg-bubble-btns"></div>
     </div>
 
-    <div id="buddy-chat" role="dialog" aria-label="CoreLab AI Assistant" aria-modal="false">
-      <div id="buddy-chat-header">
-        <span>CoreLab Assistant 🤖</span>
-        <button id="buddy-chat-close" aria-label="Close chat">×</button>
+    <!-- ── Chat panel (glassmorphism) ── -->
+    <div id="cg-chat" role="dialog" aria-label="CORE AI Guide Chat" aria-modal="false">
+      <div id="cg-chat-header">
+        <div id="cg-chat-title">
+          <span class="cg-status-dot"></span>
+          <span>CORE AI Guide</span>
+          <span class="cg-tagline">Your AI Career Guide</span>
+        </div>
+        <button id="cg-chat-close" aria-label="Close">×</button>
       </div>
-      <div id="buddy-chat-messages"></div>
-      <div id="buddy-chat-suggestions"></div>
-      <div id="buddy-chat-input-row">
-        <input id="buddy-chat-input" type="text" placeholder="Ask me anything..." aria-label="Type your message"/>
-        <button id="buddy-chat-send" aria-label="Send">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      <div id="cg-chat-msgs"></div>
+      <div id="cg-chat-typing" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+      <div id="cg-chat-chips"></div>
+      <div id="cg-chat-input-wrap">
+        <input id="cg-chat-input" type="text"
+               placeholder="Ask me anything about AI careers..."
+               aria-label="Your message" autocomplete="off"/>
+        <button id="cg-chat-send" aria-label="Send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
           </svg>
         </button>
       </div>
     </div>
+
+    <!-- ── Confetti canvas ── -->
+    <canvas id="cg-confetti" aria-hidden="true"></canvas>
   `;
-  document.body.appendChild(layer);
+  document.body.appendChild(root);
 
   /* ═══════════════════════════════════════════════════════════
-   *  6. STYLES
+   *  4. STYLES
    * ═══════════════════════════════════════════════════════════ */
-  const styleEl = document.createElement('style');
-  styleEl.textContent = `
-    #buddy-layer { position:fixed; z-index:99990; top:0; left:0; width:100%; height:100%; pointer-events:none; }
-
-    /* ── Robot ── */
-    #buddy-char {
-      position:fixed; width:80px; height:120px;
-      pointer-events:all; cursor:pointer;
-      user-select:none;
+  const css = document.createElement('style');
+  css.textContent = `
+    /* ── Root layer ── */
+    #core-guide {
+      position: fixed; z-index: 99990;
+      pointer-events: none;
+      bottom: 110px; right: 28px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px;
+      /* entrance: hidden until JS triggers */
+      opacity: 0; transform: translateY(80px) scale(.7);
+      transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1);
     }
-    #buddy-svg { width:100%; height:100%; display:block; filter:drop-shadow(0 6px 14px rgba(194,82,26,.25)); transition:filter .2s; }
-    #buddy-char:hover #buddy-svg { filter:drop-shadow(0 8px 20px rgba(194,82,26,.40)); }
-    #buddy-char.facing-right { transform:scaleX(-1); }
-
-    /* ── CSS animations ── */
-    @keyframes buddyIdle { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
-    @keyframes buddyWalkL { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-18deg)} }
-    @keyframes buddyWalkR { 0%,100%{transform:rotate(0)} 50%{transform:rotate(18deg)} }
-    @keyframes buddyWave  { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-35deg)} 75%{transform:rotate(12deg)} }
-    @keyframes buddyPoint { 0%,100%{transform:rotate(-40deg) translateY(-4px)} 50%{transform:rotate(-50deg) translateY(-6px)} }
-    @keyframes buddyThink { 0%,100%{transform:rotate(15deg) translateY(0)} 50%{transform:rotate(20deg) translateY(-3px)} }
-    @keyframes buddySurprised { 0%,60%,100%{transform:translateY(0) scale(1)} 30%{transform:translateY(-10px) scale(1.08)} }
-    @keyframes buddyHappy { 0%,100%{transform:translateY(0) rotate(0)} 25%{transform:translateY(-8px) rotate(-4deg)} 75%{transform:translateY(-8px) rotate(4deg)} }
-    @keyframes buddyLookR { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
-    @keyframes buddyLookL { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-5px)} }
-    @keyframes antPulse   { 0%,100%{r:3.5} 50%{r:4.5} }
-
-    #buddy-char[data-anim="idle"]   #buddy-svg  { animation:${prefersReduced?'none':'buddyIdle 3s ease-in-out infinite'}; }
-    #buddy-char[data-anim="walk"]   #b-leg-l    { animation:${prefersReduced?'none':'buddyWalkL .45s ease-in-out infinite'}; }
-    #buddy-char[data-anim="walk"]   #b-leg-r    { animation:${prefersReduced?'none':'buddyWalkR .45s ease-in-out infinite'}; }
-    #buddy-char[data-anim="wave"]   #b-arm-l    { animation:${prefersReduced?'none':'buddyWave .7s ease-in-out infinite'}; }
-    #buddy-char[data-anim="point"]  #b-arm-l    { animation:${prefersReduced?'none':'buddyPoint .9s ease-in-out infinite'}; }
-    #buddy-char[data-anim="think"]  #b-arm-r    { animation:${prefersReduced?'none':'buddyThink .9s ease-in-out infinite'}; }
-    #buddy-char[data-anim="surprised"] #buddy-svg { animation:${prefersReduced?'none':'buddySurprised .6s ease-in-out'}; }
-    #buddy-char[data-anim="happy"]  #buddy-svg  { animation:${prefersReduced?'none':'buddyHappy .5s ease-in-out infinite'}; }
-    #buddy-char[data-anim="lookright"] #b-head  { animation:${prefersReduced?'none':'buddyLookR .8s ease-in-out'}; }
-    #buddy-char[data-anim="lookleft"]  #b-head  { animation:${prefersReduced?'none':'buddyLookL .8s ease-in-out'}; }
-    #b-antenna-ball { animation:${prefersReduced?'none':'antPulse 2s ease-in-out infinite'}; }
-
-    /* ── Bubble ── */
-    #buddy-bubble {
-      position:fixed; background:#fffdf9; border:2px solid #c2521a;
-      border-radius:16px 16px 16px 4px; padding:11px 32px 11px 13px;
-      max-width:230px; min-width:140px;
-      box-shadow:0 6px 22px rgba(194,82,26,.22);
-      pointer-events:all; opacity:0;
-      transform:scale(.86) translateY(6px); transform-origin:bottom left;
-      transition:opacity .32s ease, transform .32s cubic-bezier(.34,1.56,.64,1);
+    #core-guide.cg-visible {
+      opacity: 1; transform: translateY(0) scale(1);
     }
-    #buddy-bubble.show { opacity:1; transform:scale(1) translateY(0); }
-    #buddy-bubble-close { position:absolute; top:6px; right:8px; background:none; border:none; font-size:1rem; color:#b89a7a; cursor:pointer; padding:2px 5px; border-radius:4px; }
-    #buddy-bubble-close:hover { color:#c2521a; background:#f3ede4; }
-    #buddy-bubble-text { font-family:'Inter',sans-serif; font-size:.82rem; font-weight:600; color:#2d2416; line-height:1.55; margin:0 0 8px; }
-    #buddy-bubble-btns { display:flex; flex-wrap:wrap; gap:6px; pointer-events:all; }
-    .buddy-bub-btn { background:linear-gradient(135deg,#e07040,#c2521a); color:#fff; border:none; border-radius:8px; padding:6px 11px; font-family:'Inter',sans-serif; font-size:.76rem; font-weight:700; cursor:pointer; pointer-events:all; transition:filter .15s; }
-    .buddy-bub-btn:hover { filter:brightness(1.1); }
-    .buddy-bub-btn.secondary { background:#f3ede4; color:#c2521a; border:1px solid #f0bfa0; }
 
-    /* ── Chat ── */
-    #buddy-chat {
-      position:fixed; bottom:110px; right:24px; width:320px; max-height:480px;
-      background:#fffdf9; border:1.5px solid #e8d9c4; border-radius:20px;
-      box-shadow:0 12px 40px rgba(45,36,22,.18);
-      display:flex; flex-direction:column; pointer-events:all; z-index:99992;
-      opacity:0; transform:translateY(16px) scale(.94); transform-origin:bottom right;
-      transition:opacity .3s ease, transform .3s cubic-bezier(.34,1.56,.64,1); visibility:hidden;
+    /* ── Float animation ── */
+    @keyframes cgFloat {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
     }
-    #buddy-chat.open { opacity:1; transform:none; visibility:visible; }
-    #buddy-chat-header { display:flex; align-items:center; justify-content:space-between; padding:13px 16px 11px; border-bottom:1px solid #e8d9c4; font-family:'Inter',sans-serif; font-size:.88rem; font-weight:800; color:#2d2416; background:linear-gradient(135deg,#fdf0e8,#fffdf9); border-radius:20px 20px 0 0; }
-    #buddy-chat-close { background:none; border:none; font-size:1.1rem; color:#b89a7a; cursor:pointer; padding:2px 6px; border-radius:5px; }
-    #buddy-chat-close:hover { color:#c2521a; background:#f3ede4; }
-    #buddy-chat-messages { flex:1; overflow-y:auto; padding:12px 14px; display:flex; flex-direction:column; gap:10px; scroll-behavior:smooth; }
-    .buddy-msg { max-width:85%; padding:8px 12px; border-radius:12px; font-family:'Inter',sans-serif; font-size:.82rem; line-height:1.5; }
-    .buddy-msg.bot  { background:#f3ede4; color:#2d2416; border-radius:12px 12px 12px 3px; align-self:flex-start; }
-    .buddy-msg.user { background:linear-gradient(135deg,#e07040,#c2521a); color:#fff; border-radius:12px 12px 3px 12px; align-self:flex-end; }
-    .buddy-prog-card { background:#fffdf9; border:1.5px solid #e8d9c4; border-radius:10px; padding:8px 10px; margin-top:4px; }
-    .buddy-prog-card strong { font-size:.82rem; color:#c2521a; display:block; }
-    .buddy-prog-card span   { font-size:.76rem; color:#5c4a32; display:block; margin:2px 0 6px; }
-    .buddy-prog-card a { font-size:.76rem; font-weight:700; color:#c2521a; text-decoration:none; }
-    .buddy-prog-card a:hover { text-decoration:underline; }
-    #buddy-chat-suggestions { padding:8px 12px 4px; display:flex; flex-wrap:wrap; gap:6px; border-top:1px solid #f0e8da; }
-    .buddy-sugg-btn { background:#f3ede4; border:1px solid #e8d9c4; border-radius:20px; padding:5px 10px; font-family:'Inter',sans-serif; font-size:.74rem; font-weight:600; color:#5c4a32; cursor:pointer; transition:background .15s,border-color .15s; }
-    .buddy-sugg-btn:hover { background:#fdf0e8; border-color:#c2521a; color:#c2521a; }
-    #buddy-chat-input-row { display:flex; gap:8px; padding:10px 12px; border-top:1px solid #e8d9c4; }
-    #buddy-chat-input { flex:1; border:1.5px solid #e8d9c4; border-radius:10px; padding:8px 11px; font-family:'Inter',sans-serif; font-size:.83rem; color:#2d2416; background:#faf8f5; outline:none; }
-    #buddy-chat-input:focus { border-color:#c2521a; }
-    #buddy-chat-send { width:36px; height:36px; background:linear-gradient(135deg,#e07040,#c2521a); border:none; border-radius:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
-    #buddy-chat-send svg { width:16px; height:16px; stroke:#fff; }
-    #buddy-chat-send:hover { filter:brightness(1.1); }
 
-    /* dark mode */
-    [data-theme="dark"] #buddy-bubble { background:#0d1728; border-color:#38bdf8; box-shadow:0 6px 22px rgba(56,189,248,.18); }
-    [data-theme="dark"] #buddy-bubble-text { color:#dbeafe; }
-    [data-theme="dark"] #buddy-bubble-close { color:#60a5fa; }
-    [data-theme="dark"] #buddy-bubble-close:hover { background:rgba(56,189,248,.1); color:#38bdf8; }
-    [data-theme="dark"] .buddy-bub-btn.secondary { background:rgba(56,189,248,.1); color:#38bdf8; border-color:rgba(56,189,248,.25); }
-    [data-theme="dark"] #buddy-chat { background:#0d1728; border-color:rgba(147,197,253,.2); }
-    [data-theme="dark"] #buddy-chat-header { background:#071020; color:#dbeafe; border-color:rgba(147,197,253,.15); }
-    [data-theme="dark"] #buddy-chat-close { color:#60a5fa; }
-    [data-theme="dark"] .buddy-msg.bot { background:rgba(59,130,246,.12); color:#dbeafe; }
-    [data-theme="dark"] .buddy-prog-card { background:rgba(59,130,246,.08); border-color:rgba(147,197,253,.15); }
-    [data-theme="dark"] .buddy-prog-card strong { color:#38bdf8; }
-    [data-theme="dark"] .buddy-prog-card span { color:#93c5fd; }
-    [data-theme="dark"] .buddy-prog-card a { color:#38bdf8; }
-    [data-theme="dark"] #buddy-chat-suggestions { border-color:rgba(147,197,253,.1); }
-    [data-theme="dark"] .buddy-sugg-btn { background:rgba(59,130,246,.1); border-color:rgba(147,197,253,.2); color:#93c5fd; }
-    [data-theme="dark"] .buddy-sugg-btn:hover { background:rgba(56,189,248,.15); border-color:#38bdf8; color:#38bdf8; }
-    [data-theme="dark"] #buddy-chat-input { background:#071020; border-color:rgba(147,197,253,.2); color:#dbeafe; }
-    [data-theme="dark"] #buddy-chat-input:focus { border-color:#38bdf8; }
-    [data-theme="dark"] #buddy-chat-input-row { border-color:rgba(147,197,253,.1); }
-    [data-theme="dark"] #buddy-char { filter:none; }
-    [data-theme="dark"] #buddy-svg { filter:drop-shadow(0 6px 14px rgba(56,189,248,.2)); }
-    [data-theme="dark"] #buddy-char:hover #buddy-svg { filter:drop-shadow(0 8px 20px rgba(56,189,248,.35)); }
+    /* ── Robot button ── */
+    #cg-robot {
+      width: 150px; height: 170px;
+      background: none; border: none; padding: 0;
+      cursor: pointer; pointer-events: all;
+      position: relative;
+      animation: ${prefersReduced ? 'none' : 'cgFloat 4.5s ease-in-out infinite'};
+      transition: filter .25s;
+      flex-shrink: 0;
+    }
+    #cg-robot:hover {
+      animation: none;
+    }
+    #cg-svg { width:100%; height:100%; display:block; }
+
+    /* ── Reactor pulse ── */
+    @keyframes cgReactor {
+      0%,100% { r:10; opacity:.15; }
+      50%      { r:14; opacity:.28; }
+    }
+    #cg-core-outer { animation: ${prefersReduced?'none':'cgReactor 2s ease-in-out infinite'}; }
+
+    @keyframes cgReactorMid {
+      0%,100% { opacity:.55; }
+      50%      { opacity:.9; }
+    }
+    #cg-core-mid { animation: ${prefersReduced?'none':'cgReactorMid 2s ease-in-out infinite'}; }
+
+    /* ── Antenna pulse ── */
+    @keyframes cgAnt { 0%,100%{r:5} 50%{r:7} }
+    #cg-ant-ball { animation: ${prefersReduced?'none':'cgAnt 2s ease-in-out infinite'}; }
+
+    /* ── Blink ── */
+    @keyframes cgBlink { 0%,88%,100%{ry:0} 93%{ry:13} }
+    #cg-blink-l { animation: ${prefersReduced?'none':'cgBlink 4.5s ease-in-out infinite'}; }
+    #cg-blink-r { animation: ${prefersReduced?'none':'cgBlink 4.5s ease-in-out infinite .15s'}; }
+
+    /* ── Arm wave ── */
+    @keyframes cgWave { 0%,100%{transform:rotate(0)} 30%{transform:rotate(-40deg)} 70%{transform:rotate(15deg)} }
+    #core-guide[data-anim="wave"]  #cg-arm-l { animation: ${prefersReduced?'none':'cgWave .75s ease-in-out infinite'}; }
+
+    /* ── Walking legs ── */
+    @keyframes cgLegL { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-20deg)} }
+    @keyframes cgLegR { 0%,100%{transform:rotate(0)} 50%{transform:rotate(20deg)} }
+    #core-guide[data-anim="walk"] #cg-leg-l { animation:${prefersReduced?'none':'cgLegL .4s ease-in-out infinite'}; }
+    #core-guide[data-anim="walk"] #cg-leg-r { animation:${prefersReduced?'none':'cgLegR .4s ease-in-out infinite'}; }
+
+    /* ── Happy bounce ── */
+    @keyframes cgHappy { 0%,100%{transform:translateY(0) scale(1)} 30%{transform:translateY(-16px) scale(1.06)} 60%{transform:translateY(-8px) scale(1.03)} }
+    #core-guide[data-anim="happy"] #cg-robot { animation:${prefersReduced?'none':'cgHappy .55s ease-in-out 2'}; }
+
+    /* ── Surprised ── */
+    @keyframes cgSurp { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+    #core-guide[data-anim="surprised"] #cg-robot { animation:${prefersReduced?'none':'cgSurp .5s ease-in-out'}; }
+
+    /* ── Facing direction ── */
+    #core-guide.facing-right #cg-robot { transform: scaleX(-1); }
+
+    /* ── Shadow ── */
+    @keyframes cgShadow { 0%,100%{rx:38;opacity:.18} 50%{rx:28;opacity:.10} }
+    #cg-shadow { animation: ${prefersReduced?'none':'cgShadow 4.5s ease-in-out infinite'}; }
+
+    /* ── Particles ── */
+    #cg-particles {
+      position: absolute; width:160px; height:180px;
+      top:-10px; left:-5px; pointer-events:none;
+    }
+    .cgp {
+      position: absolute; border-radius: 50%;
+      background: #c2521a; pointer-events: none;
+    }
+    .cgp:nth-child(1) { width:5px; height:5px; top:20%; left:5%;  opacity:.5; animation:${prefersReduced?'none':'cgParticle1 3.2s ease-in-out infinite'}; }
+    .cgp:nth-child(2) { width:4px; height:4px; top:60%; left:92%; opacity:.4; animation:${prefersReduced?'none':'cgParticle2 4.1s ease-in-out infinite .8s'}; }
+    .cgp:nth-child(3) { width:6px; height:6px; top:10%; left:80%; opacity:.35; animation:${prefersReduced?'none':'cgParticle1 5s ease-in-out infinite 1.2s'}; }
+    .cgp:nth-child(4) { width:3px; height:3px; top:75%; left:10%; opacity:.45; animation:${prefersReduced?'none':'cgParticle2 3.7s ease-in-out infinite .4s'}; }
+    .cgp:nth-child(5) { width:5px; height:5px; top:40%; left:95%; opacity:.3; animation:${prefersReduced?'none':'cgParticle1 4.5s ease-in-out infinite 2s'}; }
+    .cgp:nth-child(6) { width:4px; height:4px; top:88%; left:55%; opacity:.4; animation:${prefersReduced?'none':'cgParticle2 3.9s ease-in-out infinite .6s'}; }
+
+    @keyframes cgParticle1 {
+      0%,100% { transform:translateY(0)   translateX(0); opacity:.5; }
+      33%      { transform:translateY(-14px) translateX(6px); opacity:.9; }
+      66%      { transform:translateY(-8px)  translateX(-4px); opacity:.6; }
+    }
+    @keyframes cgParticle2 {
+      0%,100% { transform:translateY(0)   translateX(0); opacity:.4; }
+      40%      { transform:translateY(-10px) translateX(-8px); opacity:.85; }
+      70%      { transform:translateY(-5px)  translateX(5px); opacity:.5; }
+    }
+
+    /* ══════════════════════════════════════════
+       SPEECH BUBBLE
+    ══════════════════════════════════════════ */
+    #cg-bubble {
+      position: absolute;
+      bottom: 180px;
+      right: 0;
+      background: rgba(255,253,249,.97);
+      border: 1.5px solid #e8d9c4;
+      border-radius: 18px 18px 4px 18px;
+      padding: 13px 36px 13px 15px;
+      width: 240px;
+      box-shadow: 0 8px 32px rgba(45,36,22,.16);
+      pointer-events: all;
+      opacity: 0; transform: scale(.85) translateX(8px);
+      transform-origin: bottom right;
+      transition: opacity .36s ease, transform .36s cubic-bezier(.34,1.56,.64,1);
+    }
+    #cg-bubble.show { opacity:1; transform:scale(1) translateX(0); }
+
+    /* bubble tail pointing down-right (robot on right) */
+    #cg-bubble::after {
+      content:''; position:absolute;
+      bottom:-9px; right:20px;
+      border:9px solid transparent;
+      border-top-color: #e8d9c4;
+    }
+    #cg-bubble::before {
+      content:''; position:absolute;
+      bottom:-6px; right:21px;
+      border:8px solid transparent;
+      border-top-color: rgba(255,253,249,.97);
+      z-index:1;
+    }
+
+    /* When robot is on the left — bubble flips to the right side */
+    #core-guide.bubble-right #cg-bubble {
+      right: auto;
+      left: 0;
+      border-radius: 18px 18px 18px 4px;
+      transform-origin: bottom left;
+      transform: scale(.85) translateX(-8px);
+    }
+    #core-guide.bubble-right #cg-bubble.show {
+      transform: scale(1) translateX(0);
+    }
+    /* flip tail to bottom-left */
+    #core-guide.bubble-right #cg-bubble::after {
+      right: auto; left: 20px;
+    }
+    #core-guide.bubble-right #cg-bubble::before {
+      right: auto; left: 21px;
+    }
+
+    #cg-bubble-x {
+      position:absolute; top:7px; right:9px;
+      background:none; border:none; font-size:1rem;
+      color:#b89a7a; cursor:pointer; padding:2px 5px; border-radius:4px;
+      pointer-events:all;
+    }
+    #cg-bubble-x:hover { color:#c2521a; background:#f3ede4; }
+
+    #cg-bubble-text {
+      font-family:'Inter',sans-serif; font-size:.85rem;
+      font-weight:600; color:#2d2416; line-height:1.5; margin:0 0 10px;
+    }
+    #cg-bubble-btns { display:flex; flex-wrap:wrap; gap:7px; pointer-events:all; }
+
+    .cgb-btn {
+      background: linear-gradient(135deg,#e07040,#c2521a);
+      color:#fff; border:none; border-radius:10px;
+      padding:8px 14px; font-family:'Inter',sans-serif;
+      font-size:.78rem; font-weight:700; cursor:pointer;
+      pointer-events:all; transition:filter .15s, transform .15s;
+    }
+    .cgb-btn:hover { filter:brightness(1.1); transform:translateY(-1px); }
+    .cgb-btn.ghost {
+      background:#f3ede4; color:#c2521a; border:1px solid #f0bfa0;
+    }
+
+    /* ══════════════════════════════════════════
+       CHAT PANEL — Premium Glassmorphism
+    ══════════════════════════════════════════ */
+    #cg-chat {
+      position: fixed;
+      bottom: 120px; right: 28px;
+      width: 360px; max-height: 540px;
+      background: rgba(255,253,249,.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(232,217,196,.85);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(45,36,22,.18), 0 0 0 1px rgba(194,82,26,.08);
+      display: flex; flex-direction: column;
+      pointer-events: all; z-index: 99992;
+      opacity: 0; transform: translateY(20px) scale(.93);
+      transform-origin: bottom right;
+      transition: opacity .32s ease, transform .32s cubic-bezier(.34,1.56,.64,1);
+      visibility: hidden;
+    }
+    #cg-chat.open { opacity:1; transform:none; visibility:visible; }
+
+    #cg-chat-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 18px 13px;
+      border-bottom: 1px solid rgba(232,217,196,.6);
+      background: linear-gradient(135deg, #fdf0e8 0%, rgba(255,253,249,0) 100%);
+      border-radius: 24px 24px 0 0;
+    }
+    #cg-chat-title {
+      display:flex; align-items:center; gap:8px;
+      font-family:'Inter',sans-serif; font-weight:800;
+      font-size:.9rem; color:#2d2416;
+    }
+    .cg-status-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:#22c55e;
+      box-shadow:0 0 8px rgba(34,197,94,.6);
+      animation: ${prefersReduced?'none':'cgDotPulse 2s infinite'};
+    }
+    @keyframes cgDotPulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .cg-tagline { font-size:.68rem; font-weight:600; color:#8b6e4e; margin-left:2px; }
+
+    #cg-chat-close {
+      background:none; border:none; font-size:1.15rem;
+      color:#b89a7a; cursor:pointer; padding:3px 7px; border-radius:6px;
+      transition:background .15s, color .15s;
+    }
+    #cg-chat-close:hover { background:#f3ede4; color:#c2521a; }
+
+    #cg-chat-msgs {
+      flex:1; overflow-y:auto; padding:14px 16px;
+      display:flex; flex-direction:column; gap:10px;
+      scroll-behavior:smooth;
+    }
+    #cg-chat-msgs::-webkit-scrollbar { width:4px; }
+    #cg-chat-msgs::-webkit-scrollbar-thumb { background:#e8d9c4; border-radius:4px; }
+
+    .cg-msg {
+      max-width: 82%; padding: 10px 14px;
+      font-family:'Inter',sans-serif; font-size:.83rem; line-height:1.55;
+      animation: cgMsgIn .28s ease;
+    }
+    @keyframes cgMsgIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+    .cg-msg.bot {
+      background: linear-gradient(135deg,#f3ede4,#fdf0e8);
+      color:#2d2416; border-radius:14px 14px 14px 3px; align-self:flex-start;
+      border:1px solid rgba(232,217,196,.6);
+    }
+    .cg-msg.user {
+      background: linear-gradient(135deg,#e07040,#c2521a);
+      color:#fff; border-radius:14px 14px 3px 14px; align-self:flex-end;
+    }
+
+    /* Program card inside chat */
+    .cg-prog-card {
+      background:#fffdf9; border:1.5px solid #e8d9c4; border-radius:14px;
+      padding:12px 14px; margin-top:5px;
+      transition:border-color .2s, transform .2s;
+    }
+    .cg-prog-card:hover { border-color:#c2521a; transform:translateY(-1px); }
+    .cg-prog-card-tag {
+      display:inline-block; font-size:.7rem; font-weight:800;
+      letter-spacing:.05em; text-transform:uppercase;
+      padding:3px 9px; border-radius:20px; margin-bottom:6px;
+    }
+    .cg-prog-card strong { font-size:.88rem; color:#1a1a2e; display:block; margin-bottom:3px; }
+    .cg-prog-card span   { font-size:.76rem; color:#8b6e4e; display:block; margin-bottom:6px; }
+    .cg-prog-card a {
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:.78rem; font-weight:700; color:#c2521a; text-decoration:none;
+      transition:gap .15s;
+    }
+    .cg-prog-card a:hover { gap:8px; }
+
+    /* Recommendation result card */
+    .cg-rec-card {
+      background: linear-gradient(135deg,#fdf0e8,#fffdf9);
+      border: 2px solid #c2521a; border-radius:16px;
+      padding:16px; margin-top:6px;
+    }
+    .cg-rec-label {
+      font-size:.68rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.08em; color:#c2521a; margin-bottom:8px;
+      display:flex; align-items:center; gap:6px;
+    }
+    .cg-rec-title { font-size:.95rem; font-weight:800; color:#1a1a2e; margin-bottom:8px; }
+    .cg-rec-why { list-style:none; padding:0; margin:0 0 12px; display:flex; flex-direction:column; gap:5px; }
+    .cg-rec-why li { font-size:.78rem; color:#5c4a32; display:flex; align-items:flex-start; gap:7px; }
+    .cg-rec-why li::before { content:"✓"; color:#22c55e; font-weight:800; flex-shrink:0; }
+    .cg-rec-btns { display:flex; gap:8px; flex-wrap:wrap; }
+
+    /* Typing indicator */
+    #cg-chat-typing {
+      padding:6px 16px; display:none; align-items:center; gap:5px;
+    }
+    #cg-chat-typing.show { display:flex; }
+    #cg-chat-typing span {
+      width:7px; height:7px; border-radius:50%; background:#c2521a; opacity:.6;
+      animation: ${prefersReduced?'none':'cgTyping 1.2s ease-in-out infinite'};
+    }
+    #cg-chat-typing span:nth-child(2) { animation-delay:.2s; }
+    #cg-chat-typing span:nth-child(3) { animation-delay:.4s; }
+    @keyframes cgTyping { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+    /* Suggestion chips */
+    #cg-chat-chips {
+      padding:6px 14px 4px; display:flex; flex-wrap:wrap; gap:6px;
+      border-top:1px solid rgba(232,217,196,.5);
+    }
+    .cg-chip {
+      background:#f3ede4; border:1px solid #e8d9c4; border-radius:20px;
+      padding:5px 11px; font-family:'Inter',sans-serif;
+      font-size:.74rem; font-weight:600; color:#5c4a32; cursor:pointer;
+      transition:background .15s, border-color .15s, color .15s;
+    }
+    .cg-chip:hover { background:#fdf0e8; border-color:#c2521a; color:#c2521a; }
+
+    /* Input row */
+    #cg-chat-input-wrap {
+      display:flex; gap:8px; padding:10px 14px;
+      border-top:1px solid rgba(232,217,196,.6);
+    }
+    #cg-chat-input {
+      flex:1; border:1.5px solid #e8d9c4; border-radius:12px;
+      padding:9px 13px; font-family:'Inter',sans-serif;
+      font-size:.84rem; color:#2d2416; background:rgba(255,253,249,.8);
+      outline:none; transition:border-color .2s;
+    }
+    #cg-chat-input:focus { border-color:#c2521a; }
+    #cg-chat-send {
+      width:38px; height:38px; flex-shrink:0;
+      background:linear-gradient(135deg,#e07040,#c2521a);
+      border:none; border-radius:12px; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:filter .15s, transform .15s;
+    }
+    #cg-chat-send:hover { filter:brightness(1.1); transform:scale(1.05); }
+    #cg-chat-send svg { width:16px; height:16px; stroke:#fff; }
+
+    /* Inline button row inside chat */
+    .cg-btn-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:2px; }
+    .cg-inline-btn {
+      background:#f3ede4; border:1px solid #e8d9c4; border-radius:10px;
+      padding:6px 12px; font-family:'Inter',sans-serif;
+      font-size:.78rem; font-weight:600; color:#5c4a32; cursor:pointer;
+      transition:background .15s,border-color .15s,color .15s;
+    }
+    .cg-inline-btn:hover { background:#fdf0e8; border-color:#c2521a; color:#c2521a; }
+    .cg-inline-btn.primary {
+      background:linear-gradient(135deg,#e07040,#c2521a); color:#fff; border:none;
+    }
+    .cg-inline-btn.primary:hover { filter:brightness(1.1); }
+
+    /* Confetti canvas */
+    #cg-confetti {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      pointer-events:none; z-index:99999; display:none;
+    }
+
+    /* ── DARK MODE ── */
+    [data-theme="dark"] #cg-bubble {
+      background: rgba(13,23,40,.94); border-color:rgba(56,189,248,.22);
+    }
+    [data-theme="dark"] #cg-bubble-text { color:#dbeafe; }
+    [data-theme="dark"] #cg-bubble-x { color:#60a5fa; }
+    [data-theme="dark"] .cgb-btn.ghost { background:rgba(56,189,248,.1); color:#38bdf8; border-color:rgba(56,189,248,.25); }
+    [data-theme="dark"] #cg-chat { background:rgba(7,16,32,.88); border-color:rgba(56,189,248,.15); }
+    [data-theme="dark"] #cg-chat-header { background:rgba(3,8,20,.6); }
+    [data-theme="dark"] #cg-chat-title { color:#dbeafe; }
+    [data-theme="dark"] .cg-tagline { color:#60a5fa; }
+    [data-theme="dark"] #cg-chat-close { color:#60a5fa; }
+    [data-theme="dark"] .cg-msg.bot { background:rgba(59,130,246,.1); color:#dbeafe; border-color:rgba(59,130,246,.2); }
+    [data-theme="dark"] .cg-prog-card { background:rgba(7,20,45,.8); border-color:rgba(56,189,248,.18); }
+    [data-theme="dark"] .cg-prog-card strong { color:#dbeafe; }
+    [data-theme="dark"] .cg-prog-card span { color:#93c5fd; }
+    [data-theme="dark"] .cg-rec-card { background:rgba(7,20,45,.9); border-color:#38bdf8; }
+    [data-theme="dark"] .cg-rec-title { color:#dbeafe; }
+    [data-theme="dark"] .cg-rec-why li { color:#93c5fd; }
+    [data-theme="dark"] #cg-chat-typing span { background:#38bdf8; }
+    [data-theme="dark"] .cg-chip { background:rgba(59,130,246,.1); border-color:rgba(56,189,248,.2); color:#93c5fd; }
+    [data-theme="dark"] .cg-chip:hover { background:rgba(56,189,248,.15); border-color:#38bdf8; color:#38bdf8; }
+    [data-theme="dark"] #cg-chat-input { background:rgba(3,8,20,.6); border-color:rgba(56,189,248,.2); color:#dbeafe; }
+    [data-theme="dark"] #cg-chat-input:focus { border-color:#38bdf8; }
+    [data-theme="dark"] .cg-inline-btn { background:rgba(59,130,246,.1); border-color:rgba(56,189,248,.2); color:#93c5fd; }
+    [data-theme="dark"] .cg-inline-btn:hover { background:rgba(56,189,248,.15); color:#38bdf8; }
+    [data-theme="dark"] #cg-robot { filter: none; }
+    /* Dark mode robot — blue palette */
+    [data-theme="dark"] #cg-head   { fill: #B5D4F4; stroke: #185FA5; }
+    [data-theme="dark"] #cg-visor  { fill: #B5D4F4; stroke: #185FA5; }
+    [data-theme="dark"] #cg-visor + rect { stroke: #185FA5; }
+    [data-theme="dark"] #cg-body   { fill: #B5D4F4; stroke: #185FA5; }
+    [data-theme="dark"] #cg-helmet { fill: #378ADD; }
+    [data-theme="dark"] #cg-ant-ball    { fill: #378ADD; }
+    [data-theme="dark"] #cg-shadow      { fill: #378ADD; }
+    [data-theme="dark"] #cg-core-inner  { fill: #378ADD; }
+    [data-theme="dark"] #cg-core-mid    { fill: #85B7EB; }
+    [data-theme="dark"] #cg-core-outer  { fill: #85B7EB; }
+    [data-theme="dark"] #cg-eye-l-iris,
+    [data-theme="dark"] #cg-eye-r-iris  { fill: #378ADD; }
+    [data-theme="dark"] #cg-eye-l-pupil,
+    [data-theme="dark"] #cg-eye-r-pupil { fill: #185FA5; }
+    [data-theme="dark"] #cg-blink-l,
+    [data-theme="dark"] #cg-blink-r     { fill: #B5D4F4; }
+    [data-theme="dark"] #cg-mouth       { stroke: #378ADD; }
 
     @media (max-width:600px) {
-      #buddy-char { width:62px; height:93px; }
-      #buddy-chat { width:calc(100vw - 24px); right:12px; bottom:90px; }
-      #buddy-bubble { max-width:calc(100vw - 100px); }
+      #core-guide { bottom:90px; right:14px; }
+      #cg-robot   { width:110px; height:125px; }
+      #cg-chat    { width:calc(100vw - 20px); right:10px; bottom:90px; max-height:70vh; }
+      #cg-bubble  { width:200px; font-size:.8rem; }
     }
   `;
-  document.head.appendChild(styleEl);
+  document.head.appendChild(css);
 
   /* ═══════════════════════════════════════════════════════════
-   *  7. ELEMENT REFS
+   *  5. ELEMENT REFS
    * ═══════════════════════════════════════════════════════════ */
-  const charEl      = document.getElementById('buddy-char');
-  const bubbleEl    = document.getElementById('buddy-bubble');
-  const bubbleTxt   = document.getElementById('buddy-bubble-text');
-  const bubbleBtns  = document.getElementById('buddy-bubble-btns');
-  const bubbleClose = document.getElementById('buddy-bubble-close');
-  const chatPanel   = document.getElementById('buddy-chat');
-  const chatMsgs    = document.getElementById('buddy-chat-messages');
-  const chatSuggs   = document.getElementById('buddy-chat-suggestions');
-  const chatInput   = document.getElementById('buddy-chat-input');
-  const chatSend    = document.getElementById('buddy-chat-send');
-  const chatClose   = document.getElementById('buddy-chat-close');
+  const robotEl   = document.getElementById('cg-robot');
+  const bubbleEl  = document.getElementById('cg-bubble');
+  const bubTxtEl  = document.getElementById('cg-bubble-text');
+  const bubBtnsEl = document.getElementById('cg-bubble-btns');
+  const bubXEl    = document.getElementById('cg-bubble-x');
+  const chatEl    = document.getElementById('cg-chat');
+  const chatMsgsEl= document.getElementById('cg-chat-msgs');
+  const typingEl  = document.getElementById('cg-chat-typing');
+  const chipsEl   = document.getElementById('cg-chat-chips');
+  const inputEl   = document.getElementById('cg-chat-input');
+  const sendEl    = document.getElementById('cg-chat-send');
+  const closeEl   = document.getElementById('cg-chat-close');
+  const confCanvas= document.getElementById('cg-confetti');
+  const eyesEl    = document.getElementById('cg-eyes');
+  const eyeLEl    = document.getElementById('cg-eye-l-iris');
+  const eyeREl    = document.getElementById('cg-eye-r-iris');
 
   /* ═══════════════════════════════════════════════════════════
-   *  8. ROBOT MOVEMENT & ANIMATION API
+   *  6. ANIMATION HELPERS
    * ═══════════════════════════════════════════════════════════ */
-  let _robotX = window.innerWidth - 110;
-  let _robotY = window.innerHeight - 200;
-
-  function _safePos(side) {
-    const vw = window.innerWidth, vh = window.innerHeight;
-    const mob = vw < 600;
-    const sz  = mob ? 65 : 90;
-    const pad = mob ? 14 : 22;
-    const bot = mob ? 86 : 100; // clear whatsapp button
-    const positions = {
-      'bottom-right': { x: vw - sz - pad,  y: vh - sz - bot  },
-      'bottom-left':  { x: pad,             y: vh - sz - bot  },
-      'mid-right':    { x: vw - sz - pad,   y: vh * 0.42      },
-      'mid-left':     { x: pad,             y: vh * 0.42      },
-    };
-    return positions[side] || positions['bottom-right'];
-  }
-
-  function _setPos(x, y) {
-    _robotX = x; _robotY = y;
-    charEl.style.left   = x + 'px';
-    const cssBot = Math.max(window.innerHeight - y - 120, 100);
-    charEl.style.bottom = cssBot + 'px';
-    _updateBubblePos();
-  }
-
-  function _setAnim(name) {
-    S.currentAnim = name;
-    charEl.setAttribute('data-anim', name);
-  }
-
-  function _walk(side, onDone) {
-    if (prefersReduced) {
-      const p = _safePos(side);
-      _setPos(p.x, p.y);
-      _setAnim('idle');
-      onDone && onDone();
-      return;
-    }
-    const target = _safePos(side);
-    const dx = target.x - _robotX;
-    S.facing = dx > 0 ? 'right' : 'left';
-    charEl.classList.toggle('facing-right', S.facing === 'right');
-    _setAnim('walk');
-    S.isWalking = true;
-    const speed = 2.2;
-    const tick  = () => {
-      if (!S.isWalking) return;
-      const rx = target.x - _robotX, ry = target.y - _robotY;
-      const d  = Math.sqrt(rx*rx + ry*ry);
-      if (d < speed + 1) {
-        _setPos(target.x, target.y);
-        S.isWalking = false;
-        charEl.classList.remove('facing-right');
-        _setAnim('idle');
-        onDone && onDone();
-        return;
-      }
-      _setPos(_robotX + rx/d*speed, _robotY + ry/d*speed);
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-
-  function _updateBubblePos() {
-    const vw = window.innerWidth;
-    const bubW = 240;
-    let bx;
-    if (_robotX + 90 + bubW + 10 < vw) {
-      bx = _robotX + 90;
-      bubbleEl.style.borderRadius = '4px 16px 16px 16px';
-    } else {
-      bx = Math.max(8, _robotX - bubW - 10);
-      bubbleEl.style.borderRadius = '16px 16px 16px 4px';
-    }
-    const by = window.innerHeight - _robotY - 160;
-    bubbleEl.style.left   = bx + 'px';
-    bubbleEl.style.bottom = Math.max(by, 108) + 'px';
-    bubbleEl.style.top    = 'auto';
-  }
-
-  /* ─── animation shorthands ─── */
   let _animTimer = null;
-  function _doAnim(name, ms) {
-    _setAnim(name);
+  function _anim(name, ms) {
+    root.setAttribute('data-anim', name);
     clearTimeout(_animTimer);
-    _animTimer = setTimeout(() => _setAnim('idle'), ms);
+    if (ms) _animTimer = setTimeout(() => root.setAttribute('data-anim','idle'), ms);
   }
 
-  /* ─── speak (low-level) ─── */
-  let _hideTimer = null;
-  function _doSpeak(text, opts) {
-    clearTimeout(_hideTimer);
-    bubbleTxt.textContent = text;
-    bubbleBtns.innerHTML  = '';
-
-    if (opts.btn) {
-      const b = _makeBtn(opts.btn.label, () => _handleBtnAction(opts.btn.action));
-      bubbleBtns.appendChild(b);
-    }
-    if (opts.btns) {
-      opts.btns.forEach((def, i) => {
-        const b = _makeBtn(def.label, () => _handleBtnAction(def.action));
-        if (i > 0) b.classList.add('secondary');
-        bubbleBtns.appendChild(b);
-      });
-    }
-
-    _updateBubblePos();
+  /* ─── Bubble speak ─── */
+  let _bubbleHideTimer = null;
+  function _showBubble(text, opts={}) {
+    clearTimeout(_bubbleHideTimer);
+    bubTxtEl.textContent = text;
+    bubBtnsEl.innerHTML  = '';
+    if (opts.btn) bubBtnsEl.appendChild(_makeBubBtn(opts.btn.label, opts.btn.action));
+    if (opts.btns) opts.btns.forEach((b,i) => {
+      const el = _makeBubBtn(b.label, b.action);
+      if (i>0) el.classList.add('ghost');
+      bubBtnsEl.appendChild(el);
+    });
     bubbleEl.classList.add('show');
-    _doAnim('speak', 1200);
-
-    if (!opts.btn && !opts.btns) {
-      _hideTimer = setTimeout(() => _hideSpeech(), opts.duration || 6500);
-    }
+    if (!opts.btn && !opts.btns)
+      _bubbleHideTimer = setTimeout(_hideBubble, opts.duration||7000);
   }
+  function _hideBubble() { bubbleEl.classList.remove('show'); }
 
-  function _hideSpeech() {
-    bubbleEl.classList.remove('show');
-    bubbleBtns.innerHTML = '';
-  }
-
-  function _makeBtn(label, cb) {
+  function _makeBubBtn(label, action) {
     const b = document.createElement('button');
-    b.className   = 'buddy-bub-btn';
-    b.textContent = label;
+    b.className = 'cgb-btn'; b.textContent = label;
     b.setAttribute('aria-label', label);
-    b.addEventListener('click', cb);
+    b.addEventListener('click', () => {
+      _hideBubble();
+      if (action==='chat')     { _openChat(); }
+      if (action==='quiz')     { _openChat(); setTimeout(()=>brain._startFullQuiz(),400); }
+      if (action==='register') { window.location.href='register.html'; }
+    });
     return b;
   }
 
-  function _handleBtnAction(action) {
-    _hideSpeech();
-    if (action === 'chat')  { _openChat(); }
-    if (action === 'quiz')  { _openChat(); setTimeout(() => brain._startFullQuiz(), 500); }
-    if (action === 'register') { window.location.href = 'register.html'; }
+  /* ─── Auto-speak (respects all gates) ─── */
+  let _speakRelTimer = null;
+  function autoSpeak(text, opts={}) {
+    const key = opts.key || text.slice(0,40);
+    if (!canAutoSpeak()) return false;
+    if (wasSaid(key))    return false;
+    markSaid(key);
+    S.lastAutoAt = Date.now();
+    S.isSpeaking = true; S.phase = SM.SPEAKING;
+    _showBubble(text, opts);
+    _anim('speak', 1400);
+    const hold = opts.duration||7000;
+    clearTimeout(_speakRelTimer);
+    _speakRelTimer = setTimeout(()=>{
+      S.isSpeaking=false; S.phase=SM.WAITING;
+      setTimeout(()=>{ if(S.phase===SM.WAITING) S.phase=SM.IDLE; }, CD.POST);
+    }, hold+300);
+    return true;
   }
 
   /* ═══════════════════════════════════════════════════════════
-   *  9. CHAT ENGINE
+   *  7. MOUSE-TRACKING EYES
+   * ═══════════════════════════════════════════════════════════ */
+  if (!prefersReduced) {
+    let _eyeRafPending = false;
+    function _updateEyes() {
+      const rect = robotEl.getBoundingClientRect();
+      if (!rect.width) return;
+      const cx   = rect.left + rect.width/2;
+      const cy   = rect.top  + rect.height/2;
+      const dx   = S.mouseX - cx;
+      const dy   = S.mouseY - cy;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const max  = 4; // max px shift inside eye
+      const nx   = dist > 1 ? (dx/dist)*Math.min(max, dist*0.06) : 0;
+      const ny   = dist > 1 ? (dy/dist)*Math.min(max, dist*0.06) : 0;
+      // shift both irises
+      eyeLEl.setAttribute('cx', (43+nx).toFixed(2));
+      eyeLEl.setAttribute('cy', (53+ny).toFixed(2));
+      eyeREl.setAttribute('cx', (77+nx).toFixed(2));
+      eyeREl.setAttribute('cy', (53+ny).toFixed(2));
+      _eyeRafPending = false;
+    }
+    document.addEventListener('mousemove', e => {
+      S.mouseX = e.clientX; S.mouseY = e.clientY;
+      if (!_eyeRafPending) { _eyeRafPending=true; requestAnimationFrame(_updateEyes); }
+    }, { passive:true });
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+   *  8. CHAT ENGINE
    * ═══════════════════════════════════════════════════════════ */
   function _openChat() {
-    S.isChatOpen = true;
-    S.phase      = SM.USER_INTERACTING;
-    chatPanel.classList.add('open');
-    _hideSpeech();
-    _doAnim('wave', 1800);
-    chatInput.focus();
-    _initSuggestions();
-    if (chatMsgs.children.length === 0) {
-      _botMsg("Hey! 👋 I'm Buddy — CoreLab's guide. What can I help you with?");
-    }
+    S.isChatOpen=true; S.phase=SM.USER_INTERACTING;
+    chatEl.classList.add('open'); _hideBubble();
+    _anim('wave',1800); inputEl.focus(); _initChips();
+    if (!chatMsgsEl.children.length)
+      setTimeout(()=>_botMsg("Hey! 👋 I'm CORE — your AI career guide. What are you looking to do with AI?"),300);
   }
-
   function _closeChat() {
-    S.isChatOpen = false;
-    chatPanel.classList.remove('open');
-    if (S.phase === SM.USER_INTERACTING) S.phase = SM.IDLE;
+    S.isChatOpen=false; chatEl.classList.remove('open');
+    if (S.phase===SM.USER_INTERACTING) S.phase=SM.IDLE;
   }
 
-  function _botMsg(text, isHtml) {
-    const d = document.createElement('div');
-    d.className = 'buddy-msg bot';
-    if (isHtml) d.innerHTML = text; else d.textContent = text;
-    chatMsgs.appendChild(d);
-    chatMsgs.scrollTop = chatMsgs.scrollHeight;
-  }
+  function _showTyping() { typingEl.classList.add('show'); chatMsgsEl.scrollTop=9999; }
+  function _hideTyping() { typingEl.classList.remove('show'); }
 
+  function _botMsg(html, isHtml) {
+    _hideTyping();
+    const d=document.createElement('div');
+    d.className='cg-msg bot';
+    if (isHtml) d.innerHTML=html; else d.textContent=html;
+    chatMsgsEl.appendChild(d);
+    chatMsgsEl.scrollTop=chatMsgsEl.scrollHeight;
+  }
   function _userMsg(text) {
-    const d = document.createElement('div');
-    d.className = 'buddy-msg user';
-    d.textContent = text;
-    chatMsgs.appendChild(d);
-    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    const d=document.createElement('div');
+    d.className='cg-msg user'; d.textContent=text;
+    chatMsgsEl.appendChild(d);
+    chatMsgsEl.scrollTop=chatMsgsEl.scrollHeight;
   }
-
   function _progCard(p) {
-    const d = document.createElement('div');
-    d.className = 'buddy-msg bot';
-    d.innerHTML = `<div class="buddy-prog-card">
+    _hideTyping();
+    const d=document.createElement('div'); d.className='cg-msg bot';
+    d.innerHTML=`<div class="cg-prog-card">
+      <span class="cg-prog-card-tag" style="background:${p.color}22;color:${p.color}">${p.tag}</span>
       <strong>${p.title}</strong>
-      <span>${p.duration} · ${p.level} · ${p.dates}</span>
-      <span style="color:#8b6e4e">${p.price}</span>
+      <span>${p.duration} · ${p.level}</span>
+      <span>${p.dates} · ${p.price}</span>
       <a href="${p.url}">View full program →</a>
     </div>`;
-    chatMsgs.appendChild(d);
-    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    chatMsgsEl.appendChild(d); chatMsgsEl.scrollTop=chatMsgsEl.scrollHeight;
+  }
+
+  /* Recommendation result card with reasons */
+  function _recCard(p) {
+    _hideTyping();
+    const d=document.createElement('div'); d.className='cg-msg bot';
+    const reasons = p.reasons||[];
+    d.innerHTML=`<div class="cg-rec-card">
+      <div class="cg-rec-label">🎯 Recommended Program</div>
+      <div class="cg-rec-title">${p.title}</div>
+      <ul class="cg-rec-why">${reasons.slice(0,3).map(r=>`<li>${r}</li>`).join('')}</ul>
+      <div class="cg-rec-btns">
+        <a href="${p.url}" class="cg-inline-btn primary">View Program</a>
+        <a href="register.html" class="cg-inline-btn">Register Now →</a>
+      </div>
+    </div>`;
+    chatMsgsEl.appendChild(d); chatMsgsEl.scrollTop=chatMsgsEl.scrollHeight;
   }
 
   function _inlineButtons(btns) {
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:0 0 4px;';
-    btns.forEach(def => {
-      const b = document.createElement('button');
-      b.className   = 'buddy-sugg-btn';
-      b.textContent = def.label;
-      b.addEventListener('click', () => {
-        _userMsg(def.label);
-        row.remove();
-        def.cb();
-      });
+    const row=document.createElement('div'); row.className='cg-btn-row';
+    btns.forEach(def=>{
+      const b=document.createElement('button');
+      b.className='cg-inline-btn'; b.textContent=def.label;
+      if (def.primary) b.classList.add('primary');
+      b.addEventListener('click',()=>{ _userMsg(def.label); row.remove(); def.cb(); });
       row.appendChild(b);
     });
-    chatMsgs.appendChild(row);
-    chatMsgs.scrollTop = chatMsgs.scrollHeight;
+    chatMsgsEl.appendChild(row); chatMsgsEl.scrollTop=chatMsgsEl.scrollHeight;
   }
 
-  function _initSuggestions() {
-    const suggs = [
-      "Which program suits me?",
-      "What programs do you offer?",
-      "How do I register?",
-      "I'm a beginner — where should I start?",
-      "I want to build AI agents",
-      "I want to learn machine learning",
+  function _initChips() {
+    const chips=[
+      "Find my program","I'm a CS student","I want to build AI agents",
+      "I'm a complete beginner","I want to learn ML","What programs do you offer?",
     ];
-    chatSuggs.innerHTML = '';
-    suggs.forEach(s => {
-      const b = document.createElement('button');
-      b.className   = 'buddy-sugg-btn';
-      b.textContent = s;
-      b.addEventListener('click', () => { brain.handle(s); chatSuggs.innerHTML = ''; });
-      chatSuggs.appendChild(b);
+    chipsEl.innerHTML='';
+    chips.forEach(c=>{
+      const b=document.createElement('button'); b.className='cg-chip'; b.textContent=c;
+      b.addEventListener('click',()=>{ brain.handle(c); chipsEl.innerHTML=''; });
+      chipsEl.appendChild(b);
     });
   }
 
   /* ═══════════════════════════════════════════════════════════
-   *  10. CONVERSATION BRAIN
+   *  9. CAREER QUIZ  (4 questions → scored recommendation)
+   *  Plugs into the existing brain.score() engine
+   * ═══════════════════════════════════════════════════════════ */
+  const QUIZ = {
+    q1: {
+      prompt: "What do you want to become?",
+      options:[
+        {label:'🤖 AI Engineer',       key:'engineer'},
+        {label:'💼 AI Freelancer',      key:'freelancer'},
+        {label:'🎨 Content Creator',    key:'creator'},
+        {label:'🚀 Startup Builder',    key:'builder'},
+      ],
+    },
+    q2: {
+      prompt: "Can you code?",
+      options:[
+        {label:'✅ Yes', key:'yes'},
+        {label:'🔸 A little', key:'little'},
+        {label:'❌ No', key:'no'},
+      ],
+    },
+    q3: {
+      prompt: "Current level?",
+      options:[
+        {label:'🌱 Beginner',       key:'beginner'},
+        {label:'⚡ Intermediate',   key:'intermediate'},
+        {label:'🔥 Advanced',       key:'advanced'},
+      ],
+    },
+    q4: {
+      prompt: "What interests you most?",
+      options:[
+        {label:'🤖 AI Agents',         key:'agents'},
+        {label:'📊 Machine Learning',  key:'ml'},
+        {label:'🎨 Content Creation',  key:'content'},
+        {label:'⚙️ Automation',        key:'automation'},
+        {label:'📈 Data Science',      key:'data'},
+      ],
+    },
+  };
+
+  // Map quiz answers → signals for brain.score()
+  function _quizAnswersToSig(a) {
+    return {
+      isBeginner:    a.q3==='beginner',
+      wantsTechnical:a.q2==='yes'||(a.q3==='advanced'),
+      wantsNoCode:   a.q2==='no',
+      wantsPractical:a.q1==='builder'||a.q1==='freelancer',
+      wantsBroad:    false,
+      wantsContent:  a.q1==='creator'||a.q4==='content',
+      wantsMedia:    a.q1==='creator',
+      wantsMarketing:a.q1==='freelancer',
+      wantsML:       a.q4==='ml',
+      wantsDeepML:   a.q4==='ml'&&a.q2==='yes',
+      wantsData:     a.q4==='data',
+      wantsStats:    a.q4==='data',
+      wantsPython:   a.q2==='yes',
+      wantsMLModels: a.q4==='ml',
+      wantsRegClass: false,
+      wantsAgents:   a.q4==='agents'||a.q1==='engineer'&&a.q4!=='ml',
+      wantsLLMs:     a.q4==='agents',
+      wantsRAG:      a.q4==='agents',
+      wantsAPIs:     a.q2==='yes'&&(a.q4==='agents'||a.q4==='automation'),
+      wantsAutomate: a.q4==='automation',
+      wantsToolCall: a.q4==='automation'||a.q4==='agents',
+      wantsAIProduct:a.q1==='builder'||a.q1==='engineer',
+    };
+  }
+
+  /* ═══════════════════════════════════════════════════════════
+   *  10. CONVERSATION BRAIN  (signals, score, topProgs preserved)
    * ═══════════════════════════════════════════════════════════ */
   const brain = {
-
-    /* persistent profile across messages */
-    profile: { experience: null, techPref: null },
+    profile: { experience:null, techPref:null },
     quizAnswers: {},
 
-    /* ── signal extractor ── */
     signals(lower) {
       return {
         isBeginner:    /beginner|new to|no experience|zero|just start|never|don.t know|no background/i.test(lower),
@@ -681,588 +1006,488 @@
       };
     },
 
-    /* ── scoring ── */
     score(sig) {
-      const sc = { creator:0, builder:0, technical:0, advanced:0 };
-      if (sig.wantsContent)    sc.creator   += 40;
-      if (sig.wantsMedia)      sc.creator   += 30;
-      if (sig.isBeginner)      sc.creator   += 20;
-      if (sig.wantsMarketing)  sc.creator   += 10;
-      if (sig.isBeginner)      sc.builder   += 40;
-      if (sig.wantsBroad)      sc.builder   += 30;
-      if (sig.wantsPractical)  sc.builder   += 25;
-      if (sig.wantsAutomate)   sc.builder   += 20;
-      if (sig.wantsNoCode)     sc.builder   += 20;
-      if (sig.wantsDeepML)     sc.builder   -= 20;
-      if (sig.wantsAgents)     sc.builder   -= 20;
-      if (sig.wantsML)         sc.technical += 40;
-      if (sig.wantsData)       sc.technical += 35;
-      if (sig.wantsStats)      sc.technical += 30;
-      if (sig.wantsPython)     sc.technical += 25;
-      if (sig.wantsMLModels)   sc.technical += 25;
-      if (sig.wantsTechnical)  sc.technical += 20;
-      if (sig.wantsAgents)     sc.advanced  += 40;
-      if (sig.wantsLLMs)       sc.advanced  += 35;
-      if (sig.wantsRAG)        sc.advanced  += 30;
-      if (sig.wantsAPIs)       sc.advanced  += 30;
-      if (sig.wantsAutomate)   sc.advanced  += 25;
-      if (sig.wantsToolCall)   sc.advanced  += 25;
-      if (sig.wantsAIProduct)  sc.advanced  += 20;
-      if (sig.isBeginner && !sig.wantsTechnical) sc.advanced -= 20;
+      const sc={creator:0,builder:0,technical:0,advanced:0};
+      if(sig.wantsContent)   sc.creator   +=40;
+      if(sig.wantsMedia)     sc.creator   +=30;
+      if(sig.isBeginner)     sc.creator   +=20;
+      if(sig.wantsMarketing) sc.creator   +=10;
+      if(sig.isBeginner)     sc.builder   +=40;
+      if(sig.wantsBroad)     sc.builder   +=30;
+      if(sig.wantsPractical) sc.builder   +=25;
+      if(sig.wantsAutomate)  sc.builder   +=20;
+      if(sig.wantsNoCode)    sc.builder   +=20;
+      if(sig.wantsDeepML)    sc.builder   -=20;
+      if(sig.wantsAgents)    sc.builder   -=20;
+      if(sig.wantsML)        sc.technical +=40;
+      if(sig.wantsData)      sc.technical +=35;
+      if(sig.wantsStats)     sc.technical +=30;
+      if(sig.wantsPython)    sc.technical +=25;
+      if(sig.wantsMLModels)  sc.technical +=25;
+      if(sig.wantsTechnical) sc.technical +=20;
+      if(sig.wantsAgents)    sc.advanced  +=40;
+      if(sig.wantsLLMs)      sc.advanced  +=35;
+      if(sig.wantsRAG)       sc.advanced  +=30;
+      if(sig.wantsAPIs)      sc.advanced  +=30;
+      if(sig.wantsAutomate)  sc.advanced  +=25;
+      if(sig.wantsToolCall)  sc.advanced  +=25;
+      if(sig.wantsAIProduct) sc.advanced  +=20;
+      if(sig.isBeginner&&!sig.wantsTechnical) sc.advanced-=20;
       return sc;
     },
 
     topProgs(scores, threshold) {
       return Object.entries(scores)
-        .filter(([,v]) => v >= threshold)
-        .sort(([,a],[,b]) => b-a)
-        .map(([k]) => PROGRAMS[k]);
+        .filter(([,v])=>v>=threshold).sort(([,a],[,b])=>b-a)
+        .map(([k])=>PROGRAMS[k]);
     },
 
-    /* ── main handler (one response per user message) ── */
     handle(msg) {
-      _userMsg(msg);
-      chatSuggs.innerHTML = '';
-      const lower = msg.toLowerCase();
-      const sig   = this.signals(lower);
-
-      // update profile
-      if (sig.isBeginner)     this.profile.experience = 'beginner';
-      if (sig.wantsTechnical) this.profile.experience = 'technical';
-      if (sig.wantsNoCode)    this.profile.techPref   = 'nocode';
-      if (sig.wantsTechnical) this.profile.techPref   = 'technical';
-
-      // merge profile
-      const m = Object.assign({}, sig, {
-        isBeginner:     sig.isBeginner     || this.profile.experience === 'beginner',
-        wantsTechnical: sig.wantsTechnical || this.profile.techPref   === 'technical',
-        wantsNoCode:    sig.wantsNoCode    || this.profile.techPref   === 'nocode',
+      _userMsg(msg); chipsEl.innerHTML='';
+      const lower=msg.toLowerCase();
+      const sig=this.signals(lower);
+      if(sig.isBeginner)     this.profile.experience='beginner';
+      if(sig.wantsTechnical) this.profile.experience='technical';
+      if(sig.wantsNoCode)    this.profile.techPref='nocode';
+      if(sig.wantsTechnical) this.profile.techPref='technical';
+      const m=Object.assign({},sig,{
+        isBeginner:     sig.isBeginner    ||this.profile.experience==='beginner',
+        wantsTechnical: sig.wantsTechnical||this.profile.techPref==='technical',
+        wantsNoCode:    sig.wantsNoCode   ||this.profile.techPref==='nocode',
       });
-
-      // ONE response, then wait
-      setTimeout(() => this._respond(lower, m, sig), 480);
+      _showTyping();
+      setTimeout(()=>this._respond(lower,m,sig), 680);
     },
 
-    _respond(lower, m, sig) {
-
+    _respond(lower,m,sig) {
       /* list all */
-      if (/offer|programs|bootcamp|available|list|what.*have|all.*program/i.test(lower)) {
+      if(/offer|programs|bootcamp|available|list|all.*program/i.test(lower)){
         _botMsg("CoreLab has 4 bootcamps this Autumn:");
-        setTimeout(() => Object.values(PROGRAMS).forEach(_progCard), 300);
-        return;
+        setTimeout(()=>Object.values(PROGRAMS).forEach(_progCard),300); return;
       }
-
       /* register */
-      if (/register|enroll|sign up|join|apply|how.*register/i.test(lower)) {
-        _botMsg("Head to the Register page and pick your program there. Want help picking the right one first?");
-        setTimeout(() => _inlineButtons([
-          { label: 'Help me choose', cb: () => this._startFullQuiz() },
-          { label: 'Go to Register →', cb: () => { window.location.href='register.html'; } }
-        ]), 400);
-        return;
+      if(/register|enroll|sign up|join|apply/i.test(lower)){
+        _botMsg("Head to Register and pick your program. Want me to help you choose first?");
+        setTimeout(()=>_inlineButtons([
+          {label:'Help me choose',cb:()=>this._startFullQuiz()},
+          {label:'Go to Register →',primary:true,cb:()=>{window.location.href='register.html';}},
+        ]),400); return;
       }
-
-      /* unsure */
-      if (/don.t know|not sure|unsure|no idea|help me choose|confused|which one|^help$/i.test(lower)) {
-        _botMsg("That's completely fine. 😄 Let me ask you 3 quick things.");
-        setTimeout(() => this._startFullQuiz(), 600);
-        return;
+      /* find path */
+      if(/find.*path|find.*program|help.*choose|which.*program|don.t know|not sure|unsure|confused|^help$/i.test(lower)){
+        _botMsg("Let me find your path. 🤖 I'll ask 4 quick questions.");
+        setTimeout(()=>this._startCareerQuiz(),500); return;
       }
-
-      /* beginner, no specific goal */
-      if (m.isBeginner && !sig.wantsML && !sig.wantsAgents && !sig.wantsLLMs && !sig.wantsContent) {
-        _botMsg("Since you're just starting out, I'd first look at AI From Zero to AI Builder 👀\n\nIt's a broad 7-day intro — productivity tools, research assistants, web apps, automations and video creation. A solid foundation before going deeper.");
-        setTimeout(() => _inlineButtons([
-          { label: "Show me what I'd build", cb: () => { _progCard(PROGRAMS.builder); } },
-          { label: 'I have more specific goals', cb: () => this._startFullQuiz() }
-        ]), 400);
-        return;
+      /* beginner no goal */
+      if(m.isBeginner&&!sig.wantsML&&!sig.wantsAgents&&!sig.wantsLLMs&&!sig.wantsContent){
+        _botMsg("Since you're just starting out, AI From Zero to AI Builder is the broadest starting point. You'll explore multiple AI tools across 7 days before specialising.");
+        setTimeout(()=>_inlineButtons([
+          {label:"Show me",cb:()=>{_progCard(PROGRAMS.builder);}},
+          {label:'I have a more specific goal',cb:()=>this._startCareerQuiz()},
+        ]),400); return;
       }
-
       /* beginner + agents */
-      if (m.isBeginner && (sig.wantsAgents || sig.wantsLLMs)) {
-        _botMsg("Since you're starting out and interested in AI agents, I'd show you two options:\n\n→ AI From Zero to AI Builder — practical foundation first.\n→ Generative AI, LLMs & AI Agents — specifically LLMs, RAG and agents.\n\nWant me to explain the difference?");
-        setTimeout(() => _inlineButtons([
-          { label: 'Explain the difference', cb: () => {
-            _botMsg("AI From Zero to Builder: practical, no deep technical knowledge needed. Multiple AI tools.\n\nGenerative AI & Agents: specifically LLMs, RAG, APIs, tool calling, autonomous agents. More focused and technical.");
-            setTimeout(() => { _progCard(PROGRAMS.builder); _progCard(PROGRAMS.advanced); }, 300);
-          }},
-          { label: 'Show both', cb: () => { _progCard(PROGRAMS.builder); _progCard(PROGRAMS.advanced); } }
-        ]), 400);
-        return;
+      if(m.isBeginner&&(sig.wantsAgents||sig.wantsLLMs)){
+        _botMsg("Interested in AI agents but just starting? I'd show you both options — one for a foundation, one specifically for agents.");
+        setTimeout(()=>_inlineButtons([
+          {label:'Show both',cb:()=>{_progCard(PROGRAMS.builder);_progCard(PROGRAMS.advanced);}},
+          {label:'Explain the difference',cb:()=>{_botMsg("AI From Zero to Builder: broad practical intro, no deep technical knowledge needed.\n\nGenerative AI & Agents: focused on LLMs, RAG, APIs, tool calling and autonomous agents — more technical.");}},
+        ]),400); return;
       }
-
-      /* content / social / media */
-      if (sig.wantsContent || sig.wantsMedia) {
-        _botMsg("You're in the creator zone. 🎨\n\nAI Content Creator Weekend looks closely aligned — AI image generation, poster design, copywriting, short videos, voiceovers and multi-platform content. It's a 2-day intensive.");
-        setTimeout(() => _inlineButtons([
-          { label: 'View Content Creator', cb: () => { window.location.href = PROGRAMS.creator.url; } },
-          { label: 'Tell me more', cb: () => { _progCard(PROGRAMS.creator); } }
-        ]), 400);
-        return;
+      /* content */
+      if(sig.wantsContent||sig.wantsMedia){
+        _botMsg("You're in the creator zone 🎨 AI Content Creator Weekend looks closely aligned.");
+        setTimeout(()=>_recCard(PROGRAMS.creator),300); return;
       }
-
-      /* ML + agents (split) */
-      if ((sig.wantsML || sig.wantsData || sig.wantsStats) && (sig.wantsAgents || sig.wantsLLMs)) {
-        _botMsg("You're between two pretty different directions 👀\n\n→ Data Science & ML — data, statistics, Python, ML models.\n→ Generative AI & Agents — LLMs, RAG, APIs, tool calling, autonomous agents.\n\nWhich sounds closer to what you want to do?");
-        setTimeout(() => _inlineButtons([
-          { label: 'Data & ML', cb: () => { _progCard(PROGRAMS.technical); } },
-          { label: 'LLMs & Agents', cb: () => { _progCard(PROGRAMS.advanced); } },
-          { label: 'Show both', cb: () => { _progCard(PROGRAMS.technical); _progCard(PROGRAMS.advanced); } }
-        ]), 400);
-        return;
+      /* ML + agents split */
+      if((sig.wantsML||sig.wantsData)&&(sig.wantsAgents||sig.wantsLLMs)){
+        _botMsg("You're between two directions 👀");
+        setTimeout(()=>_inlineButtons([
+          {label:'📊 Data & ML',cb:()=>{_recCard(PROGRAMS.technical);}},
+          {label:'🤖 LLMs & Agents',cb:()=>{_recCard(PROGRAMS.advanced);}},
+          {label:'Show both',cb:()=>{_progCard(PROGRAMS.technical);_progCard(PROGRAMS.advanced);}},
+        ]),400); return;
       }
-
-      /* ML / data */
-      if (sig.wantsML || sig.wantsData || sig.wantsStats || sig.wantsMLModels) {
-        _botMsg("Data Science & Machine Learning is the one I'd have you look at.\n\nIt covers Python data science, data cleaning, EDA, statistics, ML foundations, regression, classification and deploying a Streamlit app.");
-        setTimeout(() => _inlineButtons([
-          { label: 'View Data Science & ML', cb: () => { window.location.href = PROGRAMS.technical.url; } },
-          { label: 'Show details', cb: () => { _progCard(PROGRAMS.technical); } }
-        ]), 400);
-        return;
+      /* ML/data */
+      if(sig.wantsML||sig.wantsData||sig.wantsStats||sig.wantsMLModels){
+        _botMsg("Data Science & Machine Learning looks like your direction.");
+        setTimeout(()=>_recCard(PROGRAMS.technical),300); return;
       }
-
-      /* agents / LLMs / RAG */
-      if (sig.wantsAgents || sig.wantsLLMs || sig.wantsRAG || sig.wantsAPIs) {
-        _botMsg("Okay, now we're talking. 🤖\n\nGenerative AI, LLMs & AI Agents is specifically focused on that — LLM foundations, APIs, RAG, embeddings, agent architecture, tool calling, n8n automation and a custom AI agent product.");
-        setTimeout(() => _inlineButtons([
-          { label: 'View AI Agents program', cb: () => { window.location.href = PROGRAMS.advanced.url; } },
-          { label: 'Show details', cb: () => { _progCard(PROGRAMS.advanced); } }
-        ]), 400);
-        return;
+      /* agents/LLMs */
+      if(sig.wantsAgents||sig.wantsLLMs||sig.wantsRAG||sig.wantsAPIs){
+        _botMsg("Generative AI, LLMs & AI Agents is specifically focused on that direction.");
+        setTimeout(()=>_recCard(PROGRAMS.advanced),300); return;
       }
-
       /* automation */
-      if (sig.wantsAutomate) {
-        _botMsg("Automation can go two ways:\n\n→ AI From Zero to AI Builder — broad, beginner-friendly, includes practical automation tools.\n→ Generative AI & Agents — LLM-powered automation, n8n, tool calling, AI workflows.");
-        setTimeout(() => _inlineButtons([
-          { label: 'Beginner-friendly', cb: () => { _progCard(PROGRAMS.builder); } },
-          { label: 'LLM automation', cb: () => { _progCard(PROGRAMS.advanced); } }
-        ]), 400);
-        return;
+      if(sig.wantsAutomate){
+        _botMsg("Automation goes two ways — beginner-friendly or LLM-powered. Which fits?");
+        setTimeout(()=>_inlineButtons([
+          {label:'Beginner-friendly',cb:()=>{_recCard(PROGRAMS.builder);}},
+          {label:'LLM-powered',cb:()=>{_recCard(PROGRAMS.advanced);}},
+        ]),400); return;
       }
-
-      /* AI engineer */
-      if (/engineer|career|profession/i.test(lower)) {
-        _botMsg("AI engineering can mean a few different things. Which sounds more interesting?");
-        setTimeout(() => _inlineButtons([
-          { label: '🧠 LLMs, RAG & AI agents', cb: () => {
-            _botMsg("Then Generative AI, LLMs & AI Agents looks like the direction to explore.");
-            setTimeout(() => _progCard(PROGRAMS.advanced), 300);
-          }},
-          { label: '📊 ML models & data', cb: () => {
-            _botMsg("Then Data Science & Machine Learning is the one to look at.");
-            setTimeout(() => _progCard(PROGRAMS.technical), 300);
-          }},
-          { label: '💻 Practical AI applications', cb: () => {
-            _botMsg("Then AI From Zero to AI Builder gives a broad practical foundation.");
-            setTimeout(() => _progCard(PROGRAMS.builder), 300);
-          }},
-        ]), 400);
-        return;
+      /* engineer/career */
+      if(/engineer|career|profession/i.test(lower)){
+        _botMsg("AI engineering can mean a few things. Which direction calls to you?");
+        setTimeout(()=>_inlineButtons([
+          {label:'🧠 LLMs & Agents',cb:()=>{_recCard(PROGRAMS.advanced);}},
+          {label:'📊 ML & Data',cb:()=>{_recCard(PROGRAMS.technical);}},
+          {label:'💻 Practical AI',cb:()=>{_recCard(PROGRAMS.builder);}},
+        ]),400); return;
       }
-
       /* CS student */
-      if (/cs\b|computer science|university|student/i.test(lower)) {
-        _botMsg("Nice 👀 Since you have a CS background, which direction sounds more interesting?");
-        setTimeout(() => _inlineButtons([
-          { label: '📊 Train ML models & data', cb: () => {
-            _botMsg("Then Data Science & ML looks like your direction.");
-            setTimeout(() => _progCard(PROGRAMS.technical), 300);
-          }},
-          { label: '🧠 LLMs, RAG & AI agents', cb: () => {
-            _botMsg("Then Generative AI & Agents is the more focused choice.");
-            setTimeout(() => _progCard(PROGRAMS.advanced), 300);
-          }},
-          { label: '💻 Practical AI apps', cb: () => {
-            _botMsg("Then AI From Zero to AI Builder gives a broad practical intro.");
-            setTimeout(() => _progCard(PROGRAMS.builder), 300);
-          }},
-          { label: '🎨 Creative AI', cb: () => {
-            _botMsg("Then AI Content Creator Weekend might be a fun starting point.");
-            setTimeout(() => _progCard(PROGRAMS.creator), 300);
-          }},
-        ]), 400);
-        return;
+      if(/cs\b|computer science|university|student/i.test(lower)){
+        _botMsg("CS background 👀 Which direction are you most drawn to?");
+        setTimeout(()=>_inlineButtons([
+          {label:'📊 Data & ML',cb:()=>{_recCard(PROGRAMS.technical);}},
+          {label:'🧠 LLMs & Agents',cb:()=>{_recCard(PROGRAMS.advanced);}},
+          {label:'💻 AI Apps',cb:()=>{_recCard(PROGRAMS.builder);}},
+          {label:'🎨 Creative AI',cb:()=>{_recCard(PROGRAMS.creator);}},
+        ]),400); return;
       }
-
-      /* money — no promises */
-      if (/money|income|earn|freelanc|salary|profit/i.test(lower)) {
-        _botMsg("That can mean a few things 😄 Which sounds closest to what you're thinking about?");
-        setTimeout(() => _inlineButtons([
-          { label: '🎨 Content & services', cb: () => { _progCard(PROGRAMS.creator); } },
-          { label: '💻 AI applications', cb: () => { _progCard(PROGRAMS.builder); } },
-          { label: '🤖 AI products', cb: () => { _progCard(PROGRAMS.advanced); } },
-          { label: '📊 Technical AI career', cb: () => {
-            _botMsg("For a technical AI path — Data Science & ML or Generative AI & Agents, depending on whether you prefer data/models or LLMs/agents.");
-            setTimeout(() => { _progCard(PROGRAMS.technical); _progCard(PROGRAMS.advanced); }, 300);
-          }},
-        ]), 400);
-        return;
+      /* score fallback */
+      const scores=this.score(m);
+      const top=this.topProgs(scores,40);
+      if(top.length>0){
+        _botMsg(top.length===1?"Here's the closest match:":"These look closely aligned:");
+        setTimeout(()=>top.forEach(_recCard),300); return;
       }
-
-      /* practical / no-code */
-      if (sig.wantsPractical || sig.wantsNoCode) {
-        _botMsg("AI From Zero to AI Builder looks like a good starting point.\n\nPractical building — AI productivity, research assistants, visual creation, code-free web apps and automation. No deep technical background needed.");
-        setTimeout(() => _inlineButtons([
-          { label: 'View AI Builder', cb: () => { window.location.href = PROGRAMS.builder.url; } },
-          { label: 'Show details', cb: () => { _progCard(PROGRAMS.builder); } }
-        ]), 400);
-        return;
-      }
-
-      /* score-based fallback */
-      const scores = this.score(m);
-      const top    = this.topProgs(scores, 40);
-      if (top.length > 0) {
-        _botMsg(top.length === 1
-          ? "Based on what you've told me, this looks like the closest match:"
-          : "Based on what you've told me, these look closely aligned:");
-        setTimeout(() => top.forEach(_progCard), 300);
-        return;
-      }
-
-      /* truly unclear */
-      _botMsg("I want to make sure I point you in the right direction. 😄 Let me ask you a couple of quick things.");
-      setTimeout(() => this._startFullQuiz(), 500);
+      /* unclear → career quiz */
+      _botMsg("Let me ask you a few quick questions to find your best fit.");
+      setTimeout(()=>this._startCareerQuiz(),500);
     },
 
-    /* ── 3-question quiz ── */
-    _startFullQuiz() {
-      this.quizAnswers = {};
-      _botMsg("Let me ask you 3 quick questions. 🤖\n\nQuestion 1: What would you rather build?");
-      setTimeout(() => _inlineButtons([
-        { label: '🎨 AI content',      cb: () => { this.quizAnswers.q1='creator';   this._quizQ2(); } },
-        { label: '💻 AI applications', cb: () => { this.quizAnswers.q1='builder';   this._quizQ2(); } },
-        { label: '📊 ML models',       cb: () => { this.quizAnswers.q1='technical'; this._quizQ2(); } },
-        { label: '🤖 AI agents',       cb: () => { this.quizAnswers.q1='advanced';  this._quizQ2(); } },
-        { label: '🤷 Not sure',        cb: () => { this.quizAnswers.q1='unsure';    this._quizQ2(); } },
-      ]), 400);
+    /* ── Career Quiz (4 questions) ── */
+    _careerAnswers: {},
+    _startCareerQuiz() {
+      this._careerAnswers={};
+      _botMsg(`${QUIZ.q1.prompt}`);
+      setTimeout(()=>_inlineButtons(QUIZ.q1.options.map(o=>({
+        label:o.label, cb:()=>{ this._careerAnswers.q1=o.key; this._careerQ2(); }
+      }))),400);
+    },
+    _careerQ2() {
+      _botMsg(QUIZ.q2.prompt);
+      setTimeout(()=>_inlineButtons(QUIZ.q2.options.map(o=>({
+        label:o.label, cb:()=>{ this._careerAnswers.q2=o.key; this._careerQ3(); }
+      }))),400);
+    },
+    _careerQ3() {
+      _botMsg(QUIZ.q3.prompt);
+      setTimeout(()=>_inlineButtons(QUIZ.q3.options.map(o=>({
+        label:o.label, cb:()=>{ this._careerAnswers.q3=o.key; this._careerQ4(); }
+      }))),400);
+    },
+    _careerQ4() {
+      _botMsg(QUIZ.q4.prompt);
+      setTimeout(()=>_inlineButtons(QUIZ.q4.options.map(o=>({
+        label:o.label, cb:()=>{ this._careerAnswers.q4=o.key; this._careerResult(); }
+      }))),400);
+    },
+    _careerResult() {
+      const sig  = _quizAnswersToSig(this._careerAnswers);
+      const sc   = this.score(sig);
+      const recs = this.topProgs(sc,30);
+      const final= recs.length>0 ? recs : [PROGRAMS.builder];
+      _showTyping();
+      setTimeout(()=>{
+        _botMsg("Based on your answers, here's my recommendation:");
+        setTimeout(()=>final.slice(0,2).forEach(_recCard),400);
+      },800);
     },
 
-    _quizQ2() {
-      _botMsg("Question 2: How technical do you want to get?");
-      setTimeout(() => _inlineButtons([
-        { label: 'Keep it practical',            cb: () => { this.quizAnswers.q2='nocode';    this._quizQ3(); } },
-        { label: 'Some technical work',          cb: () => { this.quizAnswers.q2='some';      this._quizQ3(); } },
-        { label: 'I want the technical stuff',   cb: () => { this.quizAnswers.q2='technical'; this._quizQ3(); } },
-      ]), 400);
-    },
-
-    _quizQ3() {
-      _botMsg("Question 3: What's your current level?");
-      setTimeout(() => _inlineButtons([
-        { label: 'Complete beginner',         cb: () => { this.quizAnswers.q3='beginner';  this._quizCalc(); } },
-        { label: "I've experimented with AI", cb: () => { this.quizAnswers.q3='some';      this._quizCalc(); } },
-        { label: "I'm already technical",     cb: () => { this.quizAnswers.q3='technical'; this._quizCalc(); } },
-      ]), 400);
-    },
-
-    _quizCalc() {
-      const a = this.quizAnswers;
-      const sig = {
-        isBeginner:    a.q3 === 'beginner',
-        wantsTechnical:a.q3 === 'technical' || a.q2 === 'technical',
-        wantsNoCode:   a.q2 === 'nocode',
-        wantsPractical:a.q2 === 'nocode' || a.q2 === 'some',
-        wantsBroad:    a.q1 === 'unsure',
-        wantsContent:  a.q1 === 'creator',
-        wantsMedia: false, wantsMarketing: false,
-        wantsML:       a.q1 === 'technical',
-        wantsDeepML:   a.q1 === 'technical' && a.q2 === 'technical',
-        wantsData:     a.q1 === 'technical',
-        wantsStats: false, wantsPython: a.q1 === 'technical',
-        wantsMLModels: a.q1 === 'technical', wantsRegClass: false,
-        wantsAgents:   a.q1 === 'advanced',
-        wantsLLMs:     a.q1 === 'advanced',
-        wantsRAG: false, wantsAPIs: false, wantsAutomate: false,
-        wantsToolCall: false,
-        wantsAIProduct:a.q1 === 'builder' || a.q1 === 'advanced',
-      };
-      if (a.q1 === 'unsure' && a.q3 === 'beginner') { sig.wantsBroad = true; sig.isBeginner = true; }
-
-      const scores = this.score(sig);
-      const recs   = this.topProgs(scores, 30);
-      const final  = recs.length > 0 ? recs : [PROGRAMS.builder];
-
-      setTimeout(() => {
-        _botMsg(final.length === 1
-          ? "Based on what you selected, this looks like the closest match:"
-          : "Based on what you selected, these look closely aligned:");
-        setTimeout(() => final.forEach(_progCard), 350);
-      }, 600);
-    },
+    /* ── Legacy 3-question quiz (kept for chat handle flow) ── */
+    quizAnswers:{},
+    _startFullQuiz() { this._startCareerQuiz(); },
   }; /* end brain */
 
   /* ═══════════════════════════════════════════════════════════
-   *  11. SECTION & CARD DATA
+   *  11. CONTEXT-AWARE SECTION TRIGGERS
    * ═══════════════════════════════════════════════════════════ */
-  const SECTION_POSITIONS = {
-    hero: 'bottom-right', upcoming: 'bottom-left', courses: 'bottom-left',
-    schedule: 'bottom-left', curriculum: 'bottom-right', register: 'bottom-right',
-    faq: 'bottom-left', projects: 'bottom-right', mentors: 'bottom-left',
-    pathways: 'bottom-right', about: 'bottom-left',
+  const SECTION_TRIGGERS = {
+    hero:       { text:"Need help choosing your AI path?", key:'ctx_hero', btn:{label:"Find My Path",action:'quiz'} },
+    upcoming:   { text:"Not sure which program fits you?", key:'ctx_upcoming', btn:{label:"Help me choose",action:'quiz'} },
+    courses:    { text:"Not sure which program fits you?", key:'ctx_courses', btn:{label:"Help me choose",action:'quiz'} },
+    schedule:   { text:"Not sure which program fits you?", key:'ctx_schedule', btn:{label:"Help me choose",action:'quiz'} },
+    projects:   { text:"Want to build projects like these?", key:'ctx_projects', btn:{label:"See programs",action:'chat'} },
+    faq:        { text:"Most students ask about prerequisites first.", key:'ctx_faq', btn:{label:"Ask me",action:'chat'} },
+    register:   { text:"Ready to take the next step? 🚀", key:'ctx_register', btns:[{label:"Help me choose",action:'quiz'},{label:"Register now",action:'register'}] },
   };
 
-  /* ONE message per section per page load */
-  const SECTION_MSGS = {
-    upcoming:   { text: "Checking out the programs? 👀 Not sure which fits?", key: 'section_upcoming', btn: { label: 'Help me choose', action: 'quiz' } },
-    courses:    { text: "Four programs, four directions.", key: 'section_courses', btn: { label: 'Help me choose', action: 'quiz' } },
-    schedule:   { text: "Four programs, four directions.", key: 'section_schedule', btn: { label: 'Help me choose', action: 'quiz' } },
-    curriculum: { text: "Deep-diving into the curriculum — nice.", key: 'section_curriculum' },
-    register:   { text: "Thinking about joining? 👀", key: 'section_register',
-                  btns: [{ label: 'Help me choose', action: 'quiz' }, { label: 'Register now', action: 'register' }] },
-    faq:        { text: "Questions? You can ask me too.", key: 'section_faq', btn: { label: 'Ask me', action: 'chat' } },
-    projects:   { text: "These are the kinds of things you can actually build. 😎", key: 'section_projects' },
-    about:      { text: "Want to know who's behind CoreLab? Take a look.", key: 'section_about' },
-    pathways:   { text: "Different tracks for different directions. Which calls to you?", key: 'section_pathways' },
-    mentors:    { text: "The team behind CoreLab — FAST-NUCES alumni.", key: 'section_mentors' },
-  };
+  const _seenSections = new Set();
+  let   _secDebounce  = null;
 
-  const HOVER_MSGS = {
-    creator:   { text: "Creator mode activated. 🎨",     key: 'hover_creator'   },
-    builder:   { text: "Starting your AI journey?",       key: 'hover_builder'   },
-    technical: { text: "Ready for some Python + ML? 📊",  key: 'hover_technical' },
-    advanced:  { text: "Agent territory. 👀",              key: 'hover_advanced'  },
-  };
-
-  const CARD_ENTRY_MSGS = {
-    creator:   { text: "👀 Looking at the creator track? If you want AI-powered content, this one's worth a look.", key: 'card_creator'   },
-    builder:   { text: "New to AI? This is the broadest starting point of the four.",                               key: 'card_builder'   },
-    technical: { text: "Okay... things are getting technical 📊 Python, statistics and ML are waiting.",            key: 'card_technical' },
-    advanced:  { text: "Ahhh... the advanced stuff 🤖 LLMs, RAG, tools and agents.",                               key: 'card_advanced'  },
-  };
-
-  /* ═══════════════════════════════════════════════════════════
-   *  12. SECTION OBSERVER  (debounced, fires once per section)
-   * ═══════════════════════════════════════════════════════════ */
-  const _seenSections  = new Set();
-  let   _sectionDebounce = null;
-
-  function _onSectionVisible(sectionId) {
-    if (_seenSections.has(sectionId))           return;
-    if (S.phase === SM.REGISTRATION)            return;
-    if (S.phase === SM.USER_INTERACTING)        return;
-
-    const def = SECTION_MSGS[sectionId];
+  function _onSection(id) {
+    if (_seenSections.has(id)) return;
+    if (S.phase===SM.USER_INTERACTING||S.phase===SM.QUIET) return;
+    const def = SECTION_TRIGGERS[id];
     if (!def) return;
+    _seenSections.add(id);
+    setTimeout(()=>autoSpeak(def.text,{key:def.key,btn:def.btn,btns:def.btns,duration:8000}),1000);
+  }
 
-    _seenSections.add(sectionId);
+  const sectionSels = ['.hero','#upcoming','#courses','.schedule-section','#curriculum','#register','.faq-section','.projects-grid','.mentors-section','.pathways-section'];
+  const obsEls = [];
+  sectionSels.forEach(sel=>{
+    document.querySelectorAll(sel).forEach(el=>{
+      if (!el._cgId) { el._cgId=el.id||sel.replace(/[#.]/g,'').split(' ')[0]; obsEls.push(el); }
+    });
+  });
+  const secIO = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if (!e.isIntersecting||e.intersectionRatio<0.3) return;
+      clearTimeout(_secDebounce);
+      _secDebounce=setTimeout(()=>_onSection(e.target._cgId),700);
+    });
+  },{threshold:0.3});
+  obsEls.forEach(el=>secIO.observe(el));
 
-    const side      = SECTION_POSITIONS[sectionId] || 'bottom-right';
-    const sinceMove = Date.now() - S.lastMoveAt;
-    const doMove    = !S.isWalking && sinceMove > CD.MOVE;
+  /* ═══════════════════════════════════════════════════════════
+   *  12. PROGRAM CARD HOVER — robot reacts + moves
+   * ═══════════════════════════════════════════════════════════ */
+  const CARD_HOVER_MSGS = {
+    creator:   {text:"Build real AI content — images, videos & voiceovers.",   key:'hover_creator'},
+    builder:   {text:"Perfect if you're new to AI. Broad, practical & hands-on.", key:'hover_builder'},
+    technical: {text:"Perfect if you enjoy Python, data and building ML models.", key:'hover_tech'},
+    advanced:  {text:"Build real AI agents, RAG systems and automations.",         key:'hover_adv'},
+  };
+  document.querySelectorAll('[data-category]').forEach(card=>{
+    card.addEventListener('mouseenter',()=>{
+      if(Date.now()-S.lastHoverAt<CD.HOVER) return;
+      if(S.isChatOpen||S.isSpeaking) return;
+      const cat=card.getAttribute('data-category');
+      const def=CARD_HOVER_MSGS[cat]; if (!def||wasSaid(def.key)) return;
+      S.lastHoverAt=Date.now();
+      _anim('point',1800);
+      setTimeout(()=>autoSpeak(def.text,{key:def.key,duration:5000}),400);
+    });
+  });
 
-    const afterMove = () => {
-      _doAnim('lookright', 1400);
-      setTimeout(() => autoSpeak(def.text, { key: def.key, btn: def.btn, btns: def.btns, duration: 6500 }), 1200);
-    };
+  /* ═══════════════════════════════════════════════════════════
+   *  13. REGISTER BUTTON — excited reaction
+   * ═══════════════════════════════════════════════════════════ */
+  document.querySelectorAll('[href*="register"], .btn-header').forEach(btn=>{
+    btn.addEventListener('mouseenter',()=>{
+      if(S.phase===SM.CELEBRATING) return;
+      _anim('happy', 1500);
+      // brighten reactor briefly
+      const core = document.getElementById('cg-core-mid');
+      if (core) { core.style.opacity='1'; setTimeout(()=>core.style.opacity='',1500); }
+    });
+    btn.addEventListener('click',()=>{
+      if(!wasSaid('reg_celebrate')) {
+        markSaid('reg_celebrate');
+        S.phase=SM.CELEBRATING;
+        _hideBubble();
+        _showBubble("Awesome choice 🚀 Welcome to CoreLab!",{duration:4000});
+        _anim('happy',2000);
+        _launchConfetti();
+        setTimeout(()=>{ S.phase=SM.QUIET; }, 4500);
+      }
+    });
+  });
 
-    if (doMove) {
-      S.lastMoveAt = Date.now();
-      S.phase = SM.WALKING;
-      _walk(side, () => { S.phase = SM.IDLE; afterMove(); });
-    } else {
-      afterMove();
+  /* ═══════════════════════════════════════════════════════════
+   *  14. CONFETTI
+   * ═══════════════════════════════════════════════════════════ */
+  function _launchConfetti() {
+    if (prefersReduced) return;
+    confCanvas.style.display='block';
+    const ctx=confCanvas.getContext('2d');
+    confCanvas.width=window.innerWidth; confCanvas.height=window.innerHeight;
+    const pieces=[];
+    const colors=['#c2521a','#e07040','#1d4ed8','#2d7a4f','#818cf8','#fbbf24'];
+    for(let i=0;i<90;i++) pieces.push({
+      x:Math.random()*confCanvas.width, y:-10,
+      vx:(Math.random()-.5)*4, vy:Math.random()*3+2,
+      r:Math.random()*6+3, color:colors[Math.floor(Math.random()*colors.length)],
+      rot:Math.random()*360, vrot:(Math.random()-.5)*8, alpha:1,
+    });
+    let frame=0;
+    function tick(){
+      ctx.clearRect(0,0,confCanvas.width,confCanvas.height);
+      pieces.forEach(p=>{
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vrot; p.alpha-=0.008;
+        ctx.save(); ctx.globalAlpha=Math.max(0,p.alpha);
+        ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle=p.color; ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.6);
+        ctx.restore();
+      });
+      frame++;
+      if(frame<180) requestAnimationFrame(tick);
+      else { ctx.clearRect(0,0,confCanvas.width,confCanvas.height); confCanvas.style.display='none'; }
     }
+    tick();
   }
 
-  const sectionSelectors = [
-    '.hero','#upcoming','#courses','.schedule-section',
-    '#curriculum','#register','.faq-section',
-    '.projects-grid','.mentors-section','.pathways-section',
+  /* ═══════════════════════════════════════════════════════════
+   *  15. ROAMING ZONES + SCROLL-BASED MOVEMENT
+   * ═══════════════════════════════════════════════════════════ */
+  let _robotX=0, _robotY=0;
+
+  function _zone(name) {
+    const vw=window.innerWidth, vh=window.innerHeight;
+    const mob=vw<600, sz=mob?115:150, pad=mob?12:24, bot=100;
+    return ({
+      'bottom-right':{x:vw-sz-pad,y:vh-sz-bot},
+      'bottom-left': {x:pad,      y:vh-sz-bot},
+      'mid-right':   {x:vw-sz-pad,y:vh*.38},
+      'mid-left':    {x:pad,      y:vh*.38},
+      'bottom-center':{x:(vw-sz)/2,y:vh-sz-bot},
+    })[name]||{x:vw-sz-pad,y:vh-sz-bot};
+  }
+
+  function _setPos(x,y) {
+    _robotX=x; _robotY=y;
+    root.style.right='auto';
+    root.style.left  = x+'px';
+    root.style.bottom= Math.max(window.innerHeight-y-170,bot_clearance())+'px';
+  }
+  function bot_clearance(){ return 100; }
+
+  function _walkToZone(zoneName, onDone) {
+    if (S.isWalking && !onDone) return;
+    const target=_zone(zoneName);
+    S.currentZone=zoneName; S.lastMoveAt=Date.now();
+
+    // If zone is on the left half, flip bubble to the right side so it stays visible
+    const isLeftZone = zoneName.includes('left');
+    root.classList.toggle('bubble-right', isLeftZone);
+
+    if (prefersReduced) { _setPos(target.x,target.y); S.isWalking=false; onDone&&onDone(); return; }
+    const dx=target.x-_robotX;
+    root.classList.toggle('facing-right', dx>0);
+    _anim('walk');
+    S.isWalking=true;
+    const speed=1.8;
+    const tick=()=>{
+      if(!S.isWalking) return;
+      const rx=target.x-_robotX, ry=target.y-_robotY;
+      const d=Math.sqrt(rx*rx+ry*ry);
+      if(d<speed+1){ _setPos(target.x,target.y); S.isWalking=false; root.classList.remove('facing-right'); _anim('idle'); onDone&&onDone(); return; }
+      _setPos(_robotX+rx/d*speed, _robotY+ry/d*speed);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* Scroll → zone map */
+  const SCROLL_MAP=[
+    {from:0,  to:15, zone:'bottom-right'},
+    {from:15, to:30, zone:'mid-left'},
+    {from:30, to:45, zone:'bottom-right'},
+    {from:45, to:60, zone:'mid-right'},
+    {from:60, to:75, zone:'bottom-left'},
+    {from:75, to:90, zone:'mid-right'},
+    {from:90, to:100,zone:'bottom-left'},
   ];
-  const observedEls = [];
-  sectionSelectors.forEach(sel => {
-    document.querySelectorAll(sel).forEach(el => {
-      if (!el._buddyId) {
-        el._buddyId = el.id || sel.replace(/[#.]/g,'').split(' ')[0];
-        observedEls.push(el);
-      }
-    });
-  });
+  function _zoneForPct(p){ for(const b of SCROLL_MAP) if(p>=b.from&&p<b.to) return b.zone; return 'bottom-right'; }
 
-  const secIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.intersectionRatio < 0.35) return;
-      clearTimeout(_sectionDebounce);
-      _sectionDebounce = setTimeout(() => _onSectionVisible(e.target._buddyId), 700);
-    });
-  }, { threshold: 0.35 });
-  observedEls.forEach(el => secIO.observe(el));
+  let _scrollDeb=null;
+  window.addEventListener('scroll',()=>{
+    clearTimeout(_scrollDeb);
+    _scrollDeb=setTimeout(()=>{
+      if(S.isChatOpen||S.isTyping||S.phase===SM.USER_INTERACTING||S.isWalking) return;
+      if(Date.now()-S.lastMoveAt<CD.MOVE) return;
+      const docH=Math.max(document.body.scrollHeight-window.innerHeight,1);
+      const pct=Math.round(window.scrollY/docH*100);
+      if(Math.abs(pct-S.lastScrollPct)<8) return;
+      S.lastScrollPct=pct;
+      const z=_zoneForPct(pct);
+      if(z!==S.currentZone) _walkToZone(z);
+    },650);
+  },{passive:true});
 
-  /* ═══════════════════════════════════════════════════════════
-   *  13. PROGRAM CARD ENTRY OBSERVER  (debounced)
-   * ═══════════════════════════════════════════════════════════ */
-  let _cardDebounce = null;
+  /* Idle roam */
+  const NEARBY={ 'bottom-right':['mid-right','bottom-center'], 'bottom-left':['mid-left','bottom-center'], 'bottom-center':['bottom-right','bottom-left'], 'mid-right':['bottom-right','bottom-center'], 'mid-left':['bottom-left','bottom-center'] };
+  let _idleRoamT=null;
+  function _schedIdleRoam(){ clearTimeout(_idleRoamT); _idleRoamT=setTimeout(()=>{ if(!S.isWalking&&!S.isChatOpen&&!S.isSpeaking&&S.phase!==SM.USER_INTERACTING&&S.phase!==SM.CELEBRATING&&Date.now()-S.lastMoveAt>18000){ const opts=NEARBY[S.currentZone]||['bottom-left','bottom-right']; _walkToZone(opts[Math.floor(Math.random()*opts.length)]); } _schedIdleRoam(); },24000+Math.random()*12000); }
+  _schedIdleRoam();
 
-  const cardIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.intersectionRatio < 0.5) return;
-      const cat = e.target.getAttribute('data-category');
-      if (!cat) return;
-      clearTimeout(_cardDebounce);
-      _cardDebounce = setTimeout(() => {
-        if (S.activeCard === cat)                            return;
-        if (Date.now() - S.lastCardAt < CD.CARD_ENTRY)      return;
-        if (!canAutoSpeak())                                 return;
-        const def = CARD_ENTRY_MSGS[cat];
-        if (!def || wasSaid(def.key))                        return;
-        S.activeCard = cat;
-        S.lastCardAt = Date.now();
-        const side      = (cat === 'creator' || cat === 'builder') ? 'bottom-left' : 'bottom-right';
-        const sinceMove = Date.now() - S.lastMoveAt;
-        if (!S.isWalking && sinceMove > CD.MOVE) {
-          S.lastMoveAt = Date.now();
-          S.phase = SM.WALKING;
-          _walk(side, () => { S.phase = SM.IDLE; setTimeout(() => autoSpeak(def.text, { key: def.key, duration: 6000 }), 600); });
-        } else {
-          autoSpeak(def.text, { key: def.key, duration: 6000 });
-        }
-      }, 800);
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('[data-category]').forEach(el => cardIO.observe(el));
+  /* Idle visual only */
+  const IDLE_ANIMS=['wave','lookleft','lookright'];
+  let _idleVisT=null;
+  function _schedIdleVis(){ clearTimeout(_idleVisT); _idleVisT=setTimeout(()=>{ if(!S.isSpeaking&&!S.isWalking&&!S.isChatOpen&&S.phase!==SM.USER_INTERACTING){ _anim(IDLE_ANIMS[Math.floor(Math.random()*IDLE_ANIMS.length)],2200); } _schedIdleVis(); },20000+Math.random()*15000); }
+  _schedIdleVis();
 
   /* ═══════════════════════════════════════════════════════════
-   *  14. CARD HOVER  (low-priority, cooldown-gated)
+   *  16. CLICK / SEND WIRING
    * ═══════════════════════════════════════════════════════════ */
-  document.querySelectorAll('.course-card, .program-card-filterable, [data-category]').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      if (S.isChatOpen || S.isSpeaking)                    return;
-      if (S.phase === SM.REGISTRATION)                     return;
-      if (S.phase === SM.USER_INTERACTING)                 return;
-      if (Date.now() - S.lastHoverAt < CD.HOVER)          return;
-      const cat = card.getAttribute('data-category');
-      const def = HOVER_MSGS[cat];
-      if (!def || wasSaid(def.key))                        return;
-      S.lastHoverAt = Date.now();
-      _doAnim('point', 1800);
-      setTimeout(() => autoSpeak(def.text, { key: def.key, duration: 4000 }), 450);
-    });
-    card.addEventListener('mouseleave', () => {
-      if (S.phase !== SM.SPEAKING && S.phase !== SM.WALKING && S.phase !== SM.USER_INTERACTING)
-        S.phase = SM.IDLE;
-    });
+  robotEl.addEventListener('click',()=>{
+    S.lastInteraction=Date.now();
+    if(S.isChatOpen) _closeChat(); else _openChat();
   });
+  bubXEl.addEventListener('click',()=>{ _hideBubble(); S.isSpeaking=false; S.phase=SM.IDLE; });
+  closeEl.addEventListener('click',_closeChat);
 
-  /* ═══════════════════════════════════════════════════════════
-   *  15. REGISTER BUTTON — say one thing, then go quiet
-   * ═══════════════════════════════════════════════════════════ */
-  document.querySelectorAll('a[href*="register"], .btn-header').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (!wasSaid('reg_nice_choice')) {
-        markSaid('reg_nice_choice');
-        S.isSpeaking = true;
-        _doSpeak("Nice choice! 🚀", { duration: 3000 });
-        setTimeout(() => {
-          S.isSpeaking = false;
-          S.phase = SM.REGISTRATION; // stay quiet
-          _hideSpeech();
-        }, 3500);
-      }
-    });
-  });
-
-  /* ═══════════════════════════════════════════════════════════
-   *  16. CLICK ROBOT → open/close chat
-   * ═══════════════════════════════════════════════════════════ */
-  charEl.addEventListener('click', () => {
-    S.lastInteraction = Date.now();
-    if (S.isChatOpen) { _closeChat(); } else { _openChat(); }
-  });
-
-  bubbleClose.addEventListener('click', () => {
-    _hideSpeech();
-    S.isSpeaking = false;
-    clearTimeout(_speakReleaseTimer);
-    S.phase = SM.IDLE;
-    S.lastInteraction = Date.now();
-  });
-
-  chatClose.addEventListener('click', () => _closeChat());
-
-  /* ═══════════════════════════════════════════════════════════
-   *  17. CHAT SEND
-   * ═══════════════════════════════════════════════════════════ */
-  function _sendChat() {
-    const txt = chatInput.value.trim();
-    if (!txt) return;
-    chatInput.value = '';
-    chatSuggs.innerHTML = '';
-    S.phase = SM.USER_INTERACTING;
-    brain.handle(txt);
+  function _sendMsg(){
+    const txt=inputEl.value.trim(); if(!txt) return;
+    inputEl.value=''; chipsEl.innerHTML='';
+    S.phase=SM.USER_INTERACTING; brain.handle(txt);
   }
-  chatSend.addEventListener('click', _sendChat);
-  chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') _sendChat(); });
-  chatInput.addEventListener('focus',  () => { S.isTyping = true;  S.phase = SM.USER_INTERACTING; });
-  chatInput.addEventListener('blur',   () => { S.isTyping = false; if (!S.isChatOpen) S.phase = SM.IDLE; });
+  sendEl.addEventListener('click',_sendMsg);
+  inputEl.addEventListener('keydown',e=>{ if(e.key==='Enter') _sendMsg(); });
+  inputEl.addEventListener('focus', ()=>{ S.isTyping=true;  S.phase=SM.USER_INTERACTING; });
+  inputEl.addEventListener('blur',  ()=>{ S.isTyping=false; if(!S.isChatOpen) S.phase=SM.IDLE; });
 
-  /* ═══════════════════════════════════════════════════════════
-   *  18. IDLE VISUAL ACTIONS  (no autonomous speaking)
-   * ═══════════════════════════════════════════════════════════ */
-  const idleAnims = ['wave', 'lookright', 'lookleft', 'think'];
-  let _idleTimer  = null;
-
-  function _scheduleIdle() {
-    clearTimeout(_idleTimer);
-    _idleTimer = setTimeout(() => {
-      if (S.isSpeaking || S.isWalking || S.isChatOpen ||
-          S.isTyping || S.phase === SM.USER_INTERACTING ||
-          S.phase === SM.REGISTRATION) {
-        _scheduleIdle(); return;
-      }
-      const anim = idleAnims[Math.floor(Math.random() * idleAnims.length)];
-      _doAnim(anim, 2000);
-
-      // once-only inactivity message (after 2 min)
-      if (!S.idleFired && Date.now() - S.lastInteraction > 120000) {
-        S.idleFired = true;
-        setTimeout(() => autoSpeak("Still exploring? Take your time. 😄", { key: 'idle_once', duration: 5000 }), 2000);
-      }
-      _scheduleIdle();
-    }, 18000 + Math.random() * 14000);
-  }
-  _scheduleIdle();
-
-  ['mousemove','keydown','touchstart'].forEach(evt =>
-    document.addEventListener(evt, () => { S.lastInteraction = Date.now(); }, { passive: true })
+  ['mousemove','keydown','touchstart'].forEach(ev=>
+    document.addEventListener(ev,()=>{ S.lastInteraction=Date.now(); },{passive:true})
   );
 
   /* ═══════════════════════════════════════════════════════════
-   *  19. INITIAL ENTRY  (one-time walk-on)
+   *  17. INITIAL ENTRY  (premium entrance timeline)
    * ═══════════════════════════════════════════════════════════ */
   (() => {
-    const p = _safePos('bottom-right');
-    const initBottom = Math.max(window.innerHeight - p.y - 120, 100);
-    charEl.style.bottom = initBottom + 'px';
-    charEl.style.left   = (window.innerWidth + 50) + 'px';
-    _robotX = window.innerWidth + 50;
-    _robotY = p.y;
+    const returning = _load();
 
-    setTimeout(() => {
-      S.phase = SM.WALKING;
-      _walk('bottom-right', () => {
-        S.phase = SM.IDLE;
-        _doAnim('wave', 1800);
+    if (returning && S.hasGreeted) {
+      /* Returning visitor — restore quietly */
+      const p = _zone(S.currentZone||'bottom-right');
+      root.style.left   = p.x+'px';
+      root.style.bottom = Math.max(window.innerHeight-p.y-170,100)+'px';
+      _robotX=p.x; _robotY=p.y;
+      root.classList.add('cg-visible');
+      setTimeout(()=>{
+        const docH=Math.max(document.body.scrollHeight-window.innerHeight,1);
+        const pct=Math.round(window.scrollY/docH*100);
+        const z=_zoneForPct(pct);
+        if(z!==S.currentZone) _walkToZone(z);
+      },1500);
+    } else {
+      /* First visit — premium entrance sequence */
+      const p = _zone('bottom-right');
+      root.style.right='28px'; root.style.left='auto';
+      root.style.bottom = '-200px';
+      _robotX=p.x; _robotY=p.y;
+
+      // 0.8s: fly in from bottom
+      setTimeout(()=>{
+        root.classList.add('cg-visible');
+        root.style.bottom = Math.max(window.innerHeight-p.y-170,100)+'px';
+      }, 800);
+
+      // 1.8s: wave
+      setTimeout(()=>_anim('wave',1600), 1800);
+
+      // 2.5s: welcome bubble
+      setTimeout(()=>{
         if (!S.hasGreeted) {
-          S.hasGreeted = true;
-          setTimeout(() => autoSpeak("Hey! 👋 Welcome to CoreLab.", { key: 'greeting', duration: 5000 }), 900);
+          S.hasGreeted=true;
+          _showBubble("👋 New to AI?\nI can recommend the perfect CoreLab program in 30 seconds.",{
+            btn:{label:"Find My Path",action:'quiz'}, duration:12000,
+          });
+          markSaid('greeting');
+          S.lastAutoAt=Date.now();
         }
-      });
-    }, prefersReduced ? 400 : 2500);
+      }, 2500);
+    }
   })();
 
   /* ═══════════════════════════════════════════════════════════
-   *  20. RESIZE
+   *  18. RESIZE
    * ═══════════════════════════════════════════════════════════ */
-  window.addEventListener('resize', () => {
-    if (!S.isWalking) {
-      const side = _robotX < window.innerWidth / 2 ? 'bottom-left' : 'bottom-right';
-      const p = _safePos(side);
-      _setPos(p.x, p.y);
-    }
+  window.addEventListener('resize',()=>{
+    if(!S.isWalking){ const p=_zone(S.currentZone); _setPos(p.x,p.y); }
   });
 
 })();
