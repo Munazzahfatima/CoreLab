@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
@@ -46,10 +46,16 @@
       </nav>
 
       <div class="nav-actions">
-        <button class="theme-toggle-btn" aria-label="Toggle theme">
-          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
+        <div class="theme-toggle-wrap">
+          <span class="theme-toggle-hint">
+            <span class="hint-dark">🌙 Dark Mode</span>
+            <span class="hint-light">☀️ Light Mode</span>
+          </span>
+          <button class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+        </div>
         <a href="#courses" class="btn btn-gold btn-sm btn-header">Register Now</a>
         <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -101,7 +107,8 @@
 
         <!-- Category Filters -->
         <div class="faq-categories-tabs" style="margin-bottom: 0;">
-          <button class="prog-filter-btn faq-cat-btn active" data-filter="all">All Programs (3)</button>
+          <button class="prog-filter-btn faq-cat-btn active" data-filter="all">All Programs (4)</button>
+          <button class="prog-filter-btn faq-cat-btn" data-filter="creator">🎨 Creator</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="builder">🚀 Beginner / Builder</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="technical">📊 Technical (DS/ML)</button>
           <button class="prog-filter-btn faq-cat-btn" data-filter="advanced">🤖 Advanced AI (Agents)</button>
@@ -110,13 +117,44 @@
     </section>
 
     <!-- Filterable Programs Grid (Strict Chronological Order) -->
-    <section id="courses" style="padding-bottom: 70px;">
+    <section id="courses" class="schedule-section" style="padding-bottom: 70px;">
       <div class="container">
         <div class="courses-grid-4">
 
-          <!-- 1. AI From Zero to AI Builder (5–11 Oct) -->
-          <div class="course-card program-card-filterable is-next-up" data-category="builder">
-            <div class="next-up-ribbon">⚡ NEXT UP</div>
+          <!-- 1. AI Content Creator (28–29 Sep) -->
+          <div class="course-card program-card-filterable is-next-up" data-category="creator">
+            <div class="next-up-ribbon ribbon-blue">⚡ NEXT UP</div>
+            <div>
+              <div class="course-badge-row">
+                <span class="course-category-tag tag-creator">CREATOR TRACK</span>
+                <span class="course-date-pill">🗓️ 28–29 September 2026</span>
+              </div>
+              <h3>AI Content Creator Weekend</h3>
+              <div class="course-duration-meta">
+                <span>⏱️ 2-Day Intensive (Mon &amp; Tue)</span>
+                <span>•</span>
+                <span>Beginner Friendly</span>
+              </div>
+              <p class="course-desc">
+                Learn how to generate viral visual media, high-engagement posters, AI video sequences, natural human voiceovers, animated auto-captions, and multi-platform content repurposing.
+              </p>
+              <ul class="course-highlights-list">
+                <li><span class="highlight-bullet">✦</span> <strong>Day 1 (28 Sep):</strong> AI Image Generation, Poster Design, Copywriting &amp; Hook Engines</li>
+                <li><span class="highlight-bullet">✦</span> <strong>Day 2 (29 Sep):</strong> Short Videos, Realistic AI Voiceovers, Subtitles &amp; Multi-Post Distribution</li>
+                <li><span class="highlight-bullet">✦</span> <strong>Key Deliverable:</strong> Complete Ready-to-Publish Multi-Platform Content Pack</li>
+              </ul>
+            </div>
+            <div class="card-bottom-row">
+              <div class="price-box">
+                <span class="price-main">PKR 2,999</span>
+                <span class="price-tier-sub">Student Launch Pass</span>
+              </div>
+              <a href="ai-content-creator.html" class="btn btn-blue btn-sm">Explore Curriculum &amp; Register →</a>
+            </div>
+          </div>
+
+          <!-- 2. AI From Zero to AI Builder (5–11 Oct) -->
+          <div class="course-card program-card-filterable" data-category="builder">
             <div>
               <div class="course-badge-row">
                 <span class="course-category-tag tag-builder">BEGINNER / BUILDER TRACK</span>
@@ -237,6 +275,18 @@
             <tbody>
 
               <tr>
+                <td><strong>AI Content Creator</strong></td>
+                <td><span class="course-category-tag tag-creator">Creator</span></td>
+                <td>28–29 Sep (2 Days — Mon &amp; Tue)</td>
+                <td>None (No coding needed)</td>
+                <td>Complete Multi-Platform Content Pack</td>
+                <td><strong>PKR 2,999</strong><br><span style="font-size:0.8em;color:#64748b;">Student Launch Pass</span></td>
+                <td>
+                  <a href="register.html?program=creator" class="btn btn-blue btn-sm" style="padding: 4px 10px; font-size: 0.78rem; display: inline-block; margin-bottom: 4px;">Register →</a><br>
+                  <a href="ai-content-creator.html" class="text-blue" style="font-weight: 700; font-size: 0.8rem;">Details</a>
+                </td>
+              </tr>
+              <tr>
                 <td><strong>AI From Zero to AI Builder</strong></td>
                 <td><span class="course-category-tag tag-builder">Beginner / Builder</span></td>
                 <td>5–11 Oct (7 Days)</td>
@@ -328,6 +378,7 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-nav-list">
+            <li><a href="ai-content-creator.html">AI Content Creator (28–29 Sep)</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to Builder (5–11 Oct)</a></li>
             <li><a href="data-science-machine-learning.html">Data Science & ML (5–15 Oct)</a></li>
             <li><a href="generative-ai-agents.html">GenAI & Agents (12–22 Oct)</a></li>
@@ -374,5 +425,6 @@
   </a>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/robot-guide.js"></script>
 </body>
 </html>

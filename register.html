@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
@@ -9,18 +9,22 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
-  <meta name="color-scheme" content="dark" />
+  <script>
+    (function() {
+      const saved = localStorage.getItem('corelab_theme');
+      const theme = (saved === 'light') ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <style>
     :root {
-      color-scheme: dark;
       --checkout-bg: #060913;
       --card-bg: #0d1728;
       --ink-main: #f1f5f9;
       --ink-muted: #94a3b8;
     }
-    /* ── Light mode overrides (if ever toggled) ── */
+    /* ── Light mode overrides ── */
     [data-theme="light"] {
-      color-scheme: light;
       --checkout-bg: #f8fafc;
       --card-bg: #ffffff;
       --ink-main: #0f172a;
@@ -28,6 +32,7 @@
     }
     body {
       background-color: var(--checkout-bg);
+      color: var(--ink-main);
     }
     .checkout-header {
       background: linear-gradient(135deg, #090e17 0%, #111d31 60%, #0d1726 100%);
@@ -373,6 +378,17 @@
       margin-bottom: 10px;
       font-size: 0.9rem;
     }
+    .account-lbl {
+      color: #cbd5e1;
+    }
+    .account-val-title {
+      color: #ffffff;
+      font-weight: 800;
+    }
+    .account-val-amount {
+      color: #fbbf24;
+      font-weight: 900;
+    }
     .account-detail-row:last-child {
       margin-bottom: 0;
     }
@@ -666,6 +682,168 @@
       font-weight: 800;
       color: var(--ink);
     }
+
+    /* ==========================================================================
+       Comprehensive Light Mode Styling Overrides (White Theme)
+       ========================================================================== */
+    [data-theme="light"] .checkout-header {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid #e2e8f0;
+      color: #0e1b2e;
+    }
+    [data-theme="light"] .checkout-badge {
+      background: rgba(217, 119, 6, 0.1);
+      border-color: rgba(217, 119, 6, 0.3);
+      color: #b45309;
+    }
+    [data-theme="light"] .checkout-header h1 {
+      color: #0e1b2e;
+    }
+    [data-theme="light"] .checkout-header p {
+      color: #475569;
+    }
+    [data-theme="light"] .checkout-card {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+    }
+    [data-theme="light"] .checkout-card h2 {
+      color: #0e1b2e;
+    }
+    [data-theme="light"] .checkout-card .subtitle {
+      color: #64748b;
+    }
+    [data-theme="light"] .form-group label {
+      color: #334155;
+    }
+    [data-theme="light"] .form-control,
+    [data-theme="light"] .form-select {
+      background-color: #ffffff;
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+      color-scheme: light;
+    }
+    [data-theme="light"] .form-control::placeholder {
+      color: #94a3b8;
+    }
+    [data-theme="light"] .form-control:focus,
+    [data-theme="light"] .form-select:focus {
+      background-color: #ffffff;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+    [data-theme="light"] .plan-selector-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+    }
+    [data-theme="light"] .plan-selector-box:hover {
+      border-color: var(--gold);
+      background: #fffbeb;
+    }
+    [data-theme="light"] .plan-selector-box.active {
+      border-color: var(--gold);
+      background: #fffbeb;
+      box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.2);
+    }
+    [data-theme="light"] .plan-info-text strong {
+      color: #0f172a;
+    }
+    [data-theme="light"] .plan-info-text small {
+      color: #64748b;
+    }
+    [data-theme="light"] .custom-radio {
+      border-color: #cbd5e1;
+    }
+    [data-theme="light"] .coupon-card {
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+    }
+    [data-theme="light"] .coupon-header-row label {
+      color: #475569 !important;
+    }
+    [data-theme="light"] .payment-instructions-box {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      color: #0f172a;
+      border: 1.5px solid #cbd5e1;
+    }
+    [data-theme="light"] .payment-header {
+      border-bottom: 1px solid #e2e8f0;
+      color: #0f172a;
+    }
+    [data-theme="light"] .payment-header span {
+      color: #0f172a;
+    }
+    [data-theme="light"] .account-detail-row {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    [data-theme="light"] .account-detail-row span:first-child,
+    [data-theme="light"] .account-lbl {
+      color: #475569 !important;
+      font-weight: 600;
+    }
+    [data-theme="light"] .account-detail-row strong,
+    [data-theme="light"] .account-val-title {
+      color: #0f172a !important;
+      font-weight: 800;
+    }
+    [data-theme="light"] .account-val-amount {
+      color: #b45309 !important;
+      font-weight: 900;
+    }
+    [data-theme="light"] .account-num-wrap code {
+      color: #b45309;
+    }
+    [data-theme="light"] .copy-btn {
+      background: #e2e8f0;
+      color: #0f172a;
+      border: 1px solid #cbd5e1;
+    }
+    [data-theme="light"] .copy-btn:hover {
+      background: #cbd5e1;
+    }
+    [data-theme="light"] .upload-zone {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+    [data-theme="light"] .upload-zone:hover,
+    [data-theme="light"] .upload-zone.dragover {
+      border-color: var(--gold);
+      background: #fffbeb;
+    }
+    [data-theme="light"] .upload-zone strong {
+      color: #0f172a;
+    }
+    [data-theme="light"] .whatsapp-verification-card {
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+    }
+    [data-theme="light"] .wa-content p {
+      color: #166534;
+    }
+    [data-theme="light"] .summary-item {
+      border-bottom: 1px solid #e2e8f0;
+      color: #0f172a;
+    }
+    [data-theme="light"] .summary-item span:first-child {
+      color: #64748b;
+    }
+    [data-theme="light"] .summary-total {
+      background: #f8fafc;
+      border: 1.5px dashed #e2e8f0;
+    }
+    [data-theme="light"] .summary-total .total-row span {
+      color: #0f172a;
+    }
+    [data-theme="light"] .guarantee-box {
+      color: #475569;
+    }
+    [data-theme="light"] .guarantee-box li {
+      color: #334155;
+    }
+    [data-theme="light"] .guarantee-box li span {
+      color: #16a34a;
+    }
   </style>
 </head>
 <body>
@@ -702,8 +880,18 @@
       </nav>
 
       <div class="nav-actions">
+        <div class="theme-toggle-wrap">
+          <span class="theme-toggle-hint">
+            <span class="hint-dark">🌙 Dark Mode</span>
+            <span class="hint-light">☀️ Light Mode</span>
+          </span>
+          <button class="theme-toggle-btn" aria-label="Toggle theme">
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+        </div>
         <a href="programs.html" class="btn btn-outline btn-sm btn-header">← Back to Programs</a>
-        <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav()">
+        <button class="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
       </div>
@@ -711,7 +899,7 @@
   </header>
 
   <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" style="display:none;">
+  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true">
     <div class="mobile-drawer-content">
       <a href="index.html">Home</a>
       <a href="programs.html">Programs</a>
@@ -720,6 +908,13 @@
       <a href="faq.html">FAQ</a>
       <div style="margin-top: 10px;">
         <a href="programs.html" class="btn btn-outline" style="width: 100%; text-align: center;">← Back to Programs</a>
+      </div>
+      <div class="mobile-drawer-theme-row">
+        <span>Theme</span>
+        <button class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
       </div>
     </div>
   </div>
@@ -749,6 +944,7 @@
           <div class="form-group">
             <label for="programSelect">Select Program <span class="req">*</span></label>
             <select id="programSelect" class="form-select" onchange="onProgramChange(this.value)" required>
+              <option value="creator">AI Content Creator (28–29 Sep)</option>
               <option value="builder" selected>AI From Zero to AI Builder (5–11 Oct)</option>
               <option value="datascience">Data Science & Machine Learning (5–15 Oct)</option>
               <option value="genai">Generative AI & AI Agents (12–22 Oct)</option>
@@ -810,22 +1006,22 @@
             <div class="payment-instructions-box">
               <div class="payment-header">
                 <span class="easypaisa-pill">EASYPAISA OFFICIAL ACCOUNT</span>
-                <span style="font-size: 0.8rem; color: #94a3b8;">Instant Verification</span>
+                <span style="font-size: 0.8rem; color: var(--ink-secondary);">Instant Verification</span>
               </div>
               <div class="account-detail-row">
-                <span style="color: #cbd5e1;">Account Number (Mobile):</span>
+                <span class="account-lbl">Account Number (Mobile):</span>
                 <div class="account-num-wrap">
                   <code id="epNumber">03369146789</code>
                   <button type="button" class="copy-btn" onclick="copyAccountNumber()">Copy</button>
                 </div>
               </div>
               <div class="account-detail-row">
-                <span style="color: #cbd5e1;">Account Title:</span>
-                <strong style="color: #ffffff; font-size: 1.05rem;">Syeda Munazzah Fatima</strong>
+                <span class="account-lbl">Account Title:</span>
+                <strong class="account-val-title" style="font-size: 1.08rem;">Syeda Munazzah Fatima</strong>
               </div>
               <div class="account-detail-row">
-                <span style="color: #cbd5e1;">Amount to Send:</span>
-                <strong id="displayPayAmount" style="color: #fbbf24; font-size: 1.15rem;">PKR 4,999</strong>
+                <span class="account-lbl">Amount to Send:</span>
+                <strong id="displayPayAmount" class="account-val-amount" style="font-size: 1.15rem;">PKR 4,999</strong>
               </div>
             </div>
 
@@ -1107,6 +1303,7 @@
         <div>
           <div class="footer-col-title">Programs</div>
           <ul class="footer-links">
+            <li><a href="ai-content-creator.html">AI Content Creator (28–29 Sep)</a></li>
             <li><a href="ai-from-zero-to-builder.html">AI From Zero to AI Builder (Cohort 5)</a></li>
             <li><a href="data-science-machine-learning.html">Data Science &amp; Machine Learning</a></li>
             <li><a href="generative-ai-agents.html">Generative AI &amp; AI Agents</a></li>
@@ -1150,6 +1347,13 @@
   <script>
     // Program Data with Early Bird unlocked via Coupon Corelab2711
     const PROGRAM_DATA = {
+      creator: {
+        title: "AI Content Creator Intensive",
+        schedule: "28–29 September 2026 (2 Days — Mon & Tue)",
+        tiers: [
+          { id: "launch", name: "Student Launch Pass", price: 2999, desc: "Full 2-day live sprint & complete content pack outcome", highlight: true }
+        ]
+      },
       builder: {
         title: "AI From Zero to AI Builder (Cohort 5)",
         schedule: "5–11 October 2026 (7 Days)",
@@ -1322,22 +1526,29 @@
       const isPremium = tier.id === 'premium';
       const guaranteeList = document.getElementById('guaranteeFeaturesList');
       if (guaranteeList) {
+        const isLightTheme = document.documentElement.getAttribute('data-theme') === 'light';
         if (isPremium) {
-          guaranteeList.style.background = 'linear-gradient(135deg,#0f172a,#1c1a0f)';
-          guaranteeList.style.border = '1.5px solid rgba(217,119,6,0.45)';
+          guaranteeList.style.background = isLightTheme 
+            ? 'linear-gradient(135deg, #fffbeb, #fef3c7)' 
+            : 'linear-gradient(135deg,#0f172a,#1c1a0f)';
+          guaranteeList.style.border = isLightTheme 
+            ? '1.5px solid rgba(217,119,6,0.4)' 
+            : '1.5px solid rgba(217,119,6,0.45)';
           guaranteeList.style.borderRadius = '12px';
           guaranteeList.style.padding = '14px 16px';
           guaranteeList.style.marginTop = '16px';
+          const textColor = isLightTheme ? '#334155' : '#e2e8f0';
+          const headingColor = isLightTheme ? '#b45309' : '#fbbf24';
           guaranteeList.innerHTML = `
-            <li style="margin-bottom:10px; font-size:0.78rem; font-weight:900; color:#fbbf24; text-transform:uppercase; letter-spacing:0.06em;">
+            <li style="margin-bottom:10px; font-size:0.78rem; font-weight:900; color:${headingColor}; text-transform:uppercase; letter-spacing:0.06em;">
               <span style="font-size:1rem; margin-right:6px;">👑</span> Premium Pass — Exclusive Perks
             </li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">1-on-1 Mentorship</strong> session with the instructor</li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Custom Capstone Review</strong> — written personal feedback</li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Priority WhatsApp Support</strong> (2-hr response window)</li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">Premium Study Pack</strong> — prompt libraries &amp; bonus notebooks</li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> <strong style="color:#fbbf24;">LinkedIn Recommendation</strong> from Core Lab</li>
-            <li style="color:#e2e8f0;"><span style="color:#fbbf24; margin-right:6px;">★</span> Certificate + all Regular Pass benefits included</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> <strong style="color:${headingColor};">1-on-1 Mentorship</strong> session with the instructor</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> <strong style="color:${headingColor};">Custom Capstone Review</strong> — written personal feedback</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> <strong style="color:${headingColor};">Priority WhatsApp Support</strong> (2-hr response window)</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> <strong style="color:${headingColor};">Premium Study Pack</strong> — prompt libraries &amp; bonus notebooks</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> <strong style="color:${headingColor};">LinkedIn Recommendation</strong> from Core Lab</li>
+            <li style="color:${textColor};"><span style="color:${headingColor}; margin-right:6px;">★</span> Certificate + all Regular Pass benefits included</li>
           `;
         } else {
           guaranteeList.style.background = '';
@@ -1660,6 +1871,11 @@
 
     // Run on load
     window.addEventListener('DOMContentLoaded', initFromUrl);
+    window.addEventListener('themechange', () => {
+      updateSummary();
+    });
   </script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/robot-guide.js"></script>
 </body>
 </html>

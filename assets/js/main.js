@@ -197,7 +197,7 @@ function initFaqAccordion() {
    ========================================================================== */
 function initProgramFilters() {
   const filterBtns = document.querySelectorAll('.prog-filter-btn');
-  const courseCards = document.querySelectorAll('.schedule-section .course-card');
+  const courseCards = document.querySelectorAll('.schedule-section .course-card, #courses .course-card, .courses-grid-4 .course-card');
 
   if (!filterBtns.length || !courseCards.length) return;
 
@@ -253,7 +253,7 @@ function initHeroCanvas() {
   const ctx = canvas.getContext('2d');
   let width, height;
   let particles = [];
-  const particleCount = 36;
+  const particleCount = 48;
 
   function resize() {
     if (!canvas.parentElement) return;
@@ -267,8 +267,8 @@ function initHeroCanvas() {
   const getThemePalette = () => {
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
     return isDark 
-      ? ['#f59e0b', '#3b82f6', '#a855f7', '#14b8a6', '#60a5fa'] 
-      : ['#d97706', '#2563eb', '#7c3aed', '#0d9488'];
+      ? ['#38bdf8', '#3b82f6', '#818cf8', '#22d3ee', '#60a5fa'] 
+      : ['#c2521a', '#1d4ed8', '#2d7a4f', '#5b3fa0', '#e07040'];
   };
 
   class Particle {
@@ -278,10 +278,10 @@ function initHeroCanvas() {
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.5;
-      this.vy = (Math.random() - 0.5) * 0.5;
-      this.radius = Math.random() * 2.2 + 1.2;
-      this.alpha = Math.random() * 0.5 + 0.3;
+      this.vx = (Math.random() - 0.5) * 0.6;
+      this.vy = (Math.random() - 0.5) * 0.6;
+      this.radius = Math.random() * 2.5 + 1.8;  // 1.8–4.3px dots
+      this.alpha = Math.random() * 0.2 + 0.6;   // 0.6–0.8
       const palette = getThemePalette();
       this.color = palette[Math.floor(Math.random() * palette.length)];
     }
@@ -293,11 +293,12 @@ function initHeroCanvas() {
       if (this.y < 0 || this.y > height) this.vy *= -1;
     }
     draw() {
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
       ctx.globalAlpha = this.alpha;
-      ctx.shadowBlur = 8;
+      ctx.shadowBlur = isDark ? 10 : 6;
       ctx.shadowColor = this.color;
       ctx.fill();
       ctx.shadowBlur = 0;
@@ -331,13 +332,13 @@ function initHeroCanvas() {
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist < 130) {
+        if (dist < 150) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = isDark ? '#38bdf8' : '#94a3b8';
-          ctx.globalAlpha = (1 - dist / 130) * (isDark ? 0.22 : 0.16);
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = isDark ? '#38bdf8' : '#c2521a';
+          ctx.globalAlpha = (1 - dist / 150) * (isDark ? 0.4 : 0.5);
+          ctx.lineWidth = isDark ? 1 : 1.2;
           ctx.stroke();
         }
       }
